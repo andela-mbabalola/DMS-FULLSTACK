@@ -1,6 +1,7 @@
 [![Build Status](https://travis-ci.org/andela-mbabalola/DMS-FULLSTACK.svg?branch=master)](https://travis-ci.org/andela-mbabalola/DMS-FULLSTACK)
 
 [![Coverage Status](https://coveralls.io/repos/andela-mbabalola/DMS-FULLSTACK/badge.svg?branch=master&service=github)](https://coveralls.io/github/andela-mbabalola/DMS-FULLSTACK?branch=master)
+[![Coverage Status](https://coveralls.io/repos/andela-mbabalola/DMS-FULLSTACK/badge.svg?branch=master&service=github)](https://coveralls.io/github/andela-mbabalola/DMS-FULLSTACK?branch=development)
 
 # Document Management System (DMS) API
 DMS API is a system that manages documents, users and user roles. Each document defines access rights; the document defines which roles can access it. DMS has various functionalities including:
