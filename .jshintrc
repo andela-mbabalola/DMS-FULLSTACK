@@ -34,7 +34,8 @@
     "by" : true,
     "browser" : true,
     "todoapp" : true,
-    "process" : true
+    "process" : true,
+    "gutil" : true
   },
   "quotmark": true,
   "trailing": true,
