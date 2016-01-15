@@ -1,0 +1,36 @@
+html
+  head
+    title User SignUp
+    link(rel='stylesheet', type='text/css', href='css/app.css')
+    link(href='https://fonts.googleapis.com/icon?family=Material+Icons', rel='stylesheet')
+    link(rel='stylesheet', href='https://maxcdn.bootstrapcdn.com/font-awesome/4.5.0/css/font-awesome.min.css')
+  body
+    .box
+      #header
+        #cont-lock
+          i.material-icons.lock lock
+        #bottom-head
+          h1#logintoregister Sign Up
+      form(action='', method='post', name='signUp', id= 'signUp')
+        .group
+          //username
+          input.inputMaterial(type='text', required='')
+          span.highlight
+          span.bar
+          label Username
+        .group
+          //password
+          input.inputMaterial(type='password', ng-minlength= '6' required='')
+          span.highlight
+          span.bar
+          label Password
+        button#buttonlogintoregister(type='submit') Sign Up
+        hr
+        p.sign  Or connect with 
+        .socialMedia
+          a#facebook.fa.fa-facebook-square.fa-3x(href='#')
+          a#google.fa.fa-google-plus-square.fa-3x(href='#')
+        #footer-box
+          p.footer-text
+            | Already have an account?
+            span.sign-up  Sign in now
