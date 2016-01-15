@@ -1,3 +1,5 @@
+[![Build Status](https://travis-ci.org/andela-mbabalola/DMS-FULLSTACK.svg?branch=master)](https://travis-ci.org/andela-mbabalola/DMS-FULLSTACK)
+
 [![Coverage Status](https://coveralls.io/repos/andela-mbabalola/DMS-FULLSTACK/badge.svg?branch=master&service=github)](https://coveralls.io/github/andela-mbabalola/DMS-FULLSTACK?branch=master)
 
 # Document Management System (DMS) API
