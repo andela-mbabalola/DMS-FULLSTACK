@@ -16,7 +16,7 @@ path = {
   frontEnd: {
     js:'frontEnd/js/*.js',
     sass: 'frontEnd/sass/*.scss',
-    jade: ['frontEnd/*.jade', 'frontEnd/**/*.jade'],
+    jade: ['frontEnd/*.jade', '!frontEnd/shared/**', 'frontEnd/**/*.jade'],
     img: 'frontEnd/img/*.*',
     staticFiles: [
         '!frontEnd/**/*.+(scss|css|js|jade)',
@@ -158,4 +158,4 @@ path = {
   });
 
   gulp.task('dev', ['watchers']);
-  gulp.task('production', ['minifyJs', 'minifyCss','uglify']);
+  gulp.task('production', ['minifyJs', 'minifyCss']);
