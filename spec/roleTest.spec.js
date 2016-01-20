@@ -47,7 +47,6 @@
             if (err) {
               console.log(err);
             }
-            console.log('Removed');
             done();
           });
         });
