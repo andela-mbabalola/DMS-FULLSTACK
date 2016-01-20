@@ -21,10 +21,9 @@
   }));
   app.use(morgan('dev'));
 
-  //creating a test route
   app.get('/', function(req, res) {
-    res.send({
-      text: 'You have successfully reached the test route',
+    res.sendFile('index.html', {
+      root : './public',
       code: 200
     });
   });
