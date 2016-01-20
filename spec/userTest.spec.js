@@ -318,7 +318,6 @@
         request.get('/api/users/' + userId)
           .expect(403)
           .end(function(err, res) {
-            console.log(res.body);
             expect(res.status).to.be(403);
             expect(res.body.success).to.eql(false);
             expect(res.body.message).to.eql('No token provided');
@@ -380,7 +379,6 @@
           })
           .expect(403)
           .end(function(err, res) {
-            console.log(res.body);
             expect(res.status).to.be(403);
             expect(res.body.success).to.eql(false);
             expect(res.body.message).to.equal('No token provided');
@@ -401,7 +399,6 @@
             password: 'mine',
             role: 'Supervisor'
           }).expect(200).end(function(err, res) {
-            console.log(res.body);
             expect(res.body.success).to.eql(true);
             expect(res.body.message).to.eql('User Successfully updated!');
             done();
