@@ -298,7 +298,6 @@
             expect(res.status).to.be(200);
             expect(res.body.success).to.eql(true);
             expect(res.body.message).to.eql('Document Successfully updated!');
-
             done();
           });
       });
@@ -320,7 +319,6 @@
             expect(res.status).to.be(403);
             expect(res.body.success).to.eql(false);
             expect(res.body.message).to.eql('Access denied');
-
             done();
           });
       });
@@ -338,7 +336,6 @@
             expect(res.status).to.be(404);
             expect(res.body.success).to.eql(false);
             expect(res.body.message).to.eql('Document does not exist');
-
             done();
           });
       });
