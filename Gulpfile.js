@@ -2,6 +2,7 @@ var gulp = require('gulp'),
   minifyCss = require('gulp-minify-css'),
   concat = require('gulp-concat'),
   nodemon = require('gulp-nodemon'),
+  gutil = require('gulp-util'),
   bower = require('gulp-bower'),
   sass = require('gulp-sass'),
   jade = require('gulp-jade'),
@@ -14,7 +15,7 @@ var gulp = require('gulp'),
 path = {
   public: 'public/',
   frontEnd: {
-    js:'frontEnd/js/*.js',
+    js:'frontEnd/**/*.js',
     sass: 'frontEnd/sass/*.scss',
     jade: ['frontEnd/*.jade', '!frontEnd/shared/**', 'frontEnd/**/*.jade'],
     img: 'frontEnd/img/*.*',
@@ -85,7 +86,7 @@ path = {
    * @return {[.js]}          [minified js file]
    */
   gulp.task('minify', ['js'], ()=> {
-    gulp.src('public/js/*.js')
+    gulp.src('./public/js/*.js')
     .pipe(minify())
     .pipe(gulp.dest('./public/js'))
     .pipe(notify('Gulp-minify Done!'));
@@ -108,8 +109,7 @@ path = {
    */
   gulp.task('bower', ()=> {
     return bower()
-    .pipe(gulp.dest('./public/lib/'))
-    .pipe(notify('Gulp-bower Done!'));
+    .pipe(gulp.dest('./public/lib/'));
   });
 
   /**
@@ -140,22 +140,29 @@ path = {
     b.add('./frontEnd/js/app.js');
     return b.bundle()
     .on('success', gutil.log.bind(gutil, 'Browserify Rebundled'))
-    .on('error', gutil.log.bind(gutil,
+    .on('error', gutil.log.bind(gutil, +
       'Browserify Error: in browserify gulp task'))
     // vinyl-source-stream makes the bundle compatible with gulp
     .pipe(source('app.js')) // Desired filename
     // Output the file
-    .pipe(gulp.dest('./public/js/'));
+    .pipe(gulp.dest('./public/js/'))
+    .pipe(notify('Browserify Done!'));
   });
 
   /**
    * [task to watch for changes]
    */
-  gulp.task('watchers', ()=>{
-    gulp.watch(path.frontEnd.js,['minify']);
+  gulp.task('watchers', ()=> {
+    // gulp.watch(path.frontEnd.js,['minify']);
     gulp.watch(path.frontEnd.sass,['sass']);
     gulp.watch(path.frontEnd.jade,['jade']);
+    gulp.watch(path.frontEnd.js,['browserify']);
   });
+
+  gulp.task('build', ['jade', 'js', 'sass', 'static-files', 'images',
+    'browserify', 'bower'
+  ]);
 
   gulp.task('dev', ['watchers']);
   gulp.task('production', ['minifyJs', 'minifyCss']);
+  gulp.task('default', ['server', 'watchers', 'build']);
