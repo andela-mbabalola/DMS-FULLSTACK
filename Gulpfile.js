@@ -112,12 +112,12 @@ gulp.task('images', function() {
  * @param  {[.js]} ['js']   [files to be minified]
  * @return {[.js]}          [minified js file]
  */
-gulp.task('minify', ['js'], function() {
-  return gulp.src('./public/js/*.js')
-    .pipe(minify())
-    .pipe(gulp.dest('./public/js'))
-    .pipe(notify('Gulp-minify Done!'));
-});
+// gulp.task('minify', ['js'], function() {
+//   return gulp.src('./public/js/*.js')
+//     .pipe(minify())
+//     .pipe(gulp.dest('./public/js'))
+//     .pipe(notify('Gulp-minify Done!'));
+// });
 
 /**
  * [task to minify css files]
@@ -195,7 +195,7 @@ gulp.task('watchers', function() {
   gulp.watch(path.frontEnd.js, ['browserify']);
 });
 
-gulp.task('build', ['jade', 'js', 'sass', 'static-files', 'images',
+gulp.task('build', ['jade', 'sass', 'static-files', 'images',
   'browserify', 'bower'
 ]);
 
