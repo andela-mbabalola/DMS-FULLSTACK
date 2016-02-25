@@ -14,8 +14,11 @@ services:
 install:
   - npm install
   - npm install coveralls
+before_script:
+  - npm install -g gulp
 script:
   - mocha spec/*
+  - gulp test:fend
 after_success:
   - npm run coveralls
 sudo: false
