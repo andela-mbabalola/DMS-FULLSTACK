@@ -14,11 +14,11 @@ services:
 install:
   - npm install
   - npm install coveralls
-before_script:
-  - npm install -g gulp
-  - export CHROME_BIN=chromium-browser
+before_install:
   - export DISPLAY=:99.0
   - sh -e /etc/init.d/xvfb start
+before_script:
+  - npm install -g gulp
 script:
   - mocha spec/*
   - gulp test:fend
