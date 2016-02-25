@@ -1,6 +1,4 @@
-(function() {
-  'use strict';
-  
+
   var FB;
   describe('facebook provider', function () {
     var facebookprovider;
@@ -59,4 +57,3 @@
 
     });
   });
-})();

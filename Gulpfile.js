@@ -71,12 +71,12 @@ gulp.task('jade', function() {
  * @param  {[.js]} 'js' [files written in js]
  * @return {[js]}      [concatenated js file]
  */
-gulp.task('js', function() {
-  return gulp.src(path.frontEnd.js)
-    .pipe(concat('app.js'))
-    .pipe(gulp.dest('./public/js'))
-    .pipe(notify('Js gulpify Done!'));
-});
+// gulp.task('js', function() {
+//   return gulp.src(path.frontEnd.js)
+//     .pipe(concat('app.js'))
+//     .pipe(gulp.dest('./public/js'))
+//     .pipe(notify('Js gulpify Done!'));
+// });
 
 /**
  * [task to convert sass files to css]

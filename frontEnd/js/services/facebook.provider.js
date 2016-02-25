@@ -1,6 +1,3 @@
-(function() {
-  'use strict';
-
   angular.module('Doccy.providers')
     .provider('facebook', function() {
       this.appId = 'sampleappId';
@@ -40,4 +37,3 @@
         };
       };
     });
-})();

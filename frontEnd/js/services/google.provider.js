@@ -1,6 +1,3 @@
-(function() {
-  'use strict';
-
   angular.module('Doccy.providers')
     .provider('google', function() {
       this.appConfig = {};
@@ -58,4 +55,3 @@
         };
       };
     });
-})();

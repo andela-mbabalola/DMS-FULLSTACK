@@ -5,7 +5,8 @@
     .controller('AdminPanelController', [
       'Users',
       'Documents',
-      //'Roles',      '$scope',
+      //'Roles',
+      '$scope',
       '$mdDialog',
       '$mdToast', function(Users, Documents, $scope, $mdDialog, $mdToast) {
 

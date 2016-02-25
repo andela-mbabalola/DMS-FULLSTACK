@@ -1,6 +1,3 @@
-(function() {
-  'use strict';
-
   var gapi;
   describe('google provider', function() {
 
@@ -66,4 +63,3 @@
       expect(gapi.auth.signIn).toHaveBeenCalled();
     });
   });
-})();
