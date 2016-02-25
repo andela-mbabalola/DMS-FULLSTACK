@@ -6,7 +6,8 @@
   "scripts": {
     "test": "./node_modules/.bin/istanbul cover ./node_modules/mocha/bin/_mocha spec/server/*.spec.js --colors",
     "start": "nodemon server.js",
-    "BendCoverage": "cat coverage/lcov.info |codecov" 
+    "BendCoverage": "cat coverage/lcov.info |codecov",
+    "FendCoverage": "cat FendCoverage/lcov.info |coveralls"
   },
   "repository": {
     "type": "git",
@@ -27,6 +28,7 @@
     "cloudinary": "^1.3.0",
     "codecov": "^1.0.1",
     "cookie-parser": "^1.4.0",
+    "coveralls": "^2.11.6",
     "expect.js": "^0.3.1",
     "express": "^4.13.3",
     "fs": "0.0.2",

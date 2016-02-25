@@ -15,7 +15,6 @@ install:
   - npm install
   - npm install coveralls
 before_install:
-  - pip install codecov
   - export DISPLAY=:99.0
   - sh -e /etc/init.d/xvfb start
 before_script:
@@ -25,4 +24,5 @@ script:
   - gulp test:fend
 after_success:
   - npm run BendCoverage
+  - npm run FendCoverage
 sudo: false
