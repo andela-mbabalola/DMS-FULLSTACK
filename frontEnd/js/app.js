@@ -1,5 +1,5 @@
 (function() {
-  'Use strict';
+  'use strict';
 
   angular.module('Doccy.controllers', []);
   angular.module('Doccy.services', []);
@@ -20,15 +20,11 @@
   require('./services/modal');
 
   //require controllers
-
-  // require('./controllers/footer');
-  // require('./controllers/home');
   require('./controllers/header');
   require('./controllers/welcome');
   require('./controllers/login');
   require('./controllers/signUp');
   require('./controllers/adminPanel');
-  // require('./controllers/user-profile/index');
   require('./controllers/profile');
   require('./controllers/userProfile/documents');
 
