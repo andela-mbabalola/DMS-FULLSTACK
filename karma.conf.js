@@ -16,7 +16,8 @@ var configuration = {
     plugins: [
       'karma-firefox-launcher',
       'karma-coverage',
-      'karma-jasmine',  
+      'karma-jasmine',
+      'karma-coveralls'
     ],
 
 
@@ -63,7 +64,7 @@ var configuration = {
     // possible values: 'dots', 'progress', 'junit', 'growl',
     // 'coverage', 'spec', 'failed'
     // available reporters: https://npmjs.org/browse/keyword/karma-reporter
-    reporters: ['coverage', 'progress'],
+    reporters: ['coverage', 'progress', 'coveralls'],
 
     // web server port
     port: 9876,
@@ -116,7 +117,7 @@ var configuration = {
     singleRun: false,
      coverageReporter: {
       // specify a common output directory
-      dir: 'coverage',
+      dir: 'FendCoverage',
       reporters: [
         // reporters not supporting the `file` property
         { type: 'html', subdir: 'report-html' },
