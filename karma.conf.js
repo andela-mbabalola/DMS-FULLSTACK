@@ -2,7 +2,7 @@
 // Generated on Mon Sep 21 2015 11:19:42 GMT+0300 (EAT)
 
 module.exports = function(config) {
-  config.set({
+var configuration = {
 
     // base path that will be used to resolve all patterns (eg. files,
     // exclude)
@@ -91,18 +91,18 @@ module.exports = function(config) {
     // - Safari
     // - PhantomJS
     // - IE
-    browsers: ['Chrome'], // 'Firefox', 'Safari'],
+    browsers: ['Chrome', 'ChromeCanary'], // 'Firefox', 'Safari'],
 
     // https://www.youtube.com/watch?v=FQwZrOAmMAc
     // To turn off chrome's security limitations that do
     // not allow some basics things to run
     // That are required while developing
-    // customLauncher: {
-    //   chrome_without_security: {
-    //     base: "Chrome",
-    //     flags: ["--disable-web-security"]
-    //   }
-    // }
+    customLaunchers: {
+        Chrome_travis_ci: {
+          base: 'Chrome',
+          flags: ['--no-sandbox']
+        }
+      },
 
     // Continuous Integration mode
     // if true, Karma captures browsers, runs the tests and exits
@@ -123,5 +123,11 @@ module.exports = function(config) {
         { type: 'text-summary', subdir: '.', file: 'text-summary.txt' },
       ]
     }
-  });
+  };
+
+  if(process.env.TRAVIS){
+    configuration.browsers = ['Chrome_travis_ci'];
+  }
+
+  config.set(configuration);
 };
