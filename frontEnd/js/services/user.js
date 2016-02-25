@@ -1,0 +1,46 @@
+angular.module('Doccy.services')
+  .factory('Users', ['$resource', '$http', ($resource, $http)=> {
+    var user = $resource('/api/users/:id', {
+        id: '@_id'
+    }, {
+      update: {
+        //method to issue a PUT request
+        method: 'PUT'
+      }
+    }, {
+      stripTrailingSlashes: false
+    });
+
+    user.login = (user, cb)=> {
+      $http.post('/api/users/login', user).success((res)=> {
+        cb(null, res);
+      }).error( (err)=> {
+        cb(err);
+      });
+    };
+
+    user.logout = function(cb) {
+      $http.get('/api/users/logout').success(function(res) {
+        cb(null, res);
+      }).error(function(err) {
+        cb(err);
+      });
+    };
+
+    user.session = function(cb) {
+      $http.get('/api/users/session').success(function(res) {
+        cb(null, res);
+      }).error(function(err) {
+        cb(err);
+      });
+    };
+
+    user.userDocs = (user, cb)=> {
+        $http.get('/api/user/' + user._id + '/documents').success( (res)=> {
+          cb(null, res);
+        }).error((err)=> {
+          cb(err);
+        });
+    };
+    return user;
+  }]);

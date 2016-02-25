@@ -1,0 +1,28 @@
+.edit-profile-box
+  div.edit-header
+    span
+      img.edit-profile-pic(src="{{currentUser.img_url}}")
+  md-content(layout-padding)
+    div.edit-content
+      form(method="post" name="editUserForm" ng-submit="editProfile()")
+        div(layout-gt-sm="row")
+          md-input-container.md-block(flex-gt-sm)
+            label.edit-label First name
+            input(ng-model="currentUser.firstName")  
+          md-input-container.md-block(flex-gt-sm)
+            label.edit-label Last name
+            input(ng-model="currentUser.lastName")  
+        md-input-container.md-block(flex-gt-sm)
+          label.edit-label Email
+          input(ng-model="currentUser.email") 
+        div(layout-gt-sm="row")     
+          md-input-container.md-block(flex-gt-sm)
+            label.edit-label Username
+            input(ng-model="currentUser.userName")  
+          md-input-container.md-block(flex-gt-sm)
+            label.edit-label Password
+            input(ng-model="currentUser.password")  
+        md-input-container.md-block(flex-gt-sm)
+          md-select( ng-model="user.role" placeholder="Select a role" aria-label="currentUser.role" required="true")
+            md-option(ng-value="role" ng-repeat="role in roles") {{role.title}}
+        button#buttonlogintoregister(type="submit" ng-disabled="editUserForm.$invalid") Update

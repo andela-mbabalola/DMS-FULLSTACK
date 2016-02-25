@@ -1,11 +1,10 @@
 doctype html
-html
+html(lang="en" ng-app="Doccy")
   head
     include shared/head
   body
     main
-      p Here I am
-      include shared/header
-      //md-content(ui-view)
+      //include shared/header
+      md-content(ui-view)
   footer
-    //include shared/footer
+    include shared/footer

@@ -6,9 +6,11 @@
     roleAccess = require('./../middlewares/roleAccess');
 
   function roleRoute(router) {
+    router.route('/role/roles')
+      .get(roleController.getAllRoles);
 
     //mounting the authMiddleware middleware on all the routes
-    router.all('/*', auth.authMiddleware);
+    //router.all('/*', auth.authMiddleware);
 
     //route to get, edit and delete a role with a specific Id
     router.route('/role/superAdministrator/:id')

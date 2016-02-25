@@ -94,6 +94,11 @@ body {
   font-size: 1em;
 }
 
+.remove-link-deco {
+  text-decoration: none;
+  color: #000;
+}
+
 header {
   overflow: auto;
 
@@ -216,6 +221,94 @@ h1 {
 
 .text-center {
   text-align: center;
+}
+
+.edit-profile-box {
+  position: relative;
+  top: 25px;
+  right: 0;
+  left: 0;
+
+  overflow: hidden;
+
+  width: 380px;
+  height: 580px;
+  margin: auto;
+  margin-bottom: 100px;
+
+  color: #666;
+  border-radius: 3px;
+  background: #FFF;
+  box-shadow: 0 10px 20px rgba(0,0,0,0.19), 0 6px 6px rgba(0,0,0,0.23);
+
+  .edit-header {
+    height: 180px;
+    background-color: #32CE74;
+    .edit-profile-pic {
+      height: 150px;
+      width: 150px;
+      border-radius: 50%;
+      margin: 15px 120px;
+    }
+  }
+  .edit-content {
+    .edit-label {
+      position: absolute;
+      top: -15px !important;
+    }
+
+  }
+}
+
+.edit-document-box {
+  position: relative;
+  top: 25px;
+  right: 0;
+  left: 0;
+
+  overflow: hidden;
+
+  width: 600px;
+  height: 420px;
+  margin: auto;
+  margin-bottom: 100px;
+
+  color: #666;
+  border-radius: 3px;
+  background: #FFF;
+  box-shadow: 0 10px 20px rgba(0,0,0,0.19), 0 6px 6px rgba(0,0,0,0.23);
+
+  .edit-doc-header {
+    height: 50px;
+    background-color: #32CE74;
+    .doc-header-content {
+      text-align: center;
+    }
+  }
+
+  .edit-content {
+    .edit-label {
+      position: absolute;
+    }
+  .title {
+    display: block;
+    margin-top: 30px;
+    width: 300px;
+    padding: 10px 10px 10px 5px;
+    border: none;
+    border-bottom: 1px solid rgba(#757575, 0.39);
+    font-size: 18px;
+  }
+  .title:focus ~ label,
+  .title:valid ~ label {
+    top: -20px;
+
+    color: #32CE74;
+
+    font-size: 14px;
+  }
+
+  }
 }
 
 /* BOX LOGIN */
@@ -472,6 +565,45 @@ a {
 
   font-size: 12px;
 }
+
+.createDocument {
+  width: 160px !important;
+  height: 200px;
+}
+
+// .createDocument:hover {
+//   background-color: rgb(43, 184, 116);
+// }
+
+.app-icons {
+        width: 4px;
+        min-width: 60px;
+        margin: 0px;
+        i {
+            color: #3FC380;
+        }
+        i.sec {
+          margin-left: 22px;
+        }
+    }
+
+.doc-img {
+  width: 100%;
+  height: 100%;
+  border: 1px solid rgb(218,218,218)
+}
+
+.doc-list {
+  width: 80%;
+}
+
+.doc-preview {
+  width: 100%;
+  height: 100%;
+  margin: 0px;
+  word-wrap: break-word
+}
+
 .socialMedia {
   width: 100%;
 
@@ -484,6 +616,13 @@ md-select:not([disabled]):focus .md-select-value {
 
 .user-header {
   background-color: #3FC380 !important;
+}
+
+.preview-content {
+  margin-top: 0;
+  border-bottom: 1px solid rgb(218,218,218);
+  padding-bottom: 7px;
+  margin-bottom: 10px;
 }
 
 .create-doc {

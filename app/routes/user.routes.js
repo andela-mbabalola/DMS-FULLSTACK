@@ -6,13 +6,19 @@
 
   function userRoute(router) {
 
+    //route to create a new user
+    router.route('/users')
+      .post(userController.createUser);
+
     //route to login a user
     router.route('/users/login')
       .post(userController.login);
 
-    //route to create a new user
-    router.route('/users')
-      .post(userController.createUser);
+    router.route('/users/session')
+      .all(auth.authMiddleware, userController.session);
+
+    router.route('/users/logout')
+      .get(auth.authMiddleware, userController.logout);
 
     //route to get all available user(s)
     router.route('/users')

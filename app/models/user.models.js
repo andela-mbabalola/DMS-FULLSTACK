@@ -11,7 +11,7 @@
     name: {
       firstName: {
         type: String,
-        required: true,
+        // required: true,
         validate: {
           validator: function(name) {
             return /[a-zA-Z]/.test(name);
@@ -22,7 +22,7 @@
 
       lastName: {
         type: String,
-        required: true,
+        // required: true,
         validate: {
           validator: function(name) {
             return /[a-zA-Z]/.test(name);
@@ -34,8 +34,8 @@
 
     userName: {
       type: String,
-      required: true,
-      unique: true,
+      //required: true,
+      //unique: true,
       validate: {
         validator: function(name) {
           return /\w/.test(name);
@@ -59,6 +59,7 @@
     email: {
       type: String,
       required: true,
+      unique: true,
       validate: {
         validator: function(email) {
           return /^([\w-\.]+@([\w-]+\.)+[\w-]{2,4})?$/.test(email);
@@ -70,7 +71,7 @@
     role: {
       type: ObjectId,
       ref: 'Role',
-      required: true
+      // required: true
     },
 
     createdAt: {
@@ -81,7 +82,26 @@
     updatedAt: {
       type: Date,
       default: Date.now
+    },
+    //Profile picture
+    img_id: {
+      type: String,
+    },
+    img_url: {
+      type: String,
+      default: 'img/user.jpeg'
+    },
+
+    facebook_id: {
+      type: String,
+      unique: true
+    },
+
+    google_id: {
+      type: String,
+      unique: true
     }
+
   });
 
   // Bcrypt middleware on UserSchema
