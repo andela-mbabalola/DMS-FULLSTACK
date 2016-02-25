@@ -13,6 +13,12 @@ var configuration = {
     // available frameworks: https://npmjs.org/browse/keyword/karma-adapter
     frameworks: ['jasmine'],
 
+    plugins: [
+      'karma-firefox-launcher',
+      'karma-coverage',
+      'karma-jasmine',  
+    ],
+
 
     // list of files / patterns to load in the browser
     files: [
@@ -91,18 +97,19 @@ var configuration = {
     // - Safari
     // - PhantomJS
     // - IE
-    browsers: ['Chrome', 'ChromeCanary'], // 'Firefox', 'Safari'],
+    browsers: ['Firefox'], // 'Firefox', 'Safari'],
+
 
     // https://www.youtube.com/watch?v=FQwZrOAmMAc
     // To turn off chrome's security limitations that do
     // not allow some basics things to run
     // That are required while developing
-    customLaunchers: {
-        Chrome_travis_ci: {
-          base: 'Chrome',
-          flags: ['--no-sandbox']
-        }
-      },
+    // customLaunchers: {
+    //     Chrome_travis_ci: {
+    //       base: 'Chrome',
+    //       flags: ['--no-sandbox']
+    //     }
+    //   },
 
     // Continuous Integration mode
     // if true, Karma captures browsers, runs the tests and exits
@@ -125,9 +132,9 @@ var configuration = {
     }
   };
 
-  if(process.env.TRAVIS){
-    configuration.browsers = ['Chrome_travis_ci'];
-  }
+  // if(process.env.TRAVIS){
+  //   configuration.browsers = ['Chrome_travis_ci'];
+  // }
 
   config.set(configuration);
 };
