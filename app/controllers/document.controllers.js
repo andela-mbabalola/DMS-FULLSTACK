@@ -28,7 +28,7 @@
         } else {
           //check if user exists
           User.findOne({
-            email: req.body.email
+            _id: req.body.ownerId
           }, function(err, user) {
             if (err) {
               res.send(err);
@@ -96,15 +96,8 @@
       .exec(function(err, docs) {
         if (err) {
           res.send(err);
-          //if no document is found
-        } else if (!docs) {
-          res.status(404).json({
-            success: false,
-            message: 'No document available'
-          });
         } else {
           res.status(200).json({
-            success: true,
             docs: docs
           });
         }
@@ -184,11 +177,6 @@
         if (err) {
           res.send(err);
           //if no document is found
-        } else if (doc.length < 1) {
-          res.status(404).json({
-            success: false,
-            message: 'User has no document'
-          });
         } else {
           res.status(200).json({
             success: true,

@@ -1,48 +1,39 @@
-md-toolbar.header.user-header(ng-controller="HeaderCtrl")
-  div.md-toolbar-tools
-    a.logo(ui-sref="home")
-      img(src="../img/doccy.png")
-    span(flex)
-    a(ng-repeat="menuItem in menu" ui-sref="{{menuItem.state}}")
-      md-button.menu
-        | {{menuItem.name}}
-    
-    a(ng-if="currentUser")
-      div.md-icon-button.icon-button(aria-label="Comment")
-        img.image(ng-src="{{currentUser.user.img_url || currentUser.img_url}}")
-        md-tooltip {{currentUser.user.name.firstName || currentUser.name.firstName}} {{currentUser.user.name.lastName || currentUser.name.lastName}}
-
-    a(ng-if="!currentUser" ui-sref="login")
-      md-button
-        | Sign In
-    a(ng-if="currentUser")
-      md-button.md-icon-button(aria-label="Sign out" ng-click="logout()")
-        i.md-accent.fa.fa-sign-out
-        md-tooltip Sign out
-
 .profile-page(ng-if='currentUser' layout ng-init="init()")
   .md-content(layout="row")
-    md-sidenav.md-sidenav-left.md-whiteframe-z2.main(layout='column', md-component-id='left', md-is-locked-open="$mdMedia('gt-md')")
+    md-sidenav.md-sidenav-left.md-whiteframe-z2.main.profile-sidebar(layout='column', md-component-id='left', md-is-locked-open="$mdMedia('gt-xs')")
+      div.md-toolbar-tools.usr-prof
+        a.logo(ui-sref="home")
+          img(src="../img/doccy.png")
       md-toolbar.md-tall.md-hue-2.toolbar-header.user-details
-        span(flex='')
-        .md-toolbar-tools-bottom.inset(layout='column')
+        .md-toolbar-tools-bottom.inset
           span
           img(class='profile-picture' ng-src='{{currentUser.user.img_url || currentUser.img_url}}')
-          .text-center {{currentUser.user.name.firstName || currentUser.name.firstName}} {{currentUser.user.name.lastName || currentUser.name.lastName}}
-          .text-center {{currentUser.email}}
-      md-list
-        a(class="remove-link-deco" ui-sref="userProfile.documents")
-          md-list-item(md-ink-ripple)
-            md-item-content.user-profile( layout='column' layout-align='start center')
-              .inset
-                i.fa.fa-file-text.fa-3x
-              span Documents
-      md-list
-        a(class="remove-link-deco" ui-sref="userProfile.edit({id: currentUser._id})")
-          md-list-item(md-ink-ripple)
-            md-item-content.user-profile(layout='column' layout-align='start center')
-              .inset
-                i.fa.fa-pencil.fa-3x
-              span Edit your profile
+          div.user-profile-name
+            .text-center {{currentUser.user.name.firstName || currentUser.name.firstName}} {{currentUser.user.name.lastName || currentUser.name.lastName}}
+            .text-center-email {{currentUser.email}}
+      md-divider.divider
+      md-content.profile-content
+        md-list
+          a(class="remove-link-deco" ui-sref="userProfile.documents")
+            md-list-item(md-ink-ripple)
+              md-item-content.user-profile( layout='row' layout-align='start center')
+                .inset
+                  i.fa.fa-file-text-o.fa-2x
+                span.documents Documents
+        div.bottom-details
+          md-list
+            a(class="remove-link-deco" ui-sref="userProfile.edit({id: currentUser._id})")
+              md-list-item(md-ink-ripple)
+                md-item-content.user-profile(layout='row' layout-align='start center')
+                  .inset
+                    i.fa.fa-pencil-square-o.fa-2x.user-icons
+                  span.edit Edit your profile
+          md-list
+            a(class="remove-link-deco" ng-controller="HeaderCtrl" ng-click="logout()")
+              md-list-item(md-ink-ripple)
+                md-item-content.user-profile(layout='row' layout-align='start center')
+                  .inset
+                    i.fa.fa-sign-out.fa-2x.user-icons
+                  span.edit Logout
   .md-content(flex ui-view="inner-view")
     

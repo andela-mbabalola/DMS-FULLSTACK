@@ -21,7 +21,7 @@
       //verify secret and check exp
       jwt.verify(token, config.secret, function(err, decoded) {
         if (err) {
-          return res.json({
+          return res.status(403).json({
             success: false,
             message: 'Failed to authenticate token'
           });
@@ -33,7 +33,7 @@
       });
     } else {
       //if no token is found
-      return res.status(403).send({
+      return res.status(401).send({
         success: false,
         message: 'No token provided'
       });

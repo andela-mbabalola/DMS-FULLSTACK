@@ -4,13 +4,11 @@
   angular.module('Doccy.controllers', []);
   angular.module('Doccy.services', []);
   angular.module('Doccy.providers', []);
-  angular.module('Doccy.filters', []);
   angular.module('Doccy.directives', []);
 
-  //require directives
-  require('./directives/validatePassword');
-
   //require services
+  require('./services/role');
+  require('./services/doc-preview-modal');
   require('./services/documents');
   require('./services/doc_modal');
   require('./services/user');
@@ -26,29 +24,34 @@
   // require('./controllers/footer');
   // require('./controllers/home');
   require('./controllers/header');
+  require('./controllers/welcome');
   require('./controllers/login');
   require('./controllers/signUp');
-  require('./controllers/home');
+  require('./controllers/adminPanel');
   // require('./controllers/user-profile/index');
   require('./controllers/profile');
   require('./controllers/userProfile/documents');
+
+  //require directives
+  require('./directives/validatePassword');
 
   window.app = angular.module('Doccy', [
     'Doccy.controllers',
     'Doccy.services',
     'Doccy.providers',
-    'Doccy.filters',
     'Doccy.directives',
     'ngRoute',
     'ui.router',
     'ngResource',
     'ngMaterial',
     'ui.tinymce',
-    'ngSanitize'
+    'ngSanitize',
+    'ngFileUpload',
+    'cloudinary'
   ]);
 
-  window.app.run(['$rootScope', '$state', 'facebook', 'google', 'Users',
-    ($rootScope, $state, facebook, google, Users) => {
+  window.app.run(['$rootScope', '$state', 'Users', 'facebook', 'google',
+    function($rootScope, $state, Users, facebook, google) {
 
     // Check if the user's session is still being persisted in the servers
     Users.session(function(err, res) {
@@ -60,7 +63,7 @@
     facebook.init();
     google.init();
 
-    $rootScope.$on('$stateChangeSuccess', (ev, to, toParams, from, fromParams) => {
+    $rootScope.$on('$stateChangeSuccess', function(ev, to)  {
       if (to.authenticate && $rootScope.currentUser) {
         $state.go(to);
       } else if (!to.authenticate) {
@@ -69,24 +72,17 @@
         $state.go('login');
       }
     });
-    $rootScope.login = () => {
+    $rootScope.login = function()  {
       //make a transition to login when app starts
       $state.go('login');
     };
 
-    $rootScope.menu = [{
-      name: 'Home',
-      state: 'home'
-    }, {
-      name: 'About',
-      state: 'about'
-    }];
 
   }]);
 
   window.app.config(['$stateProvider', '$httpProvider', '$urlRouterProvider',
-    '$mdThemingProvider', '$locationProvider', 'facebookProvider', 'googleProvider', ($stateProvider, $httpProvider, $urlRouterProvider,
-      $mdThemingProvider, $locationProvider, facebookProvider, googleProvider) => {
+    '$mdThemingProvider', '$locationProvider', 'facebookProvider', 'googleProvider', 'cloudinaryProvider', function($stateProvider, $httpProvider, $urlRouterProvider,
+      $mdThemingProvider, $locationProvider, facebookProvider, googleProvider,cloudinaryProvider) {
       facebookProvider.setAppId('1704950776416059');
       googleProvider.setAppConfig({
         SCOPE: 'https://www.googleapis.com/auth/userinfo.profile https://www.googleapis.com/auth/userinfo.email',
@@ -95,6 +91,12 @@
         LOGOUT: 'http://accounts.google.com/Logout',
         TYPE: 'token'
       });
+
+      cloudinaryProvider
+        .set('cloud_name', 'yhemmy')
+        // .set('api_key', '522572236687386');
+        // .set('api_secret', 'esRg6uORoctFUgFeFZanHxcxp4o');
+        .set('upload_preset', 'wte4adrf');
 
       $httpProvider.interceptors.push('TokenInjector');
 
@@ -110,7 +112,6 @@
       $stateProvider
         .state('home', {
           url: '/',
-          controller: 'HomeCtrl',
           templateUrl: 'jade/home.html',
           authenticate: false
         })
@@ -125,6 +126,12 @@
           controller: 'SignUpCtrl',
           templateUrl: 'jade/signUp.html',
           authenticate: false
+        })
+        .state('adminProfile', {
+          url: '/users/admin',
+          controller: 'AdminPanelController',
+          templateUrl: 'jade/admin-panel.html',
+          authenticate: true
         })
         .state('userProfile', {
           url: '/users/profile',
@@ -163,7 +170,7 @@
         })
         .state('welcome', {
           url: '/users/welcome',
-          //controller: 'welcomeCtrl',
+          controller: 'welcomeCtrl',
           templateUrl: 'jade/welcome.html',
           authenticate: false
         })

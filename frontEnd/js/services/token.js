@@ -1,14 +1,14 @@
 angular.module('Doccy.services')
   .factory('Token', ['$window',
-    ($window)=> {
+    function($window) {
         return {
-          set: (token)=> {
+          set: function(token) {
             $window.localStorage.setItem('token', token);
           },
-          get: ()=> {
+          get: function() {
             return $window.localStorage.getItem('token');
           },
-          remove:()=> {
+          remove: function() {
             $window.localStorage.removeItem('token');
           }
         };

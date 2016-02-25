@@ -94,12 +94,14 @@
 
     facebook_id: {
       type: String,
-      unique: true
+      // unique: true,
+      // sparse: true
     },
 
     google_id: {
       type: String,
-      unique: true
+      // unique: true,
+      // sparse: true
     }
 
   });

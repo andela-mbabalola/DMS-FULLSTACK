@@ -15,6 +15,7 @@
     //route to get, edit and delete a role with a specific Id
     router.route('/role/superAdministrator/:id')
       .get(roleController.getRoleById)
+      .get(roleController.getAllRoles)
       .put(roleController.editRole)
       .delete(roleController.deleteRole);
 

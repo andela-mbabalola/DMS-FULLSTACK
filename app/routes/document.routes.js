@@ -13,7 +13,7 @@
 
     //route to get all available documents
     router.route('/documents')
-      .get(auth.authMiddleware, documentController.getAllDocument);
+      .get(documentController.getAllDocument);
 
     //route to get all documents with a specified limit
     router.route('/documents?limit=:limit')

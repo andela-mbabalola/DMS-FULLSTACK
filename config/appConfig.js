@@ -25,8 +25,8 @@
 
   routes(router);
   function apiMiddleware(req, res, next){
-    console.log('Yay we got here !!!');
-    console.log(req.body);
+    // console.log('Yay we got here !!!');
+    // console.log(req.body);
     next();
   }
   app.use('/api', apiMiddleware, router);

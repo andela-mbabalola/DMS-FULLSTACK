@@ -8,7 +8,7 @@ var app = require('./config/appConfig'),
   port = process.env.PORT || 4444;
 
 
-// configuration ===============================================================
+// configuration
 mongoose.connect(db.url); // connect to database
 
  app.listen(port);

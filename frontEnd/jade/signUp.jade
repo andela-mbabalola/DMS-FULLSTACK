@@ -7,7 +7,7 @@ md-toolbar.header(ng-controller="HeaderCtrl")
       md-button.menu
         | {{menuItem.name}}
     
-    a(ng-if="currentUser" ui-sref="user-profile")
+    a(ng-if="currentUser" ui-sref="userProfile")
       div.md-icon-button.icon-button(aria-label="Comment")
         img.image(ng-src="{{currentUser.user.img_url || currentUser.img_url}}")
         md-tooltip {{currentUser.user.name.firstName || currentUser.name.firstName}} {{currentUser.user.name.lastName || currentUser.name.lastName}}
@@ -15,41 +15,46 @@ md-toolbar.header(ng-controller="HeaderCtrl")
     a(ng-if="!currentUser" ui-sref="login")
       md-button
         | Sign In
+    a(ng-if="currentUser")
+      md-button.md-icon-button(aria-label="Sign out" ng-click="logout()")
+        i.md-accent.fa.fa-sign-out
+        md-tooltip Sign out
 
-.box.signUp
-  #header
-    #cont-lock
-      i.material-icons.lock lock
-    #bottom-head
-      h1#logintoregister SIGN UP
-  form(method="post", name="signUpForm" ng-submit="signUp()")
-    .group
-      //username
-      input.inputMaterial(ng-model="user.email" name="email" type="email" required="true")
-      span.highlight
-      span.bar(ng-class="{danger: signUpForm.email.$invalid && signUpForm.email.$dirty}")
-      span.highlight(ng-show="signUpForm.email.$invalid && signUpForm.email.$dirty") Invalid email
-      label Email
-    .group
-      //password
-      input.inputMaterial(ng-model="user.password" name="password" type="password" ng-minlength= "6" required="true")
-      span.highlight
-      span.bar(ng-class="{danger: signUpForm.password.$invalid && signUpForm.password.$dirty}")
-      span.highlight(ng-show="signUpForm.password.$invalid && signUpForm.password.$dirty") Password too short
-      label Password
-    .group
-      //confirm password
-      input.inputMaterial(ng-model="user.confirm_password" name="confirm_password" validate-password="user.password" type="password" ng-minlength= "6" ng-required="true")
-      span.highlight
-      span.bar(ng-class="{danger: signUpForm.confirm_password.$invalid}")
-      span.highlight(ng-show="signUpForm.confirm_password.$invalid && signUpForm.confirm_password.$dirty") Password does not match
-      label Confirm Password
-    .group      
-      md-input-container.inputMaterial.select
-        md-select( ng-model="user.role" placeholder="Select a role" aria-label="currentUser.role" required="true")
-          md-option(ng-value="role" ng-repeat="role in roles") {{role.title}}
-    button#buttonlogintoregister(type="submit" ng-disabled="signUpForm.$invalid") Sign Up
-    #footer-box
-      p.footer-text
-        | Already have an account?
-        a.sign-up(ui-sref="login")  Sign In
+div.login
+  .box.signUp
+    #header
+      #cont-lock
+        i.material-icons.lock lock
+      #bottom-head
+        h1#logintoregister SIGN UP
+    form(method="post", name="signUpForm" ng-submit="signUp()")
+      .group
+        //username
+        input.inputMaterial(ng-model="user.email" name="email" type="email" required="true")
+        span.highlight
+        span.bar(ng-class="{danger: signUpForm.email.$invalid && signUpForm.email.$dirty}")
+        span.highlight(ng-show="signUpForm.email.$invalid && signUpForm.email.$dirty") Invalid email
+        label Email
+      .group
+        //password
+        input.inputMaterial(ng-model="user.password" name="password" type="password" ng-minlength= "6" required="true")
+        span.highlight
+        span.bar(ng-class="{danger: signUpForm.password.$invalid && signUpForm.password.$dirty}")
+        span.highlight(ng-show="signUpForm.password.$invalid && signUpForm.password.$dirty") Password too short
+        label Password
+      .group
+        //confirm password
+        input.inputMaterial(ng-model="user.confirm_password" name="confirm_password" validate-password="user.password" type="password" ng-minlength= "6" ng-required="true")
+        span.highlight
+        span.bar(ng-class="{danger: signUpForm.confirm_password.$invalid}")
+        span.highlight(ng-show="signUpForm.confirm_password.$invalid && signUpForm.confirm_password.$dirty") Password does not match
+        label Confirm Password
+      .group      
+        md-input-container.inputMaterial.select
+          md-select( ng-model="user.role" placeholder="Select a role" aria-label="currentUser.role" required="true")
+            md-option(ng-value="role" ng-repeat="role in roles") {{role.title}}
+      button#buttonlogintoregister(type="submit" ng-disabled="signUpForm.$invalid") Sign Up
+      #footer-box
+        p.footer-text
+          | Already have an account?
+          a.sign-up(ui-sref="login")  Sign In

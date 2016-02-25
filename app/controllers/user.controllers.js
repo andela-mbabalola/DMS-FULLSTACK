@@ -57,20 +57,20 @@
    * @return {[json]}     [success message that user has been logged in]
    */
   exports.login = function(req, res) {
+     var token;
     //checking if the user exists
     User.findOne({
       $or: [{
         email: req.body.email
       }, {
-        facebook_id: req.body.facebook_id,
+        facebook_id: req.body.facebook_id || 'eiaowfeaoiwfeoiawefio',
       }, {
-        google_id: req.body.google_id
+        google_id: req.body.google_id || 'awhfoeahifeoaw'
       }]
     }, function(err, user) {
       if (err) {
         res.send(err);
       } else {
-        console.log(user, 'here i am');
         //if user is not found
         if (!user) {
           res.status(404).json({
@@ -78,8 +78,30 @@
             message: 'Authentication failed. User not found'
           });
         } else if (user) {
-          if (user && user.facebook_id == req.body.facebook_id || user && user.google_id == req.body.google_id) {
-            var token = jwt.sign(user, config.secret, {
+          if(req.body.email && !(req.body.facebook_id || req.body.google_id)){
+              //check if password matches
+              if (helpers.comparePassword(req.body.password, user.password)) {
+                //if user was found and password matches
+                //create a token
+                 token = jwt.sign(user, config.secret, {
+                  expiresInMinutes: 1440
+                });
+
+                res.status(200).json({
+                  success: true,
+                  message: 'Successfully logged in',
+                  token: token,
+                  user: user
+                });
+              } else {
+                res.status(404).json({
+                  success: false,
+                  message: 'Authentication failed. Wrong password'
+                });
+              }}
+          else if (user.facebook_id === req.body.facebook_id ||
+            user.google_id === req.body.google_id) {
+             token = jwt.sign(user, config.secret, {
               expiresInMinutes: 1440
             });
             res.status(200).json({
@@ -88,30 +110,9 @@
               token: token,
               user: user
             });
-          } else {
-            //check if password matches
-            if (helpers.comparePassword(req.body.password, user.password)) {
-              //if user was found and password matches
-              //create a token
-              var token = jwt.sign(user, config.secret, {
-                expiresInMinutes: 1440
-              });
-
-              res.status(200).json({
-                success: true,
-                message: 'Successfully logged in',
-                token: token,
-                user: user
-              });
-            } else {
-              res.status(404).json({
-                success: false,
-                message: 'Authentication failed. Wrong password'
-              });
-            }
+          }
           }
         }
-      }
     });
   };
 
@@ -122,7 +123,6 @@
    * @return {[json]}     [success message that user has been created]
    */
   exports.createUser = function(req, res) {
-    console.log(req.body, 'request from the initial body request');
     //check if role exists
     Role.findOne({
       _id: req.body.role,
@@ -137,40 +137,26 @@
           message: 'Role not found. Create first'
         });
       } else {
-        console.log(req.body, 'request from the role body request');
         //check if user exists
         User.findOne({
           $or: [{
             email: req.body.email
           }, {
-            facebook_id: req.body.facebook_id
+            facebook_id: req.body.facebook_id || 'eiaowfeaoiwfeoiawefio',
           }, {
-            google_id: req.body.google_id
+            google_id: req.body.google_id || 'awhfoeahifeoaw'
           }]
         }, function(err, user) {
           if (err) {
             res.send(err);
           }
 
-          //if a user is found
           if (user) {
             res.status(409).json({
               success: false,
               message: 'User already exists!'
             });
           } else {
-            //ensuring all the parameters are entered before creating
-            // if (!req.body.firstName && !req.body.lastName) {
-            //   res.status(406).send({
-            //     success: false,
-            //     message: 'Please enter your firstName and lastName'
-            //   });
-            // } else if (!req.body.userName) {
-            // res.status(406).send({
-            //   success: false,
-            //   message: 'Please enter your userName'
-            // });
-            // } else
             if (!req.body.email) {
               res.status(406).send({
                 success: false,
@@ -181,16 +167,11 @@
                 success: false,
                 message: 'Please enter your password'
               });
-              // } else if (!req.body.role) {
-              //   res.status(406).send({
-              //     success: false,
-              //     message: 'Please enter your role'
-              //   });
             } else {
-              console.log(req.body, 'request body from signup form');
-              var googleId = req.body.type === 'google' ? req.body.google_id : null;
-              var facebookId = req.body.type === 'facebook' ? req.body.facebook_id : null;
-              console.log(facebookId, googleId, 'idss');
+              var googleId = req.body.type === 'google' ?
+                req.body.google_id : null;
+              var facebookId = req.body.type === 'facebook' ?
+                req.body.facebook_id : null;
               var newUser = new User({
                 name: {
                   firstName: req.body.firstName,
@@ -239,12 +220,6 @@
     User.find({}).exec(function(err, users) {
       if (err) {
         res.send(err);
-        //if no user is found
-      } else if (!users) {
-        res.status(404).send({
-          success: false,
-          message: 'There are currently no users'
-        });
       } else {
         //if users are found
         res.status(200).send(users);
@@ -284,8 +259,8 @@
    */
   exports.updateUser = function(req, res) {
     req.body.name = {
-      firstName: req.body.firstName,
-      lastName: req.body.lastName
+      firstName: req.body.name.firstName,
+      lastName: req.body.name.lastName
     };
 
     //check if role exists
@@ -380,5 +355,4 @@
         message: 'User has been successfully logged out'
       });
   };
-
 })();

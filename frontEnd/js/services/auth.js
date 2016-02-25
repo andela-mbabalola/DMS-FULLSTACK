@@ -1,18 +1,22 @@
-angular.module('Doccy.services')
-  .factory('Auth', ['Token', (Token)=> {
-    return {
-      isLoggedIn: ()=> {
-          if(Token.get()) {
+(function() {
+  'use strict';
+
+  angular.module('Doccy.services')
+    .factory('Auth', ['Token', function(Token) {
+      return {
+        isLoggedIn: function() {
+          if (Token.get()) {
             return true;
           } else {
             return false;
           }
-      },
-      setToken: (token)=> {
-        Token.set(token);
-      },
-      logout: ()=> {
-         Token.remove();
-      }
-    };
-  }]);
+        },
+        setToken: function(token) {
+          Token.set(token);
+        },
+        logout: function() {
+          Token.remove();
+        }
+      };
+    }]);
+})();

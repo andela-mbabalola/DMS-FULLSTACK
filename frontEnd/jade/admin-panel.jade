@@ -1,0 +1,111 @@
+md-toolbar.header(ng-controller="HeaderCtrl")
+  div.md-toolbar-tools
+    a.logo(ui-sref="home")
+      img(src="../img/doccy.png")
+    span(flex)
+    a(ng-repeat="menuItem in menu" ui-sref="{{menuItem.state}}")
+      md-button.menu
+        | {{menuItem.name}}
+    
+    a(ng-if="currentUser" ui-sref="userProfile")
+      div.md-icon-button.icon-button(aria-label="Comment")
+        img.image(ng-src="{{currentUser.user.img_url || currentUser.img_url}}")
+        md-tooltip {{currentUser.user.name.firstName || currentUser.name.firstName}} {{currentUser.user.name.lastName || currentUser.name.lastName}}
+
+    a(ng-if="!currentUser" ui-sref="login")
+      md-button
+        | Sign In
+    a(ng-if="currentUser")
+      md-button.md-icon-button(aria-label="Sign out" ng-click="logout()")
+        i.md-accent.fa.fa-sign-out
+        md-tooltip Sign out
+
+div(ng-cloak)
+  md-content
+    md-tabs(md-dynamic-height='')
+      md-tab(label="Users")
+        h1 Tab One
+        md-content.md-padding
+          h3.md-display-2.md-margin.text-center USERS
+          md-divider
+          div.md-margin(layout="column" md-padding flex layout-sm="column" layout-md="column" layout-align="center center")
+            md-card
+             md-table-container
+              table(md-table='' md-progress="promise" style="border:2px")
+                thead(md-head='')
+                  th(md-column='', md-text='')
+                  th(md-column='', md-text='') User Id
+                  th(md-column='', md-text='') First Name
+                  th(md-column='', md-text='') Last Name
+                  th(md-column='', md-text='') UserName
+                  th(md-column='', md-text='') Email
+                  th(md-column='', md-text='') Role
+                  th(md-column='', md-text='') Documents
+                  th(md-column='', md-text='') Edit
+                  th(md-column='', md-text='') Delete
+                tbody(md-body='')
+                  tr(md-row='' ng-repeat="user in users")
+                    td(md-cell='') 
+                      img.admin-img(src="{{user.img_url}}")
+                    td(md-cell='') {{user._id}}
+                    td(md-cell='') {{user.userName}}
+                    td(md-cell='') {{user.name.firstName}}
+                    td(md-cell='') {{user.name.lastName}}
+                    td(md-cell='') {{user.email}}
+                    td(md-cell='') {{user.role}}
+                    td(md-cell='')
+                      i.fa.fa-pencil(ng-click="updateUser($event, user)") Edit
+                    td(md-cell='')
+                      i.fa.fa-trash(ng-click="deleteUser($event, user)") Delete
+                    md-divider
+
+      md-tab(label="Roles")
+        h1 Tab Two
+        md-content.md-padding
+          h3.md-display-2.md-margin.text-center ROLES
+          md-divider
+          div.md-margin(layout="column" md-padding flex layout-sm="column" layout-md="column" layout-align="center center")
+            md-card
+             md-table-container
+              table(md-table='' md-progress="promise" style="border:2px")
+                thead(md-head='')
+                  th(md-column='', md-text='') Role Id
+                  th(md-column='', md-text='') Title
+                  th(md-column='', md-text='') Delete
+                tbody(md-body='')
+                  tr(md-row='' ng-repeat="role in roles")
+                    td(md-cell='') {{role._id}}
+                    td(md-cell='') {{role.title}}
+                    td(md-cell='')
+                      i.fa.fa-trash(ng-click="deleteRole($event, user)") Delete
+                    md-divider
+
+      md-tab(label="Documents")
+        h1 Tab Three
+        md-content.md-padding
+          h3.md-display-2.md-margin.text-center DOCUMENTS
+          md-divider
+          div.md-margin(layout="column" md-padding flex layout-sm="column" layout-md="column" layout-align="center center")
+            md-card
+             md-table-container
+              table(md-table='' md-progress="promise" style="border:2px")
+                thead(md-head='')
+                  th(md-column='', md-text='') Document Id
+                  th(md-column='', md-text='') Title
+                  th(md-column='', md-text='') Content
+                  th(md-column='', md-text='') Date Created
+                  th(md-column='', md-text='') Date Modified
+                  th(md-column='', md-text='') Edit
+                  th(md-column='', md-text='') Delete
+                tbody(md-body='')
+                  tr(md-row='' ng-repeat="document in documents")
+                    td(md-cell='') {{document._id}}
+                    td(md-cell='') {{document.title}}
+                    td(md-cell='') {{document.content | limitTo: 20}}
+                    td(md-cell='') {{document.createdAt | date: dd/mm/yyyy}}
+                    td(md-cell='') {{document.lastModified | date: dd/mm/yyyy}}
+                    td(md-cell='')
+                      i.fa.fa-pencil(ng-click="updateDocument($event, user)") Edit
+                    td(md-cell='')
+                      i.fa.fa-trash(ng-click="deleteDocument($event, user)") Delete
+                    md-divider

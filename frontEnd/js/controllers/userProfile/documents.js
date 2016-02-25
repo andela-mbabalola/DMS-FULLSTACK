@@ -13,32 +13,23 @@
       '$sce',
       '$mdToast',
       '$mdDialog',
-      function($scope, $rootScope, $state, Users, DocModal, Documents, $stateParams, $sce, $mdToast, $mdDialog) {
+      function($scope, $rootScope, $state, Users, DocModal, Documents,
+        $stateParams, $sce, $mdToast, $mdDialog) {
 
         $scope.init = function() {
           Documents.get({
             id: $stateParams.id
           }, function(res) {
             $scope.docs = res.doc;
-            console.log($stateParams.id);
           });
 
           Users.userDocs($rootScope.currentUser, function(err, res) {
-            console.log(res, 'here');
-            if (err) {
-              $scope.message = 'Your Documents goes here.';
-            } else {
-              $scope.documents = res;
-              if (res.doc.length === 0) {
-                $scope.message = 'Your Documents goes here.';
-              }
+            if (!err) {
+              $scope.userDocs = res.doc.map(function(obj) {
+                obj.content = $sce.trustAsHtml(obj.content);
+                return obj;
+              });
             }
-            $scope.userDocs = res.doc.map(function(obj) {
-              console.log(obj.content);
-              obj.content = $sce.trustAsHtml(obj.content);
-              return obj;
-            });
-            console.log($scope.userDocs);
           });
         };
 
@@ -46,17 +37,21 @@
         $scope.addDocument = function() {
           var userInfo = {
             role: $rootScope.currentUser.role,
-            email: $rootScope.currentUser.email
+            ownerId: $rootScope.currentUser._id
           };
           angular.extend($scope.document, userInfo);
           Documents.save($scope.document, function(doc) {
-            if (doc) {
-              $state.go('userProfile.documents', {
-                id: doc.id
-              });
-            } else {
-              DocModal.toast('Document not created');
-            }
+            console.log(doc);
+            $state.go('userProfile.documents', {
+              id: $rootScope.currentUser._id,
+
+            }, {
+              reload: true
+            });
+            $mdDialog.cancel();
+          }, function(err) {
+            console.log(err);
+            DocModal.toast('Document not created');
           });
         };
 
@@ -71,15 +66,26 @@
           theme: 'modern'
         };
 
+        $scope.getADoc = function() {
+          Documents.get({
+            id: $stateParams.id
+          }, function(res) {
+            $scope.docs = res.doc;
+          });
+        };
+
         $scope.editDocument = function() {
           Documents.update($scope.docs, function() {
-            console.log($scope.docs, 'im here');
-            $scope.message =
-              'You have successfully updated your document.';
-          }, function(err) {
-            console.log(err, 'here');
-            $scope.message =
-              'There was a problem updating your document.';
+            $mdToast.show($mdToast.simple()
+              .textContent('Update successful').hideDelay(2000));
+            $state.go('userProfile.documents', {
+              id: $rootScope.currentUser._id
+            }, {
+              reload: true
+            });
+          }, function() {
+            $mdToast.show($mdToast.simple()
+              .textContent('Error updating profile').hideDelay(2000));
           });
         };
 
@@ -98,13 +104,17 @@
             }, function() {
               $mdToast.show($mdToast.simple()
                 .textContent('Document Deleted').hideDelay(2000));
+              $state.go('userProfile.documents', {
+                id: $rootScope.currentUser._id
+              }, {
+                reload: true
+              });
             });
           }, function() {
             $mdToast.show($mdToast.simple()
               .textContent('Document Retained').hideDelay(2000));
           });
         };
-
         $scope.init();
       }
     ]);
