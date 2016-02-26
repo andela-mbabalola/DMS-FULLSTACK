@@ -65,18 +65,6 @@ gulp.task('jade', function() {
 });
 
 /**
- * [task to concatenate js files into a public folder]
- * @param  {[.js]} 'js' [files written in js]
- * @return {[js]}      [concatenated js file]
- */
-// gulp.task('js', function() {
-//   return gulp.src(path.frontEnd.js)
-//     .pipe(concat('app.js'))
-//     .pipe(gulp.dest('./public/js'))
-//     .pipe(notify('Js gulpify Done!'));
-// });
-
-/**
  * [task to convert sass files to css]
  * @param  {[.scss]} 'sass' [files written in scss]
  * @return {[css]}        [files converted to css]
@@ -104,18 +92,6 @@ gulp.task('images', function() {
     .pipe(gulp.dest('./public/img'))
     .pipe(notify('Gulp-imagemin Done!'));
 });
-
-/**
- * [task to minify js files]
- * @param  {[.js]} ['js']   [files to be minified]
- * @return {[.js]}          [minified js file]
- */
-// gulp.task('minify', ['js'], function() {
-//   return gulp.src('./public/js/*.js')
-//     .pipe(minify())
-//     .pipe(gulp.dest('./public/js'))
-//     .pipe(notify('Gulp-minify Done!'));
-// });
 
 /**
  * [task to minify css files]
@@ -181,7 +157,6 @@ gulp.task('test:fend', ['build'], function(done) {
     singleRun: true
   },done()).start();
 });
-
 
 /**
  * [task to watch for changes]
