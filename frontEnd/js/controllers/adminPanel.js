@@ -76,7 +76,6 @@
             .ok('Delete')
             .cancel('Cancel');
           $mdDialog.show(confirm).then(function() {
-            console.log(role, 'role here');
             Roles.remove({
               id: role._id
             }, function() {

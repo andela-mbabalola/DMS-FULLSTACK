@@ -32,8 +32,8 @@
         }
       },
       Roles = {
-        query: function(cb) {
-          cb([1, 2, 3]);
+        save: function(doc, cb, err) {
+          !doc.fail ? cb(doc) : err(null, true);
         },
         remove: function(id, cb, cbb) {
           if(id.id) {
@@ -122,16 +122,12 @@
 
     it('should call init function', function() {
       spyOn(Users, 'query').and.callThrough();
-      spyOn(Roles, 'query').and.callThrough();
       spyOn(Documents, 'query').and.callThrough();
       expect(scope.init).toBeDefined();
       scope.init();
       expect(Users.query).toHaveBeenCalled();
       expect(scope.users).toBeDefined();
       expect(scope.users).toEqual([1, 2, 3]);
-      expect(Roles.query).toHaveBeenCalled();
-      expect(scope.roles).toBeDefined();
-      expect(scope.roles).toEqual([1, 2, 3]);
       expect(Documents.query).toHaveBeenCalled();
       expect(scope.documents).toBeDefined();
       expect(scope.documents).toEqual([1, 2, 3]);
@@ -170,6 +166,17 @@
       expect(Roles.remove).toHaveBeenCalled();
       expect(state.reload).toHaveBeenCalled();
     });
+
+    it('should define and create a role', function() {
+      scope.role = {
+        _id: '345',
+        title: 'user',
+      };
+      spyOn(Roles, 'save').and.callThrough();
+      scope.createRoleBtn();
+      expect(Roles.save).toHaveBeenCalled();
+    });
+
 
     it('should call delete function and delete document', function() {
       scope.doc = {
