@@ -9,14 +9,14 @@
 
   var jwt = require('jsonwebtoken'),
     expect = require('expect.js'),
-    server = require('./../server.js'),
+    server = require('./../../server.js'),
     request = require('supertest')(server),
-    user = require('./../app/models/user.models'),
-    role = require('./../app/models/role.models'),
-    config = require('./../config/config'),
-    userName = require('./../config/adminConfig').adminName,
-    _userSeeders = require('./../seeders/user.seeders.json'),
-    _roleSeeders = require('./../seeders/role.seeders.json');
+    user = require('./../../app/models/user.models'),
+    role = require('./../../app/models/role.models'),
+    config = require('./../../config/config'),
+    userName = require('./../../config/adminConfig').adminName,
+    _userSeeders = require('./../../seeders/user.seeders.json'),
+    _roleSeeders = require('./../../seeders/role.seeders.json');
 
   describe('Roles', function() {
     describe('create role', function() {
@@ -52,13 +52,40 @@
         });
       });
 
-      it('should deny access trying to create a SuperAdmin', function(done) {
+      it('should create role with valid userName', function(done) {
         request.post('/api/role/superAdministrator/' + userName)
+          .set('x-access-token', superAdToken)
+          .send(_roleSeeders[2])
+          .end(function(err, res) {
+            console.log(res.body);
+            expect(res.status).to.be(200);
+            expect(res.body.success).to.eql(true);
+            expect(res.body.message).to.eql('Role successfully created!');
+            done();
+          });
+      });
+
+      it('should create unique roles', function(done) {
+        request.post('/api/role/superAdministrator/' + userName)
+          .set('x-access-token', superAdToken)
+          .send(_roleSeeders[0])
+          .end(function(err, res) {
+            console.log(res.body);
+            expect(res.status).to.be(409);
+            expect(res.body.success).to.eql(false);
+            expect(res.body.message).to.eql('Role already exists!');
+            done();
+          });
+      });
+
+      it('should deny access trying to create a SuperAdmin', function(done) {
+        request.post('/api/role/superAdministrator/owner/' + roleId)
           .set('x-access-token', superAdToken)
           .send({
             title: 'superAdministrator'
           })
           .end(function(err, res) {
+            console.log(res.body);
             expect(res.status).to.be(403);
             expect(res.body.success).to.eql(false);
             expect(res.body.message).to.eql('Access denied');
@@ -81,35 +108,11 @@
           });
       });
 
-
-      it('should create role with valid userName', function(done) {
-        request.post('/api/role/superAdministrator/' + userName)
-          .set('x-access-token', superAdToken)
-          .send(_roleSeeders[2])
-          .end(function(err, res) {
-            expect(res.status).to.be(200);
-            expect(res.body.success).to.eql(true);
-            expect(res.body.message).to.eql('Role successfully created!');
-            done();
-          });
-      });
-
-      it('should create unique roles', function(done) {
-        request.post('/api/role/superAdministrator/' + userName)
-          .set('x-access-token', superAdToken)
-          .send(_roleSeeders[0])
-          .end(function(err, res) {
-            expect(res.status).to.be(409);
-            expect(res.body.success).to.eql(false);
-            expect(res.body.message).to.eql('Role already exists!');
-            done();
-          });
-      });
-
       it('should get a specific role ', function(done) {
         request.get('/api/role/superAdministrator/' + roleId)
           .set('x-access-token', superAdToken)
           .end(function(err, res) {
+            console.log(res.body);
             expect(res.status).to.be(200);
             expect(err).to.be(null);
             expect(res.body).to.not.be(undefined);
@@ -123,6 +126,7 @@
         request.get('/api/role/superAdministrator/' + id)
           .set('x-access-token', superAdToken)
           .end(function(err, res) {
+            console.log(res.body);
             expect(res.body).to.not.be(undefined);
             expect(res.body.success).to.eql(false);
             expect(res.body.message).to.eql('Role not found!');

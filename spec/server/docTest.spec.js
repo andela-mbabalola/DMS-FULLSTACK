@@ -9,15 +9,15 @@
 
   var jwt = require('jsonwebtoken'),
     expect = require('expect.js'),
-    server = require('./../server.js'),
+    server = require('./../../server.js'),
     request = require('supertest')(server),
-    User = require('./../app/models/user.models'),
-    role = require('./../app/models/role.models'),
-    Docs = require('./../app/models/document.models'),
-    config = require('./../config/config'),
-    _userSeeders = require('./../seeders/user.seeders.json'),
-    _roleSeeders = require('./../seeders/role.seeders.json'),
-    _docSeeders = require('./../seeders/document.seeders.json');
+    User = require('./../../app/models/user.models'),
+    role = require('./../../app/models/role.models'),
+    Docs = require('./../../app/models/document.models'),
+    config = require('./../../config/config'),
+    _userSeeders = require('./../../seeders/user.seeders.json'),
+    _roleSeeders = require('./../../seeders/role.seeders.json'),
+    _docSeeders = require('./../../seeders/document.seeders.json');
 
   describe('Documents', function() {
     describe('Creating document(s)', function() {
@@ -35,13 +35,8 @@
             _docSeeders[1].role = Role._id;
             _docSeeders[1].ownerId = users._id;
             //creating a document using the content of the document seeder
-            Docs.create(_docSeeders[1]).then(function() {}, function(err) {
-              if (err) {
-                console.log(err);
+            Docs.create(_docSeeders[1]).then(function() {
                 done();
-              }
-            });
-            done();
           }, function(err) {
             console.log(err);
             done();
@@ -51,6 +46,7 @@
           done();
         });
       });
+    });
 
       afterEach(function(done) {
         //deleting the document created
@@ -69,11 +65,14 @@
       });
 
       it('creates unique documents', function(done) {
-        _docSeeders[1].role = 'Manager';
-        _docSeeders[1].ownerId = 'Emmy';
         request.post('/api/documents')
           .set('x-access-token', userToken)
-          .send(_docSeeders[1])
+          .send({
+            title: _docSeeders[1].title,
+            content: _docSeeders[1].content,
+            ownerId: _docSeeders[1].ownerId,
+            role: _docSeeders[1].role
+          })
           .expect(409)
           .end(function(err, res) {
             expect(res.status).to.be(409);
@@ -83,12 +82,30 @@
           });
       });
 
+      it('creates a new document', function(done) {
+        request.post('/api/documents')
+          .set('x-access-token', userToken)
+          .send({
+            title: _docSeeders[2].title,
+            content: _docSeeders[2].content,
+            ownerId: _docSeeders[1].ownerId,
+            role: _docSeeders[1].role
+          })
+          .expect(200)
+          .end(function(err, res) {
+            expect(res.status).to.be(200);
+            expect(res.body.success).to.eql(true);
+            expect(res.body.message).to.eql('Document successfully created');
+            done();
+          });
+      });
+
       it('should not create document for unauthenticated user', function(done) {
         request.post('/api/documents/')
           .send(_docSeeders[0])
-          .expect(403)
+          .expect(401)
           .end(function(err, res) {
-            expect(res.status).to.be(403);
+            expect(res.status).to.be(401);
             expect(res.body.success).to.eql(false);
             expect(res.body.message).to.eql('No token provided');
             done();
@@ -101,28 +118,13 @@
           .send({
             title: _docSeeders[1].title,
             content: _docSeeders[1].content,
-            role: ''
+            role: _roleSeeders[2]._id
           })
           .expect(400)
           .end(function(err, res) {
             expect(res.status).to.be(400);
             expect(res.body.success).to.eql(false);
             expect(res.body.message).to.eql('Role not found. Create first!');
-          });
-        done();
-      });
-
-      it('should create a new document', function(done) {
-        _docSeeders[2].role = 'Manager';
-        _docSeeders[2].ownerId = 'Emmy';
-        request.post('/api/documents')
-          .set('x-access-token', userToken)
-          .send(_docSeeders[2])
-          .expect(200)
-          .end(function(err, res) {
-            expect(res.status).to.be(200);
-            expect(res.body.success).to.eql(true);
-            expect(res.body.message).to.eql('Document successfully created');
             done();
           });
       });
@@ -242,8 +244,8 @@
           .end(function(err, res) {
             expect(res.status).to.be(200);
             expect(res.body.length).to.not.be(0);
-            expect(res.body[0].title).to.be('third');
-            expect(res.body[1].title).to.be('first');
+            expect(res.body.doc[0].title).to.be('third');
+            expect(res.body.doc[1].title).to.be('first');
             done();
           });
       });
@@ -252,11 +254,10 @@
         var id = '568831c53ff90b4456491b50';
         request.get('/api/user/' + id + '/documents/')
           .set('x-access-token', userToken)
-          .expect(404)
+          .expect(200)
           .end(function(err, res) {
-            expect(res.status).to.be(404);
-            expect(res.body.success).to.eql(false);
-            expect(res.body.message).to.eql('User has no document');
+            expect(res.status).to.be(200);
+            expect(res.body.success).to.eql(true);
             done();
           });
       });
@@ -268,7 +269,7 @@
           .end(function(err, res) {
             expect(res.status).to.be(200);
             expect(res.body.length).to.not.be(0);
-            expect(res.body.title).to.be('third');
+            expect(res.body.doc.title).to.be('third');
             done();
           });
       });

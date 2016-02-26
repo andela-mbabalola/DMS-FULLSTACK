@@ -5,23 +5,18 @@ md-content.content(ng-if="currentUser" layout)
       div(ng-cloak='')
         md-grid-list(md-cols-xs='1' md-cols-sm='2', md-cols-md='3', md-cols-gt-md='4', md-row-height-md='1:1.3' md-row-height-gt-md='1:1.3', md-row-height-sm='1:1.3', md-row-height-xs='2:2' md-gutter='8px', md-gutter-gt-sm='24px')
           md-grid-tile.createDocument(md-ink-ripple ng-click='addDocumentModal()' layout-padding style='cursor: pointer')
-            img.doc-img(src='../img/addDoc.png')
+            md-card.ripple-container.preview(md-ink-ripple)
+              i.fa.fa-plus.fa-3x.doc-preview-icon
           md-grid-tile.createDocument(layout='column' ng-repeat="doc in userDocs")
             md-card.doc-preview.ripple-container(md-ink-ripple)
               .md-padding(flex)
                 h4.preview-content {{doc.title | limitTo: 50}}
                 p(style='font-size: x-small' ng-bind-html="doc.content")
               md-card-actions(layout='row')
-                md-button.app-icons(ui-sref="userProfile.editDocument({id: doc._id})")
-                  md-icon
-                    i.fa.fa-pencil
-                  md-tooltip Update
-                md-button(ng-click='deleteUserDoc($event, doc)').app-icons
-                  md-icon
+                md-icon.app-icons(ui-sref="userProfile.editDocument({id: doc._id})")
+                    i.fa.fa-pencil.first
+                    md-tooltip Update
+                md-icon(ng-click='deleteUserDoc($event, doc)').app-icons
                     i.fa.fa-trash.sec
-                  md-tooltip Delete              
+                    md-tooltip Delete              
 
-
-  md-button.md-fab.add-document-btn(ng-click="addDocumentModal()")
-    span.fa.fa-plus
-    md-tooltip(md-direction='left') Create a new document

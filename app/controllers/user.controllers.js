@@ -8,15 +8,65 @@
     helpers = require('./../helpers/helper');
 
   /**
+   * [function to retain an authenticated user's session]
+   * @param  {[http request object]} req [used to get the request query]
+   * @param  {[http response object]} res [used to respond back to client ]
+   * @return {[object]}     [user's details and token]
+   */
+  exports.session = function(req, res) {
+    var token = req.headers['x-access-token'] || req.body.token;
+    if (token && token !== 'null') {
+      jwt.verify(token, config.secret, function(err, decoded) {
+        if (err) {
+          res.status(403).json({
+            error: 'Session has expired or does not exist.'
+          });
+        } else {
+          User.findOne({
+            _id: decoded._doc._id
+          }, function(err, user) {
+            if (err) {
+              res.status(500).json({
+                message: 'Error retrieving user',
+                err: err
+              });
+            } else if (!user) {
+              res.status(404).json({
+                message: 'User not found'
+              });
+            } else {
+              delete user.password;
+              req.decoded = user;
+              res.json(helpers.stripUser(user));
+            }
+          });
+        }
+      });
+    } else {
+      res.status(401).json({
+        error: 'Session has expired or does not exist.'
+      });
+    }
+  };
+
+
+  /**
    * [function to login a valid user]
    * @param  {[http request object]} req [used to get the request query]
    * @param  {[http response object]} res [used to respond back to client ]
    * @return {[json]}     [success message that user has been logged in]
    */
   exports.login = function(req, res) {
+     var token;
     //checking if the user exists
     User.findOne({
-      userName: req.body.userName
+      $or: [{
+        email: req.body.email
+      }, {
+        facebook_id: req.body.facebook_id || 'eiaowfeaoiwfeoiawefio',
+      }, {
+        google_id: req.body.google_id || 'awhfoeahifeoaw'
+      }]
     }, function(err, user) {
       if (err) {
         res.send(err);
@@ -28,28 +78,41 @@
             message: 'Authentication failed. User not found'
           });
         } else if (user) {
-          //check if password matches
+          if(req.body.email && !(req.body.facebook_id || req.body.google_id)){
+              //check if password matches
+              if (helpers.comparePassword(req.body.password, user.password)) {
+                //if user was found and password matches
+                //create a token
+                 token = jwt.sign(user, config.secret, {
+                  expiresInMinutes: 1440
+                });
 
-          if (helpers.comparePassword(req.body.password, user.password)) {
-            //if user was found and password matches
-            //create a token
-            var token = jwt.sign(user, config.secret, {
+                res.status(200).json({
+                  success: true,
+                  message: 'Successfully logged in',
+                  token: token,
+                  user: user
+                });
+              } else {
+                res.status(404).json({
+                  success: false,
+                  message: 'Authentication failed. Wrong password'
+                });
+              }}
+          else if (user.facebook_id === req.body.facebook_id ||
+            user.google_id === req.body.google_id) {
+             token = jwt.sign(user, config.secret, {
               expiresInMinutes: 1440
             });
-
             res.status(200).json({
               success: true,
-              message: 'Successfully logged in',
-              token: token
-            });
-          } else {
-            res.status(404).json({
-              success: false,
-              message: 'Authentication failed. Wrong password'
+              login: 'successful',
+              token: token,
+              user: user
             });
           }
+          }
         }
-      }
     });
   };
 
@@ -62,7 +125,7 @@
   exports.createUser = function(req, res) {
     //check if role exists
     Role.findOne({
-      title: req.body.role
+      _id: req.body.role,
     }, function(err, role) {
       if (err) {
         res.send(err);
@@ -76,63 +139,66 @@
       } else {
         //check if user exists
         User.findOne({
-          userName: req.body.userName
+          $or: [{
+            email: req.body.email
+          }, {
+            facebook_id: req.body.facebook_id || 'eiaowfeaoiwfeoiawefio',
+          }, {
+            google_id: req.body.google_id || 'awhfoeahifeoaw'
+          }]
         }, function(err, user) {
           if (err) {
             res.send(err);
           }
-          //if a user is found
+
           if (user) {
             res.status(409).json({
               success: false,
               message: 'User already exists!'
             });
           } else {
-            //ensuring all the parameters are entered before creating
-            if (!req.body.firstName && !req.body.lastName) {
+            if (!req.body.email) {
               res.status(406).send({
                 success: false,
-                message: 'Please enter your firstName and lastName'
-              });
-            } else if (!req.body.userName) {
-              res.status(406).send({
-                success: false,
-                message: 'Please enter your userName'
+                message: 'Please enter your email'
               });
             } else if (!req.body.password) {
               res.status(406).send({
                 success: false,
                 message: 'Please enter your password'
               });
-            } else if (!req.body.email) {
-              res.status(406).send({
-                success: false,
-                message: 'Please enter your email'
-              });
-            } else if (!req.body.role) {
-              res.status(406).send({
-                success: false,
-                message: 'Please enter your role'
-              });
             } else {
+              var googleId = req.body.type === 'google' ?
+                req.body.google_id : null;
+              var facebookId = req.body.type === 'facebook' ?
+                req.body.facebook_id : null;
               var newUser = new User({
                 name: {
                   firstName: req.body.firstName,
                   lastName: req.body.lastName
                 },
-                userName: req.body.userName,
-                password: req.body.password,
                 email: req.body.email,
+                password: req.body.password,
+                userName: req.body.userName,
+                img_url: req.body.img_url,
+                google_id: googleId,
+                facebook_id: facebookId,
                 role: role
               });
               //createa new user
-              newUser.save(function(err) {
+              newUser.save(function(err, user) {
                 if (err) {
                   res.send(err);
                 } else {
-                  res.status(200).send({
+                  var token = jwt.sign(newUser, config.secret, {
+                    expiresInMinutes: 1440
+                  });
+
+                  res.status(200).json({
                     success: true,
-                    message: 'User Successfully created!'
+                    message: 'User Successfully created!',
+                    token: token,
+                    user: user
                   });
                 }
               });
@@ -154,12 +220,6 @@
     User.find({}).exec(function(err, users) {
       if (err) {
         res.send(err);
-        //if no user is found
-      } else if (!users) {
-        res.status(404).send({
-          success: false,
-          message: 'There are currently no users'
-        });
       } else {
         //if users are found
         res.status(200).send(users);
@@ -199,13 +259,13 @@
    */
   exports.updateUser = function(req, res) {
     req.body.name = {
-      firstName: req.body.firstName,
-      lastName: req.body.lastName
+      firstName: req.body.name.firstName,
+      lastName: req.body.name.lastName
     };
 
     //check if role exists
     Role.findOne({
-      title: req.body.role
+      _id: req.body.role,
     }, function(err, role) {
       if (err) {
         res.send(err);
@@ -287,5 +347,12 @@
         res.status(200).json(docs);
       }
     });
+  };
+
+  exports.logout = function(req, res) {
+    delete req.headers['x-access-token'];
+      return res.status(200).json({
+        message: 'User has been successfully logged out'
+      });
   };
 })();

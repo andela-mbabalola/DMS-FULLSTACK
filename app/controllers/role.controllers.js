@@ -54,12 +54,6 @@
     Role.find({}, function(err, roles) {
       if (err) {
         res.send(err);
-        //if no role is found
-      } else if (roles.length === 0) {
-        res.status(404).json({
-          success: false,
-          message: 'There are currently no roles'
-        });
       } else {
         res.status(200).json(roles);
       }

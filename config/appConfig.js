@@ -9,10 +9,10 @@
     morgan = require('morgan'),
     methodOverride = require('method-override'),
     routes = require('./../app/routes/index'),
+    path = require('path'),
 
   //mounting an instance of the express router on the routes
   router = express.Router();
-    routes(router);
 
   app.use(methodOverride());
   app.use(bodyParser.json());
@@ -21,15 +21,28 @@
   }));
   app.use(morgan('dev'));
 
-  app.get('/', function(req, res) {
-    res.sendFile('index.html', {
-      root : './public',
-      code: 200
-    });
+  app.use(express.static(path.join(__dirname, '../public')));
+
+  routes(router);
+  function apiMiddleware(req, res, next){
+    // console.log('Yay we got here !!!');
+    // console.log(req.body);
+    next();
+  }
+  app.use('/api', apiMiddleware, router);
+
+  // app.get('/', function(req, res) {
+  //   console.log(__dirname);
+  //   res.sendFile(path.join(__dirname, '../public/index.html'), {
+  //     code: 200
+  //   });
+  // });
+
+  app.get('/*', function (req, res){
+    res.sendFile(path.join(__dirname, '../public/index.html'));
   });
 
   //mounting the router on a /api directory
-  app.use('/api', router);
 
   //exporting app
   module.exports = app;

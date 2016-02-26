@@ -14,7 +14,7 @@
   exports.createDocument = function(req, res) {
     //check if role exists
     Role.findOne({
-      title: req.body.role
+      _id: req.body.role
     }, function(err, role) {
       if (err) {
         res.send(err);
@@ -28,7 +28,7 @@
         } else {
           //check if user exists
           User.findOne({
-            userName: req.body.ownerId
+            _id: req.body.ownerId
           }, function(err, user) {
             if (err) {
               res.send(err);
@@ -96,14 +96,10 @@
       .exec(function(err, docs) {
         if (err) {
           res.send(err);
-          //if no document is found
-        } else if (!docs) {
-          res.status(404).json({
-            success: false,
-            message: 'No document available'
-          });
         } else {
-          res.status(200).json(docs);
+          res.status(200).json(
+            docs
+          );
         }
       });
   };
@@ -126,7 +122,10 @@
           message: 'Document not found'
         });
       } else {
-        res.status(200).json(doc);
+        res.status(200).json({
+          success: true,
+          doc: doc
+        });
       }
     });
   };
@@ -178,13 +177,11 @@
         if (err) {
           res.send(err);
           //if no document is found
-        } else if (doc.length < 1) {
-          res.status(404).json({
-            success: false,
-            message: 'User has no document'
-          });
         } else {
-          res.status(200).json(doc);
+          res.status(200).json({
+            success: true,
+            doc: doc
+          });
         }
       });
   };
