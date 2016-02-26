@@ -97,9 +97,9 @@
         if (err) {
           res.send(err);
         } else {
-          res.status(200).json({
-            docs: docs
-          });
+          res.status(200).json(
+            docs
+          );
         }
       });
   };

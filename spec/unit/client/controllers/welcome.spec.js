@@ -4,7 +4,12 @@
   describe('welcomeCtrl tests', function() {
     var scope,
       controller,
-      Documents,
+      $httpBackend,
+      Documents = {
+        query: function(cb) {
+          cb([1, 2, 3]);
+        }
+      },
       DocPreviewModal;
     beforeEach(function() {
       module('Doccy');
@@ -25,22 +30,28 @@
     beforeEach(inject(function($injector) {
       var $controller = $injector.get('$controller');
       scope = $injector.get('$rootScope');
+      $httpBackend = $injector.get('$httpBackend');
       DocPreviewModal = $injector.get('DocPreviewModal');
       controller = $controller('welcomeCtrl', {
-        $scope: scope
+        $scope: scope,
+        Documents: Documents
       });
-      Documents = $injector.get('Documents');
-      scope.init();
     }));
+
+    it('should get all documents', function() {
+      spyOn(Documents, 'query').and.callThrough();
+      expect(scope.init).toBeDefined();
+      scope.init();
+      expect(Documents.query).toHaveBeenCalled();
+      expect(scope.documents).toBeDefined();
+      expect(scope.documents).toEqual([1, 2, 3]);
+
+    });
 
     it('should show the DocPreviewModal', function() {
       spyOn(DocPreviewModal, 'modal').and.callThrough();
       scope.previewDocModal();
       expect(DocPreviewModal.modal).toHaveBeenCalled();
-    });
-
-    it('should set some variables', function() {
-      expect(scope.documents).toBeTruthy();
     });
   });
 })();

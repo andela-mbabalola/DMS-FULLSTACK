@@ -29,7 +29,7 @@
           cb(err);
         });
       };
-      
+
       user.session = function(cb) {
         $http.get('/api/users/session').success(function(res) {
           cb(null, res);

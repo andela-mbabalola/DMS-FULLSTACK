@@ -6,6 +6,7 @@
       controller,
       $httpBackend,
       scope,
+      state,
       mdDialog,
       mdToast,
       Auth = {
@@ -26,6 +27,18 @@
           if (id.id) {
             cb();
           } else if (id === null) {
+            cbb();
+          }
+        }
+      },
+      Roles = {
+        query: function(cb) {
+          cb([1, 2, 3]);
+        },
+        remove: function(id, cb, cbb) {
+          if(id.id) {
+            cb();
+          } else if(id === null) {
             cbb();
           }
         }
@@ -94,34 +107,31 @@
       scope = $injector.get('$rootScope');
       mdToast = $injector.get('$mdToast');
       $http = $injector.get('$http');
+      state = $injector.get('$state');
       $httpBackend = $injector.get('$httpBackend');
       controller = $controller('AdminPanelController', {
         $scope: scope,
         Users: Users,
+        Roles: Roles,
+        $state: state,
         Documents: Documents,
         $mdDialog: mdDialog,
         Auth: Auth
       });
-
-      $httpBackend.when('GET', '/api/users/session')
-        .respond(200, [{
-          res: 'res'
-        }]);
-
-      $httpBackend.when('GET', 'jade/home.html')
-        .respond(200, [{
-          res: 'res'
-        }]);
     }));
 
     it('should call init function', function() {
       spyOn(Users, 'query').and.callThrough();
+      spyOn(Roles, 'query').and.callThrough();
       spyOn(Documents, 'query').and.callThrough();
       expect(scope.init).toBeDefined();
       scope.init();
       expect(Users.query).toHaveBeenCalled();
       expect(scope.users).toBeDefined();
       expect(scope.users).toEqual([1, 2, 3]);
+      expect(Roles.query).toHaveBeenCalled();
+      expect(scope.roles).toBeDefined();
+      expect(scope.roles).toEqual([1, 2, 3]);
       expect(Documents.query).toHaveBeenCalled();
       expect(scope.documents).toBeDefined();
       expect(scope.documents).toEqual([1, 2, 3]);
@@ -135,11 +145,30 @@
       spyOn(mdDialog, 'confirm').and.callThrough();
       spyOn(mdDialog, 'show').and.callThrough();
       spyOn(mdToast, 'show').and.callThrough();
+      spyOn(state, 'reload').and.returnValue(0);
       scope.deleteUser('ev', scope.user);
       expect(mdDialog.confirm).toHaveBeenCalled();
       expect(mdDialog.show).toHaveBeenCalled();
       expect(mdToast.show).toHaveBeenCalled();
       expect(Users.remove).toHaveBeenCalled();
+      expect(state.reload).toHaveBeenCalled();
+    });
+
+    it('should call delete function and delete roles', function() {
+      scope.role = {
+        _id: 1
+      };
+      spyOn(Roles, 'remove').and.callThrough();
+      spyOn(mdDialog, 'confirm').and.callThrough();
+      spyOn(mdDialog, 'show').and.callThrough();
+      spyOn(mdToast, 'show').and.callThrough();
+      spyOn(state, 'reload').and.returnValue(0);
+      scope.deleteRole('ev', scope.role);
+      expect(mdDialog.confirm).toHaveBeenCalled();
+      expect(mdDialog.show).toHaveBeenCalled();
+      expect(mdToast.show).toHaveBeenCalled();
+      expect(Roles.remove).toHaveBeenCalled();
+      expect(state.reload).toHaveBeenCalled();
     });
 
     it('should call delete function and delete document', function() {
@@ -150,11 +179,13 @@
       spyOn(mdDialog, 'confirm').and.callThrough();
       spyOn(mdDialog, 'show').and.callThrough();
       spyOn(mdToast, 'show').and.callThrough();
+      spyOn(state, 'reload').and.returnValue(0);
       scope.deleteDocument('ev', scope.doc);
       expect(mdDialog.confirm).toHaveBeenCalled();
       expect(mdDialog.show).toHaveBeenCalled();
       expect(mdToast.show).toHaveBeenCalled();
       expect(Documents.remove).toHaveBeenCalled();
+      expect(state.reload).toHaveBeenCalled();
     });
   });
 })();

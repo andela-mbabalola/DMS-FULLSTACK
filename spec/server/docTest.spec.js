@@ -75,7 +75,6 @@
           })
           .expect(409)
           .end(function(err, res) {
-            console.log(res.body);
             expect(res.status).to.be(409);
             expect(res.body.success).to.eql(false);
             expect(res.body.message).to.eql('Document already exists!');
@@ -201,8 +200,8 @@
           .expect(200)
           .end(function(err, res) {
             expect(res.status).to.be(200);
-            expect(res.body.docs.length).to.not.be(0);
-            expect(res.body.docs[0].title).to.be('third');
+            expect(res.body.length).to.not.be(0);
+            expect(res.body[0].title).to.be('third');
             done();
           });
       });
@@ -217,8 +216,8 @@
           .end(function(err, res) {
             expect(res.status).to.be(200);
             expect(res.body.length).to.not.be(0);
-            expect(res.body.docs[0].title).to.be('third');
-            expect(res.body.docs[1].title).to.be('first');
+            expect(res.body[0].title).to.be('third');
+            expect(res.body[1].title).to.be('first');
             done();
           });
       });

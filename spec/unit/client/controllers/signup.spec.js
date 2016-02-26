@@ -17,7 +17,6 @@
         }
       },
       state,
-      $http,
       $httpBackend;
     beforeEach(function() {
       module('Doccy');
@@ -71,7 +70,6 @@
       scope = $injector.get('$rootScope');
       mdToast = $injector.get('$mdToast');
       $httpBackend = $injector.get('$httpBackend');
-      $http = $injector.get('$http');
       state = $injector.get('$state');
       controller = $controller('SignUpCtrl', {
         $scope: scope,

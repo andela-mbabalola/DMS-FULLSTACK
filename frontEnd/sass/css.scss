@@ -633,6 +633,31 @@ h1 {
     font-weight: 300;
 }
 
+.edit-label-title {
+  top: -15px !important;
+}
+
+.admin-role {
+  md-input-container:not(.md-input-invalid).md-input-focused .md-input {
+    border-bottom-color: #975052;
+  }
+  md-input-container:not(.md-input-invalid).md-input-focused label {
+    color: #975052;
+  }
+}
+
+.admin-role-btn:active {
+  color: #263238;
+  background-color: #975052 !important;
+}
+
+.admin-role-btn:valid {
+    -webkit-transition: all 0.4s;
+    transition: all 0.4s;
+    color: #FFF;
+    background-color: #975052 !important;
+}
+
 .updateDoc:active {
     color: #263238;
     background: #975052;
@@ -708,8 +733,7 @@ table-cont {
 }
 
 .main-doc {
-  width: 100%;
-  height: 100%;
+  height: 636px;
   .recent-documents {
     width: 100%;
     height: 40%;
@@ -724,7 +748,7 @@ table-cont {
   }
   .all-documents {
     width: 100%;
-    height: 50%;
+    height: 60%;
     background-color: #ecf0f1;
     h3 {
       margin: 0 0 0 6.5%;

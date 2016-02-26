@@ -110,12 +110,10 @@
     beforeEach(function() {
       scope.currentUser = currentUser;
       spyOn(Users, 'userDocs').and.callThrough();
-      spyOn(Documents, 'get').and.callThrough();
       scope.init();
     });
 
     it('should call init and return a document', function() {
-      expect(Documents.get).toHaveBeenCalled();
       expect(Users.userDocs).toHaveBeenCalled();
     });
 
@@ -156,6 +154,7 @@
     });
 
     it('should get document by their Id', function() {
+      spyOn(Documents, 'get').and.callThrough();
       scope.getADoc();
       expect(Documents.get).toHaveBeenCalled();
     });

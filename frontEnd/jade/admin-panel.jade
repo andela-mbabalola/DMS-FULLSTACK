@@ -24,7 +24,6 @@ div(ng-cloak)
   md-content
     md-tabs(md-dynamic-height='')
       md-tab(label="Users")
-        h1 Tab One
         md-content.md-padding
           h3.md-display-2.md-margin.text-center USERS
           md-divider
@@ -39,28 +38,24 @@ div(ng-cloak)
                   th(md-column='', md-text='') Last Name
                   th(md-column='', md-text='') UserName
                   th(md-column='', md-text='') Email
-                  th(md-column='', md-text='') Role
                   th(md-column='', md-text='') Documents
-                  th(md-column='', md-text='') Edit
                   th(md-column='', md-text='') Delete
                 tbody(md-body='')
                   tr(md-row='' ng-repeat="user in users")
                     td(md-cell='') 
                       img.admin-img(src="{{user.img_url}}")
                     td(md-cell='') {{user._id}}
-                    td(md-cell='') {{user.userName}}
                     td(md-cell='') {{user.name.firstName}}
                     td(md-cell='') {{user.name.lastName}}
+                    td(md-cell='') {{user.userName}}
                     td(md-cell='') {{user.email}}
-                    td(md-cell='') {{user.role}}
+                    td(md-cell='') {{user.totalDoc}}
                     td(md-cell='')
-                      i.fa.fa-pencil(ng-click="updateUser($event, user)") Edit
-                    td(md-cell='')
-                      i.fa.fa-trash(ng-click="deleteUser($event, user)") Delete
-                    md-divider
+                      i.fa.fa-trash(ng-click="deleteUser($event, user)")
+                  md-divider
+            
 
       md-tab(label="Roles")
-        h1 Tab Two
         md-content.md-padding
           h3.md-display-2.md-margin.text-center ROLES
           md-divider
@@ -77,11 +72,18 @@ div(ng-cloak)
                     td(md-cell='') {{role._id}}
                     td(md-cell='') {{role.title}}
                     td(md-cell='')
-                      i.fa.fa-trash(ng-click="deleteRole($event, user)") Delete
+                      i.fa.fa-trash(ng-click="deleteRole($event, role)")
                     md-divider
+            md-card
+              md-card-content
+                h5 Create New Role
+                form(method="post" enctype="multipart/form-data" name="adminRole" class="admin-role")
+                  md-input-container(md-block)
+                    label.edit-label-title Title
+                    input(type="text" md-no-float placecholder="Enter your role here" ng-model="role.title" ng-required="true")
+                  md-button.md-raised.admin-role-btn(ng-click="createRoleBtn()" ng-disabled="adminRole.$invalid") Create
 
       md-tab(label="Documents")
-        h1 Tab Three
         md-content.md-padding
           h3.md-display-2.md-margin.text-center DOCUMENTS
           md-divider
@@ -95,17 +97,14 @@ div(ng-cloak)
                   th(md-column='', md-text='') Content
                   th(md-column='', md-text='') Date Created
                   th(md-column='', md-text='') Date Modified
-                  th(md-column='', md-text='') Edit
                   th(md-column='', md-text='') Delete
                 tbody(md-body='')
                   tr(md-row='' ng-repeat="document in documents")
                     td(md-cell='') {{document._id}}
                     td(md-cell='') {{document.title}}
-                    td(md-cell='') {{document.content | limitTo: 20}}
+                    td(md-cell='' ng-bind-html="document.content | limitTo: 20") 
                     td(md-cell='') {{document.createdAt | date: dd/mm/yyyy}}
                     td(md-cell='') {{document.lastModified | date: dd/mm/yyyy}}
                     td(md-cell='')
-                      i.fa.fa-pencil(ng-click="updateDocument($event, user)") Edit
-                    td(md-cell='')
-                      i.fa.fa-trash(ng-click="deleteDocument($event, user)") Delete
+                      i.fa.fa-trash(ng-click="deleteDocument($event, user)")
                     md-divider
