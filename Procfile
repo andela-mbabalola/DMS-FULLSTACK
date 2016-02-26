@@ -1,1 +1,1 @@
-web: herokuLaucher
+web: npm run herokuLaucher
