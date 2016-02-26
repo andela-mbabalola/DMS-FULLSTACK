@@ -209,5 +209,9 @@ gulp.task('build', ['jade', 'sass', 'static-files', 'images',
 ]);
 
 gulp.task('dev', ['watchers']);
-gulp.task('production', ['minifyJs', 'minifyCss']);
+gulp.task('production', ['nodemon', 'build']);
 gulp.task('default', ['server', 'watchers', 'build']);
+
+// deployment tasks
+  gulp.task('heroku:production', ['build']);
+  gulp.task('heroku:develop', ['build']);
