@@ -1,0 +1,21 @@
+md-toolbar.header(ng-controller="HeaderCtrl")
+  div.md-toolbar-tools
+    a.logo(ui-sref="home")
+      img(src="../img/doccy.png")
+    span(flex)
+    a(ng-repeat="menuItem in menu" ui-sref="{{menuItem.state}}")
+      md-button.menu
+        | {{menuItem.name}}
+    
+    a(ng-if="currentUser" ui-sref="user-profile")
+      div.md-icon-button.icon-button(aria-label="Comment")
+        img.image(ng-src="{{currentUser.user.img_url || currentUser.img_url}}")
+        md-tooltip {{currentUser.user.name.firstName || currentUser.name.firstName}} {{currentUser.user.name.lastName || currentUser.name.lastName}}
+
+    a(ng-if="!currentUser" ui-sref="login")
+      md-button
+        | Sign In
+    a(ng-if="currentUser")
+      md-button.md-icon-button(aria-label="Sign out" ng-click="logout()")
+        i.md-accent.fa.fa-sign-out
+        md-tooltip Sign out

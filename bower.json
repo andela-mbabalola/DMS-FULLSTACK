@@ -1,0 +1,45 @@
+{
+  "name": "Dms-FullStack",
+  "description": "RESTful API to implement a document management system",
+  "main": "index.js",
+  "authors": [
+    "Babalola Maryam"
+  ],
+  "license": "ISC",
+  "keywords": [
+    "Rest-Api",
+    "Express",
+    "jwt",
+    "Mongoose"
+  ],
+  "homepage": "https://github.com/andela-mbabalola/DMS-FULLSTACK",
+  "moduleType": [],
+  "private": true,
+  "ignore": [
+    "**/.*",
+    "node_modules",
+    "bower_components",
+    "test",
+    "tests"
+  ],
+  "dependencies": {
+    "angular": "~1.4.8",
+    "angular-ui-router": "~0.2.15",
+    "angular-aria": "~1.4.8",
+    "angular-animate": "~1.4.8",
+    "angular-material": "~1.0.2",
+    "angular-route": "~1.4.8",
+    "lodash": "~4.0.0",
+    "font-awesome": "~4.5.0",
+    "angular-resource": "~1.4.8",
+    "angular-ui-tinymce": "latest",
+    "cloudinary_ng": "~0.2.0",
+    "ng-file-upload": "~12.0.1",
+    "angular-mocks": "~1.5.0",
+    "angular-sanitize": "~1.5.0"
+  },
+  "resolutions": {
+    "lodash": "~4.0.0",
+    "angular": "1.4.9"
+  }
+}

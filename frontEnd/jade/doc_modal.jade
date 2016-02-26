@@ -1,0 +1,25 @@
+md-dialog(aria-label='{{modalTitle}}', ng-cloak='', ng-controller="userDocumentCtrl")
+  md-toolbar.doc-modal-header
+    .md-toolbar-tools
+      h3 Create a Document
+      span(flex='')
+      span(class='fa fa-times' ng-click='cancel()' aria-label='Close dialog' style='cursor: pointer;')
+  md-dialog-content.create-doc
+    form(method="post" name="addDoc" ng-submit="addDocument()")
+      .group
+        input.inputMaterial(ng-model="document.title" name="title" type="text" required="true")
+        span.highlight
+        span.bar(ng-class="{danger: addDoc.title.$invalid && addDoc.title.$dirty}")
+        span.highlight(ng-show="addDoc.title.$invalid && addDoc.title.$dirty") Add a title
+        label Title
+      .group
+        //password
+        label Content
+        textarea(ui-tinymce="tinymceOptions" ng-model="document.content" placeholder="Add content" name="content" type="text" required="true")
+        span.highlight
+        span.bar(ng-class="{danger: addDoc.content.$invalid && addDoc.content.$dirty}")
+        span.highlight(ng-show="addDoc.content.$invalid && addDoc.content.$dirty") Add a content
+                   
+            
+      button.modalLogin(type="submit" ng-disabled="addDoc.$invalid") Create
+      #footer-box

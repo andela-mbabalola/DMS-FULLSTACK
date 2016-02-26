@@ -1,0 +1,43 @@
+md-toolbar.header(ng-controller="HeaderCtrl")
+  div.md-toolbar-tools
+    a.logo(ui-sref="home")
+      img(src="../img/doccy.png")
+    span(flex)
+    
+    a(ng-if="currentUser" ui-sref="userProfile")
+      div.md-icon-button.icon-button(aria-label="Comment")
+        img.image(ng-src="{{currentUser.user.img_url || currentUser.img_url}}")
+        md-tooltip {{currentUser.user.name.firstName || currentUser.name.firstName}} {{currentUser.user.name.lastName || currentUser.name.lastName}}
+
+    a(ng-if="!currentUser" ui-sref="login")
+      md-button.header-menu
+        | Sign In
+    
+    a(ng-if="currentUser")
+      md-button.md-icon-button.signup-menu(aria-label="Sign out" ng-click="logout()")
+        i.md-accent.fa.fa-sign-out
+        md-tooltip Sign out
+
+div.home-main
+  div.welcome-note
+    p
+      | If it's worth doing, it's worth documenting...
+    p
+      |If you don't have time to do it right, you should have time to do it over.
+  div.welcome-images
+    div.wImages
+    div.wImagesa
+    div.wImagesb
+  div.welcome-description
+    div.wdescr
+      p Simple to use.
+    div.wdescr
+      p Create, share and keep documents easily.
+    div.wdescr
+      p Format and Preview documents just like a standard editor.
+  div.signup-button(ui-sref="login")
+    md-button.action-button
+      | GET STARTED
+  div.guest-entry
+    a(ui-sref="welcome") continue as guest  
+       i.fa.fa-sign-out

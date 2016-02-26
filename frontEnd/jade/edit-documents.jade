@@ -1,0 +1,12 @@
+.edit-document-box(ng-controller="userDocumentCtrl")
+  div.edit-doc-header
+    span.doc-header-content Edit Document
+  md-content(layout-padding)
+    div.edit-content
+      form(method="post" name="editDocumentForm" ng-submit="editDocument()")
+        md-input-container.md-block(flex-gt-sm)
+          label.edit-label Title
+          input.title(ng-model="docs.title" name="title" type="text" required="true") 
+        md-input-container.md-block(flex-gt-sm)
+          textarea(ui-tinymce="tinymceOptions" ng-model="docs.content")  
+        button.updateDoc(type="submit" ng-disabled="editDocumentForm.$invalid") Update

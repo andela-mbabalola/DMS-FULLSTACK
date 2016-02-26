@@ -1,0 +1,40 @@
+md-dialog.modal(aria-label='Modal Title', ng-cloak)
+  md-toolbar.profile-header
+    .md-toolbar-tools
+      h3.welcome Welcome
+      span(flex='')
+      span(class='fa fa-times' ng-click='cancel()' aria-label='Close dialog' style='cursor: pointer;')
+    span
+      img(class="profile-pic" src="{{currentUser.img_url}}")
+      .text-center {{currentUser.firstName}}
+      .text-center {{currentUser.email}}
+  md-dialog-content.dialog-box
+    form(method="post" name="signUp" ng-submit="signUpSocial(currentUser)")
+      .group
+        input.inputMaterial(ng-model="currentUser.email" name="email" type="email" required="true")
+        span.highlight
+        span.bar(ng-class="{danger: signUp.email.$invalid && signUp.email.$dirty}")
+        span.highlight(ng-show="signUp.email.$invalid && signUp.email.$dirty") Invalid Email
+        label Email
+      .group
+        //password
+        input.inputMaterial(ng-model="currentUser.password" name="password" type="password" ng-minlength= "6" required="true")
+        span.highlight
+        span.bar(ng-class="{danger: signUp.password.$invalid && signUp.password.$dirty}")
+        span.highlight(ng-show="signUp.password.$invalid && signUp.password.$dirty") Password too short
+        label Password            
+      .group
+        //confirm password
+        input.inputMaterial(ng-model="currentUser.confirm_password" name="confirm_password" validate-password="currentUser.password" type="password" ng-minlength= "6" ng-required="true")
+        span.highlight
+        span.bar(ng-class="{danger: signUp.confirm_password.$invalid}")
+        span.highlight(ng-show="signUp.confirm_password.$invalid && signUp.confirm_password.$dirty") Password does not match
+        label Confirm Password
+      .group      
+        md-input-container.inputMaterial.select
+          md-select( ng-model="currentUser.role" placeholder="Select a role" aria-label="currentUser.role" required="true")
+            md-option(ng-value="role" ng-repeat="role in roles") {{role.title}}
+            
+      
+      button.modalLogin(type="submit" ng-disabled="signUp.$invalid") Login
+      #footer-box
