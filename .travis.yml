@@ -26,3 +26,9 @@ after_success:
   - npm run BendCoverage
   - npm run FendCoverage
 sudo: false
+
+deploy:
+  provider: heroku
+  api_key:
+    secure: 04c947b8-e44c-4684-9cf3-d0ce5f8d6553
+  app: doccy

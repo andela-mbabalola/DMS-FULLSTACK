@@ -7,7 +7,8 @@
     "test": "./node_modules/.bin/istanbul cover ./node_modules/mocha/bin/_mocha spec/server/*.spec.js --colors",
     "start": "nodemon server.js",
     "BendCoverage": "cat coverage/lcov.info |codecov",
-    "FendCoverage": "cat FendCoverage/lcov.info |coveralls"
+    "FendCoverage": "cat FendCoverage/lcov.info |coveralls",
+    "herokuLaucher": "gulp build && node index.js"
   },
   "repository": {
     "type": "git",
@@ -54,6 +55,7 @@
     "gulp-karma": "0.0.5",
     "gulp-minify": "0.0.5",
     "gulp-minify-css": "^1.2.3",
+    "gulp-mocha": "^2.2.0",
     "gulp-nodemon": "^2.0.6",
     "gulp-notify": "^2.2.0",
     "gulp-sass": "^2.1.1",
