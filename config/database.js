@@ -2,6 +2,6 @@
   'Use strict';
 
   module.exports = {
-    'url': 'mongodb://localhost/restApi'
+    'url': process.env.DATABASE_URL || 'mongodb://localhost/restApi'
   };
 })();

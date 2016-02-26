@@ -4,7 +4,6 @@
 var app = require('./config/appConfig'),
   mongoose = require('mongoose'),
   db = require('./config/database'),
-
   port = process.env.PORT || 4444;
 
 
