@@ -8,7 +8,7 @@
     "start": "nodemon server.js",
     "BendCoverage": "cat coverage/lcov.info |codecov",
     "FendCoverage": "cat FendCoverage/lcov.info |coveralls",
-    "herokuLaucher": "gulp build && node index.js"
+    "herokuLauncher": "gulp build && node server.js"
   },
   "repository": {
     "type": "git",
