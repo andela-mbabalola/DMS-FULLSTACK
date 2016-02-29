@@ -26,6 +26,7 @@
   require('./controllers/signUp');
   require('./controllers/adminPanel');
   require('./controllers/profile');
+  require('./controllers/user-profile');
   require('./controllers/userProfile/documents');
 
   //require directives
@@ -132,7 +133,7 @@
         })
         .state('userProfile', {
           url: '/users/profile',
-          //controller: 'UserProfileCtrl',
+          controller: 'UserProfileCtrl',
           templateUrl: 'jade/user-profile.html',
           authenticate: true
         })

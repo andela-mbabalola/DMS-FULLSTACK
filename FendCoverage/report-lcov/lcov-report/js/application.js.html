@@ -20,24 +20,24 @@
     </h1>
     <div class='clearfix'>
       <div class='fl pad1y space-right2'>
-        <span class="strong">82.79% </span>
+        <span class="strong">82% </span>
         <span class="quiet">Statements</span>
-        <span class='fraction'>332/401</span>
+        <span class='fraction'>337/411</span>
       </div>
       <div class='fl pad1y space-right2'>
-        <span class="strong">43.02% </span>
+        <span class="strong">41.11% </span>
         <span class="quiet">Branches</span>
-        <span class='fraction'>37/86</span>
+        <span class='fraction'>37/90</span>
       </div>
       <div class='fl pad1y space-right2'>
-        <span class="strong">84.15% </span>
+        <span class="strong">83.42% </span>
         <span class="quiet">Functions</span>
-        <span class='fraction'>154/183</span>
+        <span class='fraction'>156/187</span>
       </div>
       <div class='fl pad1y space-right2'>
-        <span class="strong">83.77% </span>
+        <span class="strong">82.91% </span>
         <span class="quiet">Lines</span>
-        <span class='fraction'>320/382</span>
+        <span class='fraction'>325/392</span>
       </div>
     </div>
   </div>
@@ -1181,7 +1181,32 @@
 1136
 1137
 1138
-1139</td><td class="line-coverage quiet"><span class="cline-any cline-yes">20×</span>
+1139
+1140
+1141
+1142
+1143
+1144
+1145
+1146
+1147
+1148
+1149
+1150
+1151
+1152
+1153
+1154
+1155
+1156
+1157
+1158
+1159
+1160
+1161
+1162
+1163
+1164</td><td class="line-coverage quiet"><span class="cline-any cline-yes">21×</span>
 <span class="cline-any cline-yes">1×</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
@@ -1211,11 +1236,13 @@
 <span class="cline-any cline-yes">1×</span>
 <span class="cline-any cline-yes">1×</span>
 <span class="cline-any cline-yes">1×</span>
+<span class="cline-any cline-yes">1×</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-yes">1×</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-yes">1×</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
@@ -1657,6 +1684,7 @@
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-yes">4×</span>
 <span class="cline-any cline-yes">3×</span>
+<span class="cline-any cline-yes">3×</span>
 <span class="cline-any cline-yes">2×</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-yes">2×</span>
@@ -1729,6 +1757,27 @@
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">1×</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">1×</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
@@ -1864,6 +1913,7 @@
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-yes">2×</span>
+<span class="cline-any cline-yes">1×</span>
 <span class="cline-any cline-yes">1×</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-yes">2×</span>
@@ -2348,6 +2398,7 @@
   require('./controllers/signUp');
   require('./controllers/adminPanel');
   require('./controllers/profile');
+  require('./controllers/user-profile');
   require('./controllers/userProfile/documents');
 &nbsp;
   //require directives
@@ -2365,6 +2416,7 @@
     'ui.tinymce',
     'ngSanitize',
     'ngFileUpload',
+    'md.data.table',
     'cloudinary'
   ]);
 &nbsp;
@@ -2453,7 +2505,7 @@
         })
         .state('userProfile', {
           url: '/users/profile',
-          //controller: 'UserProfileCtrl',
+          controller: 'UserProfileCtrl',
           templateUrl: 'jade/user-profile.html',
           authenticate: true
         })
@@ -2504,7 +2556,7 @@
 &nbsp;
 })();
 &nbsp;
-},{"./controllers/adminPanel":2,"./controllers/header":3,"./controllers/login":4,"./controllers/profile":5,"./controllers/signUp":6,"./controllers/userProfile/documents":7,"./controllers/welcome":8,"./directives/validatePassword":9,"./services/auth":10,"./services/doc-preview-modal":11,"./services/doc_modal":12,"./services/documents":13,"./services/facebook.provider":14,"./services/google.provider":15,"./services/modal":16,"./services/role":17,"./services/token":18,"./services/tokenInjector":19,"./services/user":20}],2:[function(require,module,exports){
+},{"./controllers/adminPanel":2,"./controllers/header":3,"./controllers/login":4,"./controllers/profile":5,"./controllers/signUp":6,"./controllers/user-profile":7,"./controllers/userProfile/documents":8,"./controllers/welcome":9,"./directives/validatePassword":10,"./services/auth":11,"./services/doc-preview-modal":12,"./services/doc_modal":13,"./services/documents":14,"./services/facebook.provider":15,"./services/google.provider":16,"./services/modal":17,"./services/role":18,"./services/token":19,"./services/tokenInjector":20,"./services/user":21}],2:[function(require,module,exports){
 (function() {
   'use strict';
 &nbsp;
@@ -2668,7 +2720,7 @@
                   id: $rootScope.currentUser._id
                 });
               } else {
-                $state.go('userProfile', {
+                $state.go('userProfile.documents', {
                   id: $rootScope.currentUser._id
                 });
               }
@@ -2707,7 +2759,7 @@
             } else {
 <span class="cstat-no" title="statement not covered" >              $rootScope.currentUser = resp.user;</span>
 <span class="cstat-no" title="statement not covered" >              Auth.setToken(resp.token);</span>
-<span class="cstat-no" title="statement not covered" >              $state.go('userProfile', {</span>
+<span class="cstat-no" title="statement not covered" >              $state.go('userProfile.documents', {</span>
                 id: resp.user._id
               });
             }
@@ -2794,6 +2846,7 @@
         };
 &nbsp;
         $scope.editProfile = function() {
+          angular.extend($rootScope.currentUser, $scope.password);
           Users.update($rootScope.currentUser, function() {
             $mdToast.show($mdToast.simple()
               .textContent('Profile successfully updated').hideDelay(2000));
@@ -2841,7 +2894,7 @@
               id: $rootScope.currentUser.user._id
             });
           } else {
-              $state.go('userProfile', {
+              $state.go('userProfile.documents', {
                 id: $rootScope.currentUser.user._id
               });
             }
@@ -2859,6 +2912,27 @@
 })();
 &nbsp;
 },{}],7:[function(require,module,exports){
+(function() {
+  'use strict';
+&nbsp;
+  angular.module('Doccy.controllers')
+    .controller('UserProfileCtrl', [
+      '$rootScope',
+      '$scope',
+<span class="fstat-no" title="function not covered" >    function($rootScope, $scope) {</span>
+<span class="cstat-no" title="statement not covered" >      $scope.admin = <span class="fstat-no" title="function not covered" >function() {</span></span>
+<span class="cstat-no" title="statement not covered" >        console.log($rootScope.currentUser, 'fdsfgns');</span>
+<span class="cstat-no" title="statement not covered" >        if($rootScope.currentUser.email === 'owner@gmail.com' &amp;&amp;</span>
+        $rootScope.currentUser.role === 'superAdministrator') {
+<span class="cstat-no" title="statement not covered" >          return true;</span>
+        } else {
+<span class="cstat-no" title="statement not covered" >          return false;</span>
+        }
+      };
+    }]);
+})();
+&nbsp;
+},{}],8:[function(require,module,exports){
 (function() {
   'use strict';
 &nbsp;
@@ -2985,7 +3059,7 @@
     ]);
 })();
 &nbsp;
-},{}],8:[function(require,module,exports){
+},{}],9:[function(require,module,exports){
 (function() {
   'use strict';
 &nbsp;
@@ -3002,6 +3076,7 @@
         };
 &nbsp;
         $scope.previewDocModal = function(ev) {
+          console.log($scope.documents);
           DocPreviewModal.modal(ev, 'document', 'Preview a Document');
         };
         $scope.init();
@@ -3009,7 +3084,7 @@
     ]);
 })();
 &nbsp;
-},{}],9:[function(require,module,exports){
+},{}],10:[function(require,module,exports){
 (function() {
   'use strict';
 &nbsp;
@@ -3033,7 +3108,7 @@
     });
 })();
 &nbsp;
-},{}],10:[function(require,module,exports){
+},{}],11:[function(require,module,exports){
 (function() {
   'use strict';
 &nbsp;
@@ -3057,7 +3132,7 @@
     }]);
 })();
 &nbsp;
-},{}],11:[function(require,module,exports){
+},{}],12:[function(require,module,exports){
 (function() {
   'use strict';
 &nbsp;
@@ -3111,7 +3186,7 @@
       });
 })();
 &nbsp;
-},{}],12:[function(require,module,exports){
+},{}],13:[function(require,module,exports){
 (function() {
   'use strict';
 &nbsp;
@@ -3165,7 +3240,7 @@
       });
 })();
 &nbsp;
-},{}],13:[function(require,module,exports){
+},{}],14:[function(require,module,exports){
 (function() {
   'use strict';
 &nbsp;
@@ -3186,7 +3261,7 @@
     }]);
 })();
 &nbsp;
-},{}],14:[function(require,module,exports){
+},{}],15:[function(require,module,exports){
   angular.module('Doccy.providers')
     .provider('facebook', function() {
       this.appId = 'sampleappId';
@@ -3227,7 +3302,7 @@
       };
     });
 &nbsp;
-},{}],15:[function(require,module,exports){
+},{}],16:[function(require,module,exports){
   angular.module('Doccy.providers')
     .provider('google', function() {
       this.appConfig = {};
@@ -3286,7 +3361,7 @@
       };
     });
 &nbsp;
-},{}],16:[function(require,module,exports){
+},{}],17:[function(require,module,exports){
 (function() {
   'use strict';
 &nbsp;
@@ -3340,7 +3415,7 @@
       });
 })();
 &nbsp;
-},{}],17:[function(require,module,exports){
+},{}],18:[function(require,module,exports){
 angular.module('Doccy.services')
   .factory('Roles', ['$resource', <span class="fstat-no" title="function not covered" >function($resource) {</span>
 <span class="cstat-no" title="statement not covered" >    var roles = $resource('/api/role/superAdministrator/owner/:id', {</span>
@@ -3357,7 +3432,7 @@ angular.module('Doccy.services')
 <span class="cstat-no" title="statement not covered" >    return roles;</span>
   }]);
 &nbsp;
-},{}],18:[function(require,module,exports){
+},{}],19:[function(require,module,exports){
 angular.module('Doccy.services')
   .factory('Token', ['$window',
     function($window) {
@@ -3375,7 +3450,7 @@ angular.module('Doccy.services')
     }
   ]);
 &nbsp;
-},{}],19:[function(require,module,exports){
+},{}],20:[function(require,module,exports){
 (function() {
   'use strict';
 &nbsp;
@@ -3394,7 +3469,7 @@ angular.module('Doccy.services')
     }]);
 })();
 &nbsp;
-},{}],20:[function(require,module,exports){
+},{}],21:[function(require,module,exports){
 (function() {
   'use strict';
 &nbsp;
@@ -3463,7 +3538,7 @@ angular.module('Doccy.services')
 </div><!-- /wrapper -->
 <div class='footer quiet pad2 space-top1 center small'>
   Code coverage
-  generated by <a href="http://istanbul-js.org/" target="_blank">istanbul</a> at Sun Feb 28 2016 23:03:52 GMT+0100 (WAT)
+  generated by <a href="http://istanbul-js.org/" target="_blank">istanbul</a> at Mon Feb 29 2016 05:06:36 GMT+0100 (WAT)
 </div>
 </div>
 <script src="../prettify.js"></script>

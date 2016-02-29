@@ -126,7 +126,7 @@
       spyOn(state, 'go').and.callThrough();
       scope.login();
       expect(Users.login).toHaveBeenCalled();
-      expect(state.go).toHaveBeenCalledWith('userProfile', {
+      expect(state.go).toHaveBeenCalledWith('userProfile.documents', {
         id: 0
       });
     });

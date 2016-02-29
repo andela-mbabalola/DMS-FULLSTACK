@@ -57,18 +57,7 @@
           }
         };
 
-        $scope.admin = function() {
-          console.log($rootScope.currentUser, 'fdsfgns');
-          if($rootScope.currentUser.email === 'owner@gmail.com' &&
-          $rootScope.currentUser.role === 'superAdministrator') {
-            return true;
-          } else {
-            return false;
-          }
-        };
-
         $scope.editProfile = function() {
-          console.log($rootScope.currentUser, 'afefvgefe');
           angular.extend($rootScope.currentUser, $scope.password);
           Users.update($rootScope.currentUser, function() {
             $mdToast.show($mdToast.simple()

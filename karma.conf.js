@@ -37,6 +37,7 @@ var configuration = {
       'public/lib/cloudinary-core/cloudinary-core.js',
       'public/lib/cloudinary_ng/js/angular.cloudinary.js',
       'public/lib/ng-file-upload/ng-file-upload.js',
+      'public/lib/angular-material-data-table/dist/md-data-table.min.js',
 
       //tinyMCE script
       'public/lib/tinymce-dist/tinymce.js',

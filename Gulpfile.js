@@ -25,7 +25,7 @@ var gulp = require('gulp'),
         'app/**/*.*'
       ]
     },
-    serverTests: ['./tests/server/**/*.spec.js'],
+    serverTests: ['./spec/server/**/*.spec.js'],
     unitTests: [
       'public/lib/angular/angular.js',
       'public/lib/angular-ui-router/release/angular-ui-router.min.js',
@@ -41,6 +41,7 @@ var gulp = require('gulp'),
       'public/lib/cloudinary-core/cloudinary-core.js',
       'public/lib/cloudinary_ng/js/angular.cloudinary.js',
       'public/lib/ng-file-upload/ng-file-upload.js',
+      'public/lib/angular-material-data-table/dist/md-data-table.min.js',
 
       //tinyMCE script
       'public/lib/tinymce-dist/tinymce.js',
