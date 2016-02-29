@@ -11,8 +11,8 @@
     expect = require('expect.js'),
     server = require('./../../server.js'),
     request = require('supertest')(server),
-    User = require('./../../app/models/user.models'),
-    role = require('./../../app/models/role.models'),
+    User = require('./../../server/models/user.models'),
+    role = require('./../../server/models/role.models'),
     config = require('./../../config/config'),
     _userSeeders = require('./../../seeders/user.seeders.json'),
     _roleSeeders = require('./../../seeders/role.seeders.json');

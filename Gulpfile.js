@@ -5,6 +5,7 @@ var gulp = require('gulp'),
   bower = require('gulp-bower'),
   sass = require('gulp-sass'),
   jade = require('gulp-jade'),
+  mocha = require('gulp-mocha'),
   Server = require('karma').Server,
   imagemin = require('gulp-imagemin'),
   notify = require('gulp-notify'),
@@ -13,17 +14,18 @@ var gulp = require('gulp'),
 
   path = {
     public: 'public/',
-    frontEnd: {
-      js: 'frontEnd/**/*.js',
-      sass: 'frontEnd/sass/*.scss',
-      jade: ['frontEnd/*.jade', '!frontEnd/shared/**', 'frontEnd/**/*.jade'],
-      img: 'frontEnd/img/*.*',
+    app: {
+      js: 'app/**/*.js',
+      sass: 'app/sass/*.scss',
+      jade: ['app/*.jade', '!app/shared/**', 'app/**/*.jade'],
+      img: 'app/img/*.*',
       staticFiles: [
-        '!frontEnd/**/*.+(scss|css|js|jade)',
-        '!frontEnd/img/**/*',
-        'frontEnd/**/*.*'
+        '!app/**/*.+(scss|css|js|jade)',
+        '!app/img/**/*',
+        'app/**/*.*'
       ]
     },
+    serverTests: ['./tests/server/**/*.spec.js'],
     unitTests: [
       'public/lib/angular/angular.js',
       'public/lib/angular-ui-router/release/angular-ui-router.min.js',
@@ -58,7 +60,7 @@ var gulp = require('gulp'),
  * @return {[html]}        [files converted to html]
  */
 gulp.task('jade', function() {
-  return gulp.src(path.frontEnd.jade)
+  return gulp.src(path.app.jade)
     .pipe(jade())
     .pipe(gulp.dest('./public/'))
     .pipe(notify('Gulp-jade Done!'));
@@ -70,7 +72,7 @@ gulp.task('jade', function() {
  * @return {[css]}        [files converted to css]
  */
 gulp.task('sass', function() {
-  return gulp.src(path.frontEnd.sass)
+  return gulp.src(path.app.sass)
     .pipe(sass())
     .pipe(gulp.dest('./public/css'))
     .pipe(notify('Gulp-sass Done!'));
@@ -83,7 +85,7 @@ gulp.task('sass', function() {
  * @return {[.jpg, .png]}          [minified image]
  */
 gulp.task('images', function() {
-  return gulp.src(path.frontEnd.img)
+  return gulp.src(path.app.img)
     .pipe(imagemin({
       optimizationLevel: 3,
       progressive: true,
@@ -134,12 +136,12 @@ gulp.task('server', function() {
  * [task to handle static files]
  */
 gulp.task('static-files', function() {
-  return gulp.src(path.frontEnd.staticFiles)
+  return gulp.src(path.app.staticFiles)
     .pipe(gulp.dest('public/'));
 });
 
 gulp.task('browserify', function() {
-  return browserify('./frontEnd/js/app.js').bundle()
+  return browserify('./app/js/app.js').bundle()
     .on('success', gutil.log.bind(gutil, 'Browserify Rebundled'))
     .on('error', gutil.log.bind(gutil, 'Browserify ' +
       'Error: in browserify gulp task'))
@@ -158,14 +160,24 @@ gulp.task('test:fend', ['build'], function(done) {
   },done()).start();
 });
 
+gulp.task('test:bend', ['test:fend'], function() {
+  return gulp.src(path.serverTests)
+    .pipe(mocha({
+      reporter: 'spec'
+    }))
+    .once('error', function(err) {
+      throw err;
+    });
+});
+
 /**
  * [task to watch for changes]
  */
 gulp.task('watchers', function() {
-  // gulp.watch(path.frontEnd.js,['minify']);
-  gulp.watch(path.frontEnd.sass, ['sass']);
-  gulp.watch(path.frontEnd.jade, ['jade']);
-  gulp.watch(path.frontEnd.js, ['browserify']);
+  // gulp.watch(path.app.js,['minify']);
+  gulp.watch(path.app.sass, ['sass']);
+  gulp.watch(path.app.jade, ['jade']);
+  gulp.watch(path.app.js, ['browserify']);
 });
 
 gulp.task('build', ['jade', 'sass', 'static-files', 'images',

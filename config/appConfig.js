@@ -8,7 +8,7 @@
     bodyParser = require('body-parser'),
     morgan = require('morgan'),
     methodOverride = require('method-override'),
-    routes = require('./../app/routes/index'),
+    routes = require('./../server/routes/index'),
     path = require('path'),
 
   //mounting an instance of the express router on the routes

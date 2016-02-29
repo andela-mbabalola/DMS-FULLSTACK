@@ -20,9 +20,9 @@ md-toolbar.header(ng-controller="HeaderCtrl")
         i.md-accent.fa.fa-sign-out
         md-tooltip Sign out
 
-div(ng-cloak)
+div.admin(ng-cloak)
   md-content
-    md-tabs(md-dynamic-height='')
+    md-tabs(md-dynamic-height)
       md-tab(label="Users")
         md-content.md-padding
           h3.md-display-2.md-margin.text-center USERS
@@ -30,27 +30,25 @@ div(ng-cloak)
           div.md-margin(layout="column" md-padding flex layout-sm="column" layout-md="column" layout-align="center center")
             md-card
              md-table-container
-              table(md-table='' md-progress="promise" style="border:2px")
-                thead(md-head='')
-                  th(md-column='', md-text='')
-                  th(md-column='', md-text='') User Id
-                  th(md-column='', md-text='') First Name
-                  th(md-column='', md-text='') Last Name
-                  th(md-column='', md-text='') UserName
-                  th(md-column='', md-text='') Email
-                  th(md-column='', md-text='') Documents
-                  th(md-column='', md-text='') Delete
-                tbody(md-body='')
-                  tr(md-row='' ng-repeat="user in users")
-                    td(md-cell='') 
+              table(md-table md-progress="promise" style="border:2px")
+                thead(md-head)
+                  th(md-column, md-text)
+                  th(md-column, md-text) User Id
+                  th(md-column, md-text) First Name
+                  th(md-column, md-text) Last Name
+                  th(md-column, md-text) UserName
+                  th(md-column, md-text) Email
+                  th(md-column, md-text) 
+                tbody(md-body)
+                  tr(md-row ng-repeat="user in users")
+                    td(md-cell) 
                       img.admin-img(src="{{user.img_url}}")
-                    td(md-cell='') {{user._id}}
-                    td(md-cell='') {{user.name.firstName}}
-                    td(md-cell='') {{user.name.lastName}}
-                    td(md-cell='') {{user.userName}}
-                    td(md-cell='') {{user.email}}
-                    td(md-cell='') {{user.totalDoc}}
-                    td(md-cell='')
+                    td(md-cell) {{user._id}}
+                    td(md-cell) {{user.name.firstName}}
+                    td(md-cell) {{user.name.lastName}}
+                    td(md-cell) {{user.userName}}
+                    td(md-cell) {{user.email}}
+                    td(md-cell)
                       i.fa.fa-trash(ng-click="deleteUser($event, user)")
                   md-divider
             
@@ -62,16 +60,16 @@ div(ng-cloak)
           div.md-margin(layout="column" md-padding flex layout-sm="column" layout-md="column" layout-align="center center")
             md-card
              md-table-container
-              table(md-table='' md-progress="promise" style="border:2px")
-                thead(md-head='')
-                  th(md-column='', md-text='') Role Id
-                  th(md-column='', md-text='') Title
-                  th(md-column='', md-text='') Delete
-                tbody(md-body='')
-                  tr(md-row='' ng-repeat="role in roles")
-                    td(md-cell='') {{role._id}}
-                    td(md-cell='') {{role.title}}
-                    td(md-cell='')
+              table(md-table md-progress="promise" style="border:2px")
+                thead(md-head)
+                  th(md-column, md-text) Role Id
+                  th(md-column, md-text) Title
+                  th(md-column, md-text) 
+                tbody(md-body)
+                  tr(md-row ng-repeat="role in roles")
+                    td(md-cell) {{role._id}}
+                    td(md-cell) {{role.title}}
+                    td(md-cell)
                       i.fa.fa-trash(ng-click="deleteRole($event, role)")
                     md-divider
             md-card
@@ -90,21 +88,19 @@ div(ng-cloak)
           div.md-margin(layout="column" md-padding flex layout-sm="column" layout-md="column" layout-align="center center")
             md-card
              md-table-container
-              table(md-table='' md-progress="promise" style="border:2px")
-                thead(md-head='')
-                  th(md-column='', md-text='') Document Id
-                  th(md-column='', md-text='') Title
-                  th(md-column='', md-text='') Content
-                  th(md-column='', md-text='') Date Created
-                  th(md-column='', md-text='') Date Modified
-                  th(md-column='', md-text='') Delete
-                tbody(md-body='')
-                  tr(md-row='' ng-repeat="document in documents")
-                    td(md-cell='') {{document._id}}
-                    td(md-cell='') {{document.title}}
-                    td(md-cell='' ng-bind-html="document.content | limitTo: 20") 
-                    td(md-cell='') {{document.createdAt | date: dd/mm/yyyy}}
-                    td(md-cell='') {{document.lastModified | date: dd/mm/yyyy}}
-                    td(md-cell='')
+              table(md-table md-progress="promise" style="border:2px")
+                thead(md-head)
+                  th(md-column, md-text) Document Id
+                  th(md-column, md-text) Title
+                  th(md-column, md-text) Content
+                  th(md-column, md-text) Date Created
+                  th(md-column, md-text) 
+                tbody(md-body)
+                  tr(md-row ng-repeat="document in documents")
+                    td(md-cell) {{document._id}}
+                    td(md-cell) {{document.title}}
+                    td(md-cell ng-bind-html="document.content | limitTo: 20") 
+                    td(md-cell) {{document.createdAt | date: dd/mm/yyyy}}
+                    td(md-cell)
                       i.fa.fa-trash(ng-click="deleteDocument($event, user)")
                     md-divider

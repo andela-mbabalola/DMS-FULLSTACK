@@ -14,6 +14,7 @@
         };
 
         $scope.previewDocModal = function(ev) {
+          console.log($scope.documents);
           DocPreviewModal.modal(ev, 'document', 'Preview a Document');
         };
         $scope.init();

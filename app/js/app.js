@@ -43,6 +43,7 @@
     'ui.tinymce',
     'ngSanitize',
     'ngFileUpload',
+    'md.data.table',
     'cloudinary'
   ]);
 

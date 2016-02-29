@@ -462,6 +462,7 @@ height: 700px;
 
 .content {
   background-color: #ecf0f1;
+  height: 680px;
 }
 
 .modal {
@@ -646,6 +647,11 @@ h1 {
   }
 }
 
+.admin {
+  width: 100%;
+  height: 650px;
+}
+
 .admin-role-btn:active {
   color: #263238;
   background-color: #975052 !important;
@@ -721,7 +727,6 @@ h1 {
 }
 
 .welcome-docs-preview {
-  padding-top: 20% !important;
   .welcome-preview-cont {
     height: 200px !important;
     width: 150px !important;
@@ -743,7 +748,7 @@ table-cont {
       font-family: 'Raleway', sans-serif;
     }
     .recent-doc-list {
-      margin-left: 6%;
+      margin-left: 3%;
     }
   }
   .all-documents {
@@ -753,6 +758,7 @@ table-cont {
     h3 {
       margin: 0 0 0 6.5%;
       font-family: 'Raleway', sans-serif;
+      padding-top: 10px;
     }
     .recent-doc-list {
       margin-left: 3.5%;
@@ -779,8 +785,8 @@ table-cont {
 }
 
 .admin-img {
-  width: 70px;
-  height: 70px;
+  width: 50px;
+  height: 50px;
   border-radius: 50%;
 }
 
@@ -809,7 +815,7 @@ table-cont {
 }
 
 .doc-list {
-  width: 80%;
+  width: 100%;
 }
 
 .preview {
@@ -826,6 +832,13 @@ table-cont {
 }
 
 .doc-preview {
+  width: 170px;
+  height: 250px;
+  margin: 0px;
+  word-wrap: break-word;
+}
+
+.docPreview {
   width: 90%;
   height: 100%;
   margin: 0px;

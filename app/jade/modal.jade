@@ -1,13 +1,11 @@
 md-dialog.modal(aria-label='Modal Title', ng-cloak)
   md-toolbar.profile-header
     .md-toolbar-tools
-      h3.welcome Welcome
+      h3.welcome Welcome {{currentUser.firstName}}
       span(flex='')
       span(class='fa fa-times' ng-click='cancel()' aria-label='Close dialog' style='cursor: pointer;')
     span
       img(class="profile-pic" src="{{currentUser.img_url}}")
-      .text-center {{currentUser.firstName}}
-      .text-center {{currentUser.email}}
   md-dialog-content.dialog-box
     form(method="post" name="signUp" ng-submit="signUpSocial(currentUser)")
       .group
