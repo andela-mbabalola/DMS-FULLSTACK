@@ -24,9 +24,9 @@
   require('./controllers/welcome');
   require('./controllers/login');
   require('./controllers/signUp');
+  require('./controllers/user-profile');
   require('./controllers/adminPanel');
   require('./controllers/profile');
-  require('./controllers/user-profile');
   require('./controllers/userProfile/documents');
 
   //require directives
