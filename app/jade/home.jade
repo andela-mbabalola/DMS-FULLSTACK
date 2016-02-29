@@ -4,7 +4,7 @@ md-toolbar.header(ng-controller="HeaderCtrl")
       img(src="../img/doccy.png")
     span(flex)
     
-    a(ng-if="currentUser" ui-sref="userProfile")
+    a(ng-if="currentUser" ui-sref="userProfile.documents")
       div.md-icon-button.icon-button(aria-label="Comment")
         img.image(ng-src="{{currentUser.user.img_url || currentUser.img_url}}")
         md-tooltip {{currentUser.user.name.firstName || currentUser.name.firstName}} {{currentUser.user.name.lastName || currentUser.name.lastName}}

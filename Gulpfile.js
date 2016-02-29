@@ -1,6 +1,6 @@
 var gulp = require('gulp'),
   minifyCss = require('gulp-minify-css'),
-  nodemon = require('gulp-nodemon'),
+  // nodemon = require('gulp-nodemon'),
   gutil = require('gulp-util'),
   bower = require('gulp-bower'),
   sass = require('gulp-sass'),
@@ -119,19 +119,19 @@ gulp.task('bower', function() {
 /**
  * [task to start the api server]
  */
-gulp.task('server', function() {
-  nodemon({
-      script: 'server.js',
-      ext: 'js html',
-      env: {
-        'NODE_ENV': 'development'
-      },
-      ignore: ['public/**', 'client/**', 'node_modules/**']
-    })
-    .on('restart', ['jade', 'sass'], function() {
-      console.log('Server restarted!');
-    });
-});
+// gulp.task('server', function() {
+//   nodemon({
+//       script: 'server.js',
+//       ext: 'js html',
+//       env: {
+//         'NODE_ENV': 'development'
+//       },
+//       ignore: ['public/**', 'client/**', 'node_modules/**']
+//     })
+//     .on('restart', ['jade', 'sass'], function() {
+//       console.log('Server restarted!');
+//     });
+// });
 
 /**
  * [task to handle static files]
