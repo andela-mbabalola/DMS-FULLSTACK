@@ -85,7 +85,7 @@
       googleProvider.setAppConfig({
         SCOPE: 'https://www.googleapis.com/auth/userinfo.profile https://www.googleapis.com/auth/userinfo.email',
         CLIENTID: '315009085385-3i53uqkt2o6vvou3r52ssa2f6b96hu0v.apps.googleusercontent.com',
-        REDIRECT: 'http://localhost:4444',
+        REDIRECT: 'http://doccy.herokuapp.com',
         LOGOUT: 'http://accounts.google.com/Logout',
         TYPE: 'token'
       });
