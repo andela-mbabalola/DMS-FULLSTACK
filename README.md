@@ -5,6 +5,8 @@ A document management system
 
 [![Coverage Status](https://coveralls.io/repos/github/andela-mbabalola/DMS-FULLSTACK/badge.svg?branch=feature%2Ffend-bend-tests)](https://coveralls.io/github/andela-mbabalola/DMS-FULLSTACK?branch=feature%2Ffend-bend-tests)
 
+[![codecov.io](https://codecov.io/github/andela-mbabalola/DMS-FULLSTACK/coverage.svg?branch=feature/devops)](https://codecov.io/github/andela-mbabalola/DMS-FULLSTACK?branch=feature/devops)
+
 # SYNOPSIS (DOCCY)
 DOCCY is a system that manages documents, users and user roles. Each document defines access rights; the document defines which roles can access it. DMS has various functionalities including:
 
@@ -30,6 +32,9 @@ Navigate to `http://localhost:4444` on your browser.
 
 # TESTS
 After installation, run the gulp test:bend command to run all the necessary tests
+
+# DEPLOYMENT
+Checkout [Doccy] (http://doccy.herokuapp.com) on heroku
 
 #CONTRIBUTING
 I'm not an expert and I'm sure there are always rooms for improvement - if you have an idea, take a look through [my repository] (https://github.com/andela-mbabalola/DMS-FULLSTACK) and add your comments.
