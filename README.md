@@ -3,7 +3,7 @@ A document management system
 
 [![Travis Ci](https://img.shields.io/travis/andela-mbabalola/DMS-FULLSTACK.svg)](https://travis-ci.org/andela-mbabalola/DMS-FULLSTACK)
 
-[![Coverage Status](https://coveralls.io/repos/andela-mbabalola/DMS-FULLSTACK/badge.svg?branch=master&service=github)](https://coveralls.io/github/andela-mbabalola/DMS-FULLSTACK?branch=master)
+[![Coverage Status](https://coveralls.io/repos/github/andela-mbabalola/DMS-FULLSTACK/badge.svg?branch=feature%2Ffend-bend-tests)](https://coveralls.io/github/andela-mbabalola/DMS-FULLSTACK?branch=feature%2Ffend-bend-tests)
 
 # SYNOPSIS (DOCCY)
 DOCCY is a system that manages documents, users and user roles. Each document defines access rights; the document defines which roles can access it. DMS has various functionalities including:
