@@ -140,7 +140,7 @@
       spyOn(state, 'go').and.callThrough();
       scope.login();
       expect(Users.login).toHaveBeenCalled();
-      expect(state.go).toHaveBeenCalledWith('adminProfile.edit', {
+      expect(state.go).toHaveBeenCalledWith('adminProfile', {
         id: 1
       });
     });
