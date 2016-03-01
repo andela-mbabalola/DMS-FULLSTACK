@@ -21,7 +21,7 @@ before_script:
   - npm install -g mocha
   - npm install -g gulp
 script:
-  - mocha spec/*
+  - npm test
   - gulp test:fend
 after_success:
   - npm run BendCoverage
