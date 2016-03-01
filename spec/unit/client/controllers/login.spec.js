@@ -126,7 +126,7 @@
       spyOn(state, 'go').and.callThrough();
       scope.login();
       expect(Users.login).toHaveBeenCalled();
-      expect(state.go).toHaveBeenCalledWith('userProfile.documents', {
+      expect(state.go).toHaveBeenCalledWith('userProfile.edit', {
         id: 0
       });
     });
@@ -140,7 +140,7 @@
       spyOn(state, 'go').and.callThrough();
       scope.login();
       expect(Users.login).toHaveBeenCalled();
-      expect(state.go).toHaveBeenCalledWith('adminProfile', {
+      expect(state.go).toHaveBeenCalledWith('adminProfile.edit', {
         id: 1
       });
     });

@@ -26,7 +26,7 @@ div.main-doc
     div.recent-doc-list
       md-grid-list.gridlist(md-cols-xs="2" md-cols-sm="3" md-cols-md="5" md-cols-gt-md="7" md-row-height="7:9" md-row-height-gt-xs="7:9" md-row-height-sm="7:9" md-gutter-xs="4px" md-gutter-sm="4px" md-gutter-gt-xs="4px")
         md-grid-tile.welcome-docs-preview(layout='column' ng-repeat="document in documents | limitTo: 4")
-          md-card.ripple-container.welcome-preview-cont(md-ink-ripple ng-click='previewDocModal($event, {id: document._id})')
+          md-card.ripple-container.welcome-preview-cont(md-ink-ripple)
             .md-padding(flex)
               h4.preview-content {{document.title | limitTo: 20}}
               p(style='font-size: x-small' ng-bind-html="document.content | limitTo: 10")
@@ -36,7 +36,7 @@ div.main-doc
     div.recent-doc-list    
       md-grid-list.gridlist(md-cols-xs="2" md-cols-sm="3" md-cols-md="5" md-cols-gt-md="7" md-row-height="7:9" md-row-height-gt-xs="7:9" md-row-height-sm="7:9" md-gutter-xs="10px" md-gutter-sm="10px" md-gutter-gt-xs="10px")
         md-grid-tile.welcome-docs-preview(layout='column' ng-repeat="document in documents")
-          md-card.ripple-container.welcome-preview-cont(md-ink-ripple ng-click='previewDocModal({id: document._id})')
+          md-card.ripple-container.welcome-preview-cont(md-ink-ripple)
             .md-padding(flex)
               h4.preview-content {{document.title | limitTo: 20}}
               p(style='font-size: x-small' ng-bind-html="document.content | limitTo: 10")

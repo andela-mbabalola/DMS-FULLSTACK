@@ -112,7 +112,7 @@
       spyOn(state, 'go').and.callThrough();
       scope.signUp();
       expect(Users.save).toHaveBeenCalled();
-      expect(state.go).toHaveBeenCalledWith('userProfile.documents', {
+      expect(state.go).toHaveBeenCalledWith('userProfile.edit', {
         id: 0
       });
     });
