@@ -26,7 +26,7 @@
               id: $rootScope.currentUser.user._id
             });
           } else {
-              $state.go('userProfile.documents', {
+              $state.go('userProfile.edit', {
                 id: $rootScope.currentUser.user._id
               });
             }

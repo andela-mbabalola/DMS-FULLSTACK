@@ -17,7 +17,7 @@
                   id: $rootScope.currentUser._id
                 });
               } else {
-                $state.go('userProfile.documents', {
+                $state.go('userProfile.edit', {
                   id: $rootScope.currentUser._id
                 });
               }
@@ -56,7 +56,7 @@
             } else {
               $rootScope.currentUser = resp.user;
               Auth.setToken(resp.token);
-              $state.go('userProfile.documents', {
+              $state.go('userProfile.edit', {
                 id: resp.user._id
               });
             }
