@@ -27,6 +27,7 @@
         }
 
           Users.userDocs($rootScope.currentUser, function(err, res) {
+            //$state.reload();
             console.log(res, 'here');
             if (!err) {
               $scope.userDocs = res.doc.map(function(obj) {

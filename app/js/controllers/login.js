@@ -56,7 +56,7 @@
             } else {
               $rootScope.currentUser = resp.user;
               Auth.setToken(resp.token);
-              $state.go('userProfile.documents', {
+              $state.go('userProfile.edit-profile', {
                 id: resp.user._id
               });
             }

@@ -14,7 +14,7 @@ body {
 }
 
 .home-main {
-  height: 636px;
+  height: 650px;
   background: linear-gradient(to bottom, #975052 0%,#975052 50%,#000000 50%,#efefef 50%,#efefef 100%);
   margin-top: -20px;
   .welcome-note {
@@ -555,7 +555,7 @@ h1 {
 }
 
 .welcome {
-  margin-left: 38% !important;
+  margin-left: 28% !important;
 }
 
 .divider {
@@ -768,6 +768,7 @@ table-cont {
 
 .profile-sidebar {
   width: 260px;
+  background-color: #96281B;
 }
 
 .createDocument {
@@ -845,8 +846,9 @@ table-cont {
   word-wrap: break-word;
 }
 
-.user-header {
-  background-color: #3FC380 !important;
+.profile-view {
+  width: 100%;
+  background-color: #bdc3c7;
 }
 
 .preview-content {
@@ -905,6 +907,9 @@ md-toolbar.md-hue-2:not(.md-menu-toolbar) {
   }
 }
 
+.profile-page {
+  height: 700px;
+}
 
 .footer {
   width: 100%;

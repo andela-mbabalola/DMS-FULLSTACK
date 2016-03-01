@@ -6,6 +6,7 @@ var gulp = require('gulp'),
   sass = require('gulp-sass'),
   jade = require('gulp-jade'),
   mocha = require('gulp-mocha'),
+  //connect = require('gulp-connect'),
   Server = require('karma').Server,
   imagemin = require('gulp-imagemin'),
   notify = require('gulp-notify'),
@@ -133,6 +134,13 @@ gulp.task('bower', function() {
 //     });
 // });
 
+  // gulp.task('connect', function() {
+  //   connect.server({
+  //     root: 'server.js',
+  //     livereload: true
+  //   });
+  // });
+
 /**
  * [task to handle static files]
  */
@@ -187,4 +195,4 @@ gulp.task('build', ['jade', 'sass', 'static-files', 'images',
 
 gulp.task('dev', ['watchers']);
 gulp.task('production', ['minifyJs', 'minifyCss']);
-gulp.task('default', ['server', 'watchers', 'build']);
+gulp.task('default', ['watchers', 'build']);
