@@ -62,7 +62,7 @@
     "karma-coveralls": "^1.1.2",
     "karma-firefox-launcher": "^0.1.7",
     "karma-jasmine": "^0.3.7",
-    "mocha": "^2.3.4",
+    "mocha": "^2.3.4"
   },
   "devDependencies": {
     "gulp-connect": "^3.1.0",
