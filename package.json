@@ -68,6 +68,7 @@
     "phantomjs-prebuilt": "^2.1.4"
   },
   "devDependencies": {
+    "gulp-connect": "^3.1.0",
     "gulp-nodemon": "2.0.4"
   }
 }
