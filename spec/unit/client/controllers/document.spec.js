@@ -29,20 +29,16 @@
       },
       Documents = {
         save: function(doc, cb, err) {
-          !doc.fail ? cb(doc) : err(null, true);
+          return !doc.fail ? cb(doc) : err(null, true);
         },
         update: function(doc, cb) {
-          doc ? cb(doc) : cb(true, null);
+          return doc ? cb(doc) : cb(true, null);
         },
         get: function(id, cb) {
           cb([1]);
         },
-        remove: function(id, cb, cbb) {
-          if (id.id) {
-            cb();
-          } else if (id === null) {
-            cbb();
-          }
+        remove: function(doc, cb, cbb) {
+          return !doc._id ? cbb() : cb();
         }
       };
 

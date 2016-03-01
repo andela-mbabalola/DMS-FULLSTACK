@@ -2,7 +2,6 @@
   'use strict';
 
   describe('Document Service Test', function() {
-  'use strict';
   var Documents;
 
     beforeEach(function() {

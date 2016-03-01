@@ -36,7 +36,7 @@
               },
               status: 409
             });
-          } else if (user.email === null) {
+          } else if (!user.email) {
             err({
               user: {
                 _id: 3,

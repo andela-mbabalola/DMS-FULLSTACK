@@ -23,36 +23,24 @@
         query: function(cb) {
           cb([1, 2, 3]);
         },
-        remove: function(id, cb, cbb) {
-          if (id.id) {
-            cb();
-          } else if (id === null) {
-            cbb();
-          }
+        remove: function(user, cb, cbb) {
+          return !user._id ? cbb() : cb();
         }
       },
       Roles = {
         save: function(doc, cb, err) {
-          !doc.fail ? cb(doc) : err(null, true);
+           return !doc.fail ? cb(doc) : err(null, true);
         },
-        remove: function(id, cb, cbb) {
-          if(id.id) {
-            cb();
-          } else if(id === null) {
-            cbb();
-          }
+        remove: function(doc, cb, cbb) {
+          return !doc._id ? cbb() : cb();
         }
       },
       Documents = {
         query: function(cb) {
           cb([1, 2, 3]);
         },
-        remove: function(id, cb, cbb) {
-          if (id.id) {
-            cb();
-          } else if (id === null) {
-            cbb();
-          }
+        remove: function(doc, cb, cbb) {
+          return !doc._id ? cbb() : cb();
         }
       };
 
