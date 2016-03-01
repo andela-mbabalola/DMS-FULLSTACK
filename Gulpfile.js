@@ -5,7 +5,7 @@ var gulp = require('gulp'),
   bower = require('gulp-bower'),
   sass = require('gulp-sass'),
   jade = require('gulp-jade'),
-  //mocha = require('gulp-mocha'),
+  mocha = require('gulp-mocha'),
   Server = require('karma').Server,
   imagemin = require('gulp-imagemin'),
   notify = require('gulp-notify'),
@@ -161,15 +161,15 @@ gulp.task('test:fend', ['build'], function(done) {
   },done()).start();
 });
 
-// gulp.task('test:bend', ['test:fend'], function() {
-//   return gulp.src(path.serverTests)
-//     .pipe(mocha({
-//       reporter: 'spec'
-//     }))
-//     .once('error', function(err) {
-//       throw err;
-//     });
-// });
+gulp.task('test:bend', ['test:fend'], function() {
+  return gulp.src(path.serverTests)
+    .pipe(mocha({
+      reporter: 'spec'
+    }))
+    .once('error', function(err) {
+      throw err;
+    });
+});
 
 /**
  * [task to watch for changes]

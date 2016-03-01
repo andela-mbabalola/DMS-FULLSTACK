@@ -33,6 +33,9 @@ Navigate to `http://localhost:4444` on your browser.
 # TESTS
 After installation, run the gulp test:bend command to run all the necessary tests
 
+# DEPLOYMENT
+Checkout [Doccy] (http://doccy.herokuapp.com) on heroku
+
 #CONTRIBUTING
 I'm not an expert and I'm sure there are always rooms for improvement - if you have an idea, take a look through [my repository] (https://github.com/andela-mbabalola/DMS-FULLSTACK) and add your comments.
 
