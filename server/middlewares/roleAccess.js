@@ -15,7 +15,6 @@
     //check if the role equals that of the superAdministrator
     if (req.body.title === config.role) {
       res.status(403).json({
-        success: false,
         message: 'Access denied'
       });
     } else {
@@ -36,13 +35,11 @@
         res.send(err);
       } else if (!role) {
         res.status(404).json({
-          success: false,
           message: 'Role not found'
         });
       } else {
         if (role.title !== config.role) {
           res.status(403).json({
-            success: false,
             message: 'Access denied'
           });
         } else {

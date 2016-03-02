@@ -65,7 +65,6 @@
           .expect(404)
           .end(function(err, res) {
             expect(res.status).to.be(404);
-            expect(res.body.success).to.eql(false);
             expect(res.body.message).to.eql
               ('Authentication failed. Wrong password');
             done();
@@ -81,7 +80,6 @@
           .expect(404)
           .end(function(err, res) {
             expect(res.status).to.be(404);
-            expect(res.body.success).to.eql(false);
             expect(res.body.message).to.eql
               ('Authentication failed. User not found');
             done();
@@ -97,7 +95,6 @@
           .expect(200)
           .end(function(err, res) {
             expect(res.status).to.be(200);
-            expect(res.body.success).to.eql(true);
             expect(res.body.message).to.eql('Successfully logged in');
             expect(res.body.message).to.not.be.empty();
             done();
@@ -149,7 +146,6 @@
           .expect(200)
           .end(function(err, res) {
             expect(res.status).to.be(200);
-            expect(res.body.success).to.eql(true);
             expect(res.body.message).to.eql('User Successfully created!');
             done();
           });
@@ -168,7 +164,6 @@
           .expect(400)
           .end(function(err, res) {
             expect(res.status).to.be(400);
-            expect(res.body.success).to.eql(false);
             expect(res.body.message).to.eql('Role not found. Create first');
             done();
           });
@@ -186,7 +181,6 @@
           .expect(400)
           .end(function(err, res) {
             expect(res.status).to.be(400);
-            expect(res.body.success).to.eql(false);
             expect(res.body.message).to.eql('Role not found. Create first');
             done();
           });
@@ -205,7 +199,6 @@
           .expect(409)
           .end(function(err, res) {
             expect(res.status).to.be(409);
-            expect(res.body.success).to.eql(false);
             expect(res.body.message).to.eql('User already exists!');
             done();
           });
@@ -285,7 +278,6 @@
           .expect(404)
           .end(function(err, res) {
             expect(res.status).to.be(404);
-            expect(res.body.success).to.eql(false);
             expect(res.body.message).to.eql('User not found!');
             done();
           });
@@ -296,7 +288,6 @@
           .expect(401)
           .end(function(err, res) {
             expect(res.status).to.be(401);
-            expect(res.body.success).to.eql(false);
             expect(res.body.message).to.eql('No token provided');
             done();
           });
@@ -357,7 +348,6 @@
           .expect(401)
           .end(function(err, res) {
             expect(res.status).to.be(401);
-            expect(res.body.success).to.eql(false);
             expect(res.body.message).to.equal('No token provided');
             done();
           });
@@ -376,7 +366,6 @@
             password: 'mine',
             role: _userSeeders[2].role
           }).expect(200).end(function(err, res) {
-            expect(res.body.success).to.eql(true);
             expect(res.body.message).to.eql('User Successfully updated!');
             done();
           });
@@ -398,7 +387,6 @@
           .expect(400)
           .end(function(err, res) {
             expect(res.status).to.be(400);
-            expect(res.body.success).to.eql(false);
             expect(res.body.message).to.eql
               ('Role does not exist, create first');
             done();
@@ -420,7 +408,6 @@
           .expect(400)
           .end(function(err, res) {
             expect(res.status).to.be(400);
-            expect(res.body.success).to.eql(false);
             expect(res.body.message).to.eql
               ('Role does not exist, create first');
             done();
@@ -444,7 +431,6 @@
           .expect(404)
           .end(function(err, res) {
             expect(res.status).to.be(404);
-            expect(res.body.success).to.eql(false);
             expect(res.body.message).to.eql('User does not exist');
             done();
           });
@@ -494,7 +480,6 @@
           .expect(401)
           .end(function(err, res) {
             expect(res.status).to.be(401);
-            expect(res.body.success).to.eql(false);
             expect(res.body.message).to.eql('No token provided');
             done();
           });
@@ -507,7 +492,6 @@
           .expect(404)
           .end(function(err, res) {
             expect(res.status).to.be(404);
-            expect(res.body.success).to.eql(false);
             expect(res.body.message).to.eql('User does not exist!');
             done();
           });
@@ -519,7 +503,6 @@
           .expect(200)
           .end(function(err, res) {
             expect(res.status).to.be(200);
-            expect(res.body.success).to.eql(true);
             expect(res.body.message).to.eql('User successfully deleted!');
             done();
           });

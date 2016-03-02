@@ -18,29 +18,29 @@
             md-list-item(md-ink-ripple)
               md-item-content.user-profile( layout='row' layout-align='start center')
                 .inset
-                  i.fa.fa-file-text-o.fa-2x
-                span.documents Documents
+                  i.fa.fa-file-text-o
+                span Documents
         md-list
           a(class="remove-link-deco" ng-if="admin()" ui-sref="adminProfile")
             md-list-item(md-ink-ripple)
               md-item-content.user-profile(layout='row' layout-align='start center')
                 .inset
-                  i.fa.fa-lock.fa-2x
-                span.documents Admin View
+                  i.fa.fa-lock
+                span Admin View
         div.bottom-details
           md-list
             a(class="remove-link-deco" ui-sref="userProfile.edit({id: currentUser._id})")
               md-list-item(md-ink-ripple)
                 md-item-content.user-profile(layout='row' layout-align='start center')
                   .inset
-                    i.fa.fa-pencil-square-o.fa-2x.user-icons
-                  span.edit Edit your profile
+                    i.fa.fa-pencil-square-o.user-icons
+                  span Edit your profile
           md-list
             a(class="remove-link-deco" ng-controller="HeaderCtrl" ng-click="logout()")
               md-list-item(md-ink-ripple)
                 md-item-content.user-profile(layout='row' layout-align='start center')
                   .inset
-                    i.fa.fa-sign-out.fa-2x.user-icons
-                  span.edit Logout
+                    i.fa.fa-sign-out.user-icons
+                  span Logout
   .md-content(flex ui-view="inner-view")
     

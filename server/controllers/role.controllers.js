@@ -20,7 +20,6 @@
         //if role exists
         if (role) {
           res.status(409).json({
-            success: false,
             message: 'Role already exists!'
           });
         } else {
@@ -33,7 +32,6 @@
               res.send(err);
             } else {
               res.status(200).json({
-                success: true,
                 message: 'Role successfully created!'
               });
             }
@@ -72,12 +70,10 @@
         res.send(err);
       } else if (!role) {
         res.status(404).json({
-          success: false,
           message: 'Role not found!'
         });
       } else {
         res.status(200).json({
-          success: true,
           message: role
         });
       }
@@ -95,18 +91,15 @@
     Role.findByIdAndUpdate(req.params.id, req.body, function(err, role) {
       if (err) {
         res.json({
-          success: false,
           message: 'Update role failed!'
         });
         //if no role is found
       } else if (!role) {
         res.status(404).json({
-          success: false,
           message: 'Role not found'
         });
       } else {
         res.status(200).json({
-          success: true,
           message: 'Role successfully updated'
         });
       }
@@ -124,18 +117,15 @@
     Role.findById(req.params.id).remove(function(err, role) {
       if (err) {
         res.json({
-          success: false,
           message: 'Delete role failed'
         });
         //if no role is found
       } else if (!role) {
         res.status(404).json({
-          success: false,
           message: 'Role does not exist!'
         });
       } else {
         res.status(200).json({
-          success: true,
           message: 'Role successfully deleted'
         });
       }

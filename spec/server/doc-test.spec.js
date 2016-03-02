@@ -76,7 +76,6 @@
           .expect(409)
           .end(function(err, res) {
             expect(res.status).to.be(409);
-            expect(res.body.success).to.eql(false);
             expect(res.body.message).to.eql('Document already exists!');
             done();
           });
@@ -94,7 +93,6 @@
           .expect(200)
           .end(function(err, res) {
             expect(res.status).to.be(200);
-            expect(res.body.success).to.eql(true);
             expect(res.body.message).to.eql('Document successfully created');
             done();
           });
@@ -106,7 +104,6 @@
           .expect(401)
           .end(function(err, res) {
             expect(res.status).to.be(401);
-            expect(res.body.success).to.eql(false);
             expect(res.body.message).to.eql('No token provided');
             done();
           });
@@ -123,7 +120,6 @@
           .expect(400)
           .end(function(err, res) {
             expect(res.status).to.be(400);
-            expect(res.body.success).to.eql(false);
             expect(res.body.message).to.eql('Role not found. Create first!');
             done();
           });
@@ -257,7 +253,6 @@
           .expect(200)
           .end(function(err, res) {
             expect(res.status).to.be(200);
-            expect(res.body.success).to.eql(true);
             done();
           });
       });
@@ -281,7 +276,6 @@
           .expect(400)
           .end(function(err, res) {
             expect(res.status).to.be(400);
-            expect(res.body.success).to.eql(false);
             expect(res.body.message).to.eql('Document not found');
             done();
           });
@@ -297,7 +291,6 @@
           .expect(200)
           .end(function(err, res) {
             expect(res.status).to.be(200);
-            expect(res.body.success).to.eql(true);
             expect(res.body.message).to.eql('Document Successfully updated!');
             done();
           });
@@ -318,7 +311,6 @@
           .expect(403)
           .end(function(err, res) {
             expect(res.status).to.be(403);
-            expect(res.body.success).to.eql(false);
             expect(res.body.message).to.eql('Access denied');
             done();
           });
@@ -335,7 +327,6 @@
           .expect(404)
           .end(function(err, res) {
             expect(res.status).to.be(404);
-            expect(res.body.success).to.eql(false);
             expect(res.body.message).to.eql('Document does not exist');
             done();
           });
@@ -347,7 +338,6 @@
           .expect(200)
           .end(function(err, res) {
             expect(res.status).to.be(200);
-            expect(res.body.success).to.eql(true);
             expect(res.body.message).to.eql('Document successfully deleted');
             done();
           });
@@ -360,7 +350,6 @@
           .expect(400)
           .end(function(err, res) {
             expect(res.status).to.eql(400);
-            expect(res.body.success).to.eql(false);
             expect(res.body.message).to.eql('Document not found');
             done();
           });
@@ -377,7 +366,6 @@
           .expect(403)
           .end(function(err, res) {
             expect(res.status).to.eql(403);
-            expect(res.body.success).to.eql(false);
             expect(res.body.message).to.eql('Access denied');
             done();
           });

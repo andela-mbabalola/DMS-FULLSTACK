@@ -28,8 +28,8 @@
         role: '45'
       },
       Documents = {
-        save: function(doc, cb, err) {
-          return !doc.fail ? cb(doc) : err(null, true);
+        save: function(doc, cb, errCb) {
+          return !doc.fail ? cb(doc) : errCb(null, true);
         },
         update: function(doc, cb) {
           return doc ? cb(doc) : cb(true, null);
@@ -37,8 +37,8 @@
         get: function(id, cb) {
           cb([1]);
         },
-        remove: function(doc, cb, cbb) {
-          return !doc._id ? cbb() : cb();
+        remove: function(docId, cb, errCb) {
+          return !docId ? errCb() : cb();
         }
       };
 
@@ -157,7 +157,7 @@
 
     it('should call delete function and delete document', function() {
       scope.doc = {
-        _id: 1
+        id: 1
       };
       spyOn(Documents, 'remove').and.callThrough();
       spyOn(mdDialog, 'confirm').and.returnValue(mdDialog);
@@ -172,7 +172,7 @@
 
     it('should call delete function and fail', function() {
       scope.doc = {
-        _id: null
+        title: 'something'
       };
       spyOn(Documents, 'remove').and.callThrough();
       spyOn(mdToast, 'show').and.callThrough();
@@ -188,7 +188,7 @@
 
     it('should call update function', function() {
       scope.doc = {
-        _id: 1
+        id: 1
       };
       spyOn(Documents, 'update').and.callThrough();
       spyOn(mdToast, 'show').and.callThrough();

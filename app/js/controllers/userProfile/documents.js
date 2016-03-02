@@ -13,8 +13,9 @@
       '$sce',
       '$mdToast',
       '$mdDialog',
+      '$mdSidenav',
       function($scope, $rootScope, $state, Users, DocModal, Documents,
-        $stateParams, $sce, $mdToast, $mdDialog) {
+        $stateParams, $sce, $mdToast, $mdDialog, $mdSidenav) {
 
         $scope.init = function() {
           console.log($stateParams.id);
@@ -37,6 +38,19 @@
             }
           });
         };
+
+        $scope.toggle = toggleSidenav('left');
+
+        $scope.isOpen = function() {
+          return $mdSidenav('left').isOpen();
+        };
+
+        function toggleSidenav(navId) {
+          return function() {
+            $mdSidenav(navId)
+              .toggle();
+          };
+        }
 
         // create event
         $scope.addDocument = function() {

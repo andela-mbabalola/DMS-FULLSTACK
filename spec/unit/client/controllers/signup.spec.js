@@ -35,7 +35,7 @@
     }));
 
     Users = {
-      save: function(user, cb, err) {
+      save: function(user, cb, errCb) {
         if (user.email === 'tay@tay.com') {
           cb({
             token: 'token',
@@ -54,7 +54,7 @@
 
           });
         } else if (user.email === null) {
-          err({
+          errCb({
             status: 401,
             message: 'Authentication failed. Wrong password',
             user: {

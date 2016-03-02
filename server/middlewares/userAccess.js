@@ -18,16 +18,13 @@
         res.send(err);
       } else if (!doc) {
         res.status(404).json({
-          success: false,
           message: 'Docs not found'
         });
       } else {
-        console.log('here' + req.decoded._doc._id);
         if (req.decoded._doc._id !== doc.ownerId.toString() &&
           req.decoded._doc.role !== config.role &&
           req.decoded._doc.role !== doc.role.toString()) {
           res.status(403).json({
-            success: false,
             message: 'Access denied'
           });
         } else {
