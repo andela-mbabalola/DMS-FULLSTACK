@@ -1,4 +1,4 @@
-.profile-page(ng-if='currentUser' layout ng-init="init()")
+.profile-page(ng-if='currentUser' flex layout="row" ng-init="init()")
   .md-content(layout="row")
     md-sidenav.md-sidenav-left.md-whiteframe-z2.main.profile-sidebar(layout='column', md-component-id='left', md-is-locked-open="$mdMedia('gt-xs')")
       div.md-toolbar-tools.usr-prof
@@ -42,5 +42,5 @@
                   .inset
                     i.fa.fa-sign-out.user-icons
                   span Logout
-  .md-content(flex ui-view="inner-view")
+  .md-content(flex ui-view="inner-view" layout="column")
     

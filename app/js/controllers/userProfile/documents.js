@@ -94,6 +94,7 @@
         };
 
         $scope.editDocument = function() {
+          console.log($scope.docs, 'arsefsw');
           Documents.update($scope.docs, function() {
             $mdToast.show($mdToast.simple()
               .textContent('Update successful').hideDelay(2000));
@@ -104,7 +105,7 @@
             });
           }, function() {
             $mdToast.show($mdToast.simple()
-              .textContent('Error updating profile').hideDelay(2000));
+              .textContent('Error updating document').hideDelay(2000));
           });
         };
 
