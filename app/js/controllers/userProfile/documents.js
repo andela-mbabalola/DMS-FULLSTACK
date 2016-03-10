@@ -13,22 +13,21 @@
       '$sce',
       '$mdToast',
       '$mdDialog',
+      '$mdSidenav',
       function($scope, $rootScope, $state, Users, DocModal, Documents,
-        $stateParams, $sce, $mdToast, $mdDialog) {
+        $stateParams, $sce, $mdToast, $mdDialog, $mdSidenav) {
 
         $scope.init = function() {
           console.log($stateParams.id);
-          if($stateParams.id){
-          Documents.get({
-            id: $stateParams.id
-          }, function(res) {
-            $scope.docs = res.doc;
-          });
-        }
+          if ($stateParams.id) {
+            Documents.get({
+              id: $stateParams.id
+            }, function(res) {
+              $scope.docs = res.doc;
+            });
+          }
 
           Users.userDocs($rootScope.currentUser, function(err, res) {
-            //$state.reload();
-            console.log(res, 'here');
             if (!err) {
               $scope.userDocs = res.doc.map(function(obj) {
                 obj.content = $sce.trustAsHtml(obj.content);
@@ -37,6 +36,19 @@
             }
           });
         };
+
+        $scope.toggle = toggleSidenav('left');
+
+        $scope.isOpen = function() {
+          return $mdSidenav('left').isOpen();
+        };
+
+        function toggleSidenav(navId) {
+          return function() {
+            $mdSidenav(navId)
+              .toggle();
+          };
+        }
 
         // create event
         $scope.addDocument = function() {
@@ -80,6 +92,7 @@
         };
 
         $scope.editDocument = function() {
+          console.log($scope.docs, 'arsefsw');
           Documents.update($scope.docs, function() {
             $mdToast.show($mdToast.simple()
               .textContent('Update successful').hideDelay(2000));
@@ -90,7 +103,7 @@
             });
           }, function() {
             $mdToast.show($mdToast.simple()
-              .textContent('Error updating profile').hideDelay(2000));
+              .textContent('Error updating document').hideDelay(2000));
           });
         };
 

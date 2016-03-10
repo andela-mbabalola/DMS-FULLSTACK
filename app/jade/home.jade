@@ -20,19 +20,16 @@ md-toolbar.header(ng-controller="HeaderCtrl")
 div.home-main
   div.welcome-note
     p
-      | If it's worth doing, it's worth documenting...
-    p
       |If you don't have time to do it right, you should have time to do it over.
-  div.welcome-images
-    div.wImages
-    div.wImagesa
-    div.wImagesb
-  div.welcome-description
-    div.wdescr
+  div.welcome-images(layout="row" layout-xs="column")
+    div.all(flex)
+      div.wImages
       p Simple to use.
-    div.wdescr
+    div.all(flex)
+      div.wImagesa
       p Create, share and keep documents easily.
-    div.wdescr
+    div.all(flex)
+      div.wImagesb
       p Format and Preview documents just like a standard editor.
   div.signup-button(ui-sref="login")
     md-button.action-button

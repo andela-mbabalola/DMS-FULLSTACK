@@ -134,6 +134,7 @@
         expect(response.res).toBeDefined();
         expect(response.res).toBe('res');
       });
+      
       it('should test error of userDocs function', function() {
         var error, response;
         var cb = function(err, res) {

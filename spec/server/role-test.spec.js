@@ -59,7 +59,6 @@
           .end(function(err, res) {
             console.log(res.body);
             expect(res.status).to.be(200);
-            expect(res.body.success).to.eql(true);
             expect(res.body.message).to.eql('Role successfully created!');
             done();
           });
@@ -72,7 +71,6 @@
           .end(function(err, res) {
             console.log(res.body);
             expect(res.status).to.be(409);
-            expect(res.body.success).to.eql(false);
             expect(res.body.message).to.eql('Role already exists!');
             done();
           });
@@ -87,7 +85,6 @@
           .end(function(err, res) {
             console.log(res.body);
             expect(res.status).to.be(403);
-            expect(res.body.success).to.eql(false);
             expect(res.body.message).to.eql('Access denied');
             done();
           });
@@ -102,7 +99,6 @@
           })
           .end(function(err, res) {
             expect(res.status).to.be(403);
-            expect(res.body.success).to.eql(false);
             expect(res.body.message).to.eql('Access denied!');
             done();
           });
@@ -128,7 +124,6 @@
           .end(function(err, res) {
             console.log(res.body);
             expect(res.body).to.not.be(undefined);
-            expect(res.body.success).to.eql(false);
             expect(res.body.message).to.eql('Role not found!');
             done();
           });
@@ -142,7 +137,6 @@
           })
           .end(function(err, res) {
             expect(res.status).to.eql(200);
-            expect(res.body.success).to.eql(true);
             expect(res.body.message).to.eql('Role successfully updated');
             done();
           });
@@ -165,7 +159,6 @@
           })
           .end(function(err, res) {
             expect(res.status).to.be(404);
-            expect(res.body.success).to.eql(false);
             expect(res.body.message).to.eql('Role not found');
             done();
           });
@@ -176,14 +169,12 @@
           .set('x-access-token', superAdToken)
           .end(function(err, res) {
             expect(res.status).to.be(200);
-            expect(res.body.success).to.eql(true);
             expect(res.body.message).to.eql('Role successfully deleted');
 
             request.get('/api/role/superAdministrator/' + roleId)
               .set('x-access-token', superAdToken)
               .end(function(err, res) {
                 expect(res.status).to.be(404);
-                expect(res.body.success).to.eql(false);
                 expect(res.body.message).to.eql('Role not found!');
                 done();
               });
@@ -196,7 +187,6 @@
           .set('x-access-token', superAdToken)
           .end(function(err, res) {
             expect(res.status).to.be(403);
-            expect(res.body.success).to.eql(false);
             expect(res.body.message).to.eql('Access denied');
             done();
           });

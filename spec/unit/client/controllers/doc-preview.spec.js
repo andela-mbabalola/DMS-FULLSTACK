@@ -1,7 +1,7 @@
 (function() {
   'use strict';
 
-  describe('docpreviewCtrl test', function() {
+  describe('docPreview ctrl', function() {
     var mdDialog,
       controller,
       scope;

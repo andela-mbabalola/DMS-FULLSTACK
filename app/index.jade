@@ -2,9 +2,7 @@ doctype html
 html(lang="en" ng-app="Doccy")
   head
     include shared/head
-  body
-    main
-      //include shared/header
-      md-content(ui-view)
+  body(layout="column")
+    md-content(ui-view flex layout="column")
   footer
     include shared/footer

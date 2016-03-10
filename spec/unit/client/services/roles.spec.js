@@ -1,8 +1,8 @@
 (function() {
   'use strict';
 
-  describe('Document Service Test', function() {
-  var Documents;
+  describe('Roles Service Test', function() {
+  var Roles;
 
     beforeEach(function() {
       module('Doccy');
@@ -21,13 +21,13 @@
     }));
 
     beforeEach(inject(function($injector) {
-      Documents = $injector.get('Documents');
+      Roles = $injector.get('Roles');
     }));
 
     describe('Documents unit tests', function() {
       it('update should be a function', function() {
-        expect(Documents.update).toBeDefined();
-        expect(typeof Documents.update).toBe('function');
+        expect(Roles.update).toBeDefined();
+        expect(typeof Roles.update).toBe('function');
       });
     });
   });

@@ -1,20 +1,21 @@
-md-content.content(ng-if="currentUser" layout)  
+md-content.content(ng-if="currentUser" layout) 
+  i.fa.fa-bars(hide-gt-xs ng-click="toggle()")   
   .md-padding.doc-list
-      h3 My Documents
-      div(ng-cloak='')
-        md-grid-list(md-cols-xs='1' md-cols-sm='2', md-cols-md='3', md-cols-gt-md='4', md-row-height-md='1:1.3' md-row-height-gt-md='1:1.3', md-row-height-sm='1:1.3', md-row-height-xs='1:1.3' md-gutter='6px', md-gutter-gt-sm='20px')
-          md-grid-tile.createDocument(md-ink-ripple ng-click='addDocumentModal()' layout-padding style='cursor: pointer')
-            md-card.ripple-container.preview(md-ink-ripple)
-              i.fa.fa-plus.fa-3x.doc-preview-icon
-          md-grid-tile.createDocument(layout='column' ng-repeat="doc in userDocs")
-            md-card.doc-preview.ripple-container(md-ink-ripple)
-              .md-padding(flex)
-                h4.preview-content {{doc.title | limitTo: 30}}
-                p(style='font-size: x-small' ng-bind-html="doc.content")
-              md-card-actions(layout='row')
-                md-icon.app-icons(ui-sref="userProfile.editDocument({id: doc._id})")
-                    i.fa.fa-pencil.first
-                    md-tooltip Update
-                md-icon(ng-click='deleteUserDoc($event, doc)').app-icons
-                    i.fa.fa-trash.sec
-                    md-tooltip Delete              
+    h3.md-padding My Documents
+    div.docs(ng-cloak='')
+      md-grid-list(md-cols-md='3' md-cols='2' md-cols-gt-md='5' md-row-height-gt-md='1:1.2' md-row-height='1:1.2' md-gutter='4px' md-gutter-md='6px' md-gutter-gt-md='15px')
+        md-grid-tile(layout='column' md-rowspan='1' md-colspan='1' ng-click='addDocumentModal()' style='cursor: pointer')
+          md-card.ripple-container.tile(md-ink-ripple)
+            i.fa.fa-plus.fa-3x.doc-preview-icon
+        md-grid-tile(layout='column' md-colspan='1' md-rowspan='1' ng-repeat="doc in userDocs")
+          md-card.ripple-container.tile(md-ink-ripple)
+            .md-padding(flex)
+              h4.preview-content {{doc.title | limitTo: 30}}
+              p(style='font-size: x-small' ng-bind-html="doc.content | limitTo: 30")
+            md-card-actions(layout='row')
+              md-icon.app-icons(ui-sref="userProfile.editDocument({id: doc._id})")
+                  i.fa.fa-pencil
+                  md-tooltip Update
+              md-icon(ng-click='deleteUserDoc($event, doc)').app-icons
+                  i.fa.fa-trash
+                  md-tooltip Delete              

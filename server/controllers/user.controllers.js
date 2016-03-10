@@ -74,7 +74,6 @@
         //if user is not found
         if (!user) {
           res.status(404).json({
-            success: false,
             message: 'Authentication failed. User not found'
           });
         } else if (user) {
@@ -88,14 +87,12 @@
                 });
 
                 res.status(200).json({
-                  success: true,
                   message: 'Successfully logged in',
                   token: token,
                   user: user
                 });
               } else {
                 res.status(404).json({
-                  success: false,
                   message: 'Authentication failed. Wrong password'
                 });
               }}
@@ -105,7 +102,6 @@
               expiresInMinutes: 1440
             });
             res.status(200).json({
-              success: true,
               login: 'successful',
               token: token,
               user: user
@@ -133,7 +129,6 @@
       //if role does not exist
       if (!role) {
         res.status(400).json({
-          success: false,
           message: 'Role not found. Create first'
         });
       } else {
@@ -153,18 +148,15 @@
 
           if (user) {
             res.status(409).json({
-              success: false,
               message: 'User already exists!'
             });
           } else {
             if (!req.body.email) {
               res.status(406).send({
-                success: false,
                 message: 'Please enter your email'
               });
             } else if (!req.body.password) {
               res.status(406).send({
-                success: false,
                 message: 'Please enter your password'
               });
             } else {
@@ -195,7 +187,6 @@
                   });
 
                   res.status(200).json({
-                    success: true,
                     message: 'User Successfully created!',
                     token: token,
                     user: user
@@ -241,7 +232,6 @@
         //if no user is found
       } else if (!user) {
         res.status(404).json({
-          success: false,
           message: 'User not found!'
         });
       } else {
@@ -272,7 +262,6 @@
         //if role is not found
       } else if (!role) {
         res.status(400).json({
-          success: false,
           message: 'Role does not exist, create first'
         });
       } else {
@@ -286,12 +275,10 @@
               //if user is not found
             } else if (!user) {
               res.status(404).json({
-                success: false,
                 message: 'User does not exist'
               });
             } else {
               res.status(200).json({
-                success: true,
                 message: 'User Successfully updated!'
               });
             }
@@ -314,12 +301,10 @@
         //if user is not found
       } else if (!user) {
         res.status(404).json({
-          success: false,
           message: 'User does not exist!'
         });
       } else {
         res.status(200).json({
-          success: true,
           message: 'User successfully deleted!'
         });
       }
@@ -340,7 +325,6 @@
         res.send(err);
       } else if (!docs) {
         res.status(404).send({
-          success: false,
           message: 'Documents not found'
         });
       } else {

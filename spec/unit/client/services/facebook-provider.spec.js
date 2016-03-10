@@ -43,17 +43,18 @@
       expect(facebookprovider.login).toBeDefined();
       expect(typeof facebookprovider.login).toBe('function');
     });
+
     it('facebook init should have been called', function(){
       spyOn(FB, 'init');
       facebookprovider.init();
       expect(FB.init).toHaveBeenCalled();
     });
+
     it('facebook login should have been called', function() {
       spyOn(FB, 'login').and.callThrough();
       spyOn(FB, 'api').and.callThrough();
       facebookprovider.login();
       expect(FB.login).toHaveBeenCalled();
       expect(FB.api).toHaveBeenCalled();
-
     });
   });

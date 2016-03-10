@@ -19,7 +19,7 @@
       controller,
       user,
       Users = {
-        save: function(user, cb, err) {
+        save: function(user, cb, errCb) {
           if (user.email === 'tee@tee.com') {
             cb({
               token: 'token',
@@ -29,15 +29,15 @@
               }
             });
           } else if (user.email === 'tay@tay.com') {
-            err({
+            errCb({
               user: {
                 _id: 2,
                 email: 'tay'
               },
               status: 409
             });
-          } else if (user.email === null) {
-            err({
+          } else if (!user.email) {
+            errCb({
               user: {
                 _id: 3,
                 email: null
