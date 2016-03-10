@@ -1,29 +1,31 @@
-.edit-profile-box
-  div.edit-header
-    div.show-edit-icon
-      img.edit-profile-pic(src="{{currentUser.img_url}}" ng-mouseover="opaq=1" ng-mouseleave="opaq=0")
-      i.fa.fa-pencil.edit(ng-style="{opacity:opaq}" ngf-select="uploadProfilePic($file)")
-  md-content(layout-padding)
-    div.edit-content
-      form(method="post" name="editUserForm" ng-submit="editProfile()" class="editUser")
-        div(layout-gt-sm="row")
+md-content.edit-main(flex)
+  i.fa.fa-bars(ng-controller="userDocumentCtrl" hide-gt-xs ng-click="toggle()")
+  .edit-profile-box
+    div.edit-header
+      div.show-edit-icon
+        img.edit-profile-pic(src="{{currentUser.img_url}}" ng-mouseover="opaq=1" ng-mouseleave="opaq=0")
+        i.fa.fa-pencil.edit(ng-style="{opacity:opaq}" ngf-select="uploadProfilePic($file)")
+    md-content(layout-padding)
+      div.edit-content
+        form(method="post" name="editUserForm" ng-submit="editProfile()" class="editUser")
+          div(layout-gt-sm="row")
+            md-input-container.md-block(flex-gt-sm)
+              label.edit-label First name
+              input(ng-model="currentUser.name.firstName" type="text")  
+            md-input-container.md-block(flex-gt-sm)
+              label.edit-label Last name
+              input.inputMaterial(ng-model="currentUser.name.lastName" type="text")  
           md-input-container.md-block(flex-gt-sm)
-            label.edit-label First name
-            input(ng-model="currentUser.name.firstName" type="text")  
+            label.edit-label Email
+            input(ng-model="currentUser.email" type="email") 
+          div(layout-gt-sm="row")     
+            md-input-container.md-block(flex-gt-sm)
+              label.edit-label Username
+              input(ng-model="currentUser.userName"  type="text")  
+            md-input-container.md-block(flex-gt-sm)
+              label.edit-label Password
+              input(ng-model="password"  type="password")  
           md-input-container.md-block(flex-gt-sm)
-            label.edit-label Last name
-            input.inputMaterial(ng-model="currentUser.name.lastName" type="text")  
-        md-input-container.md-block(flex-gt-sm)
-          label.edit-label Email
-          input(ng-model="currentUser.email" type="email") 
-        div(layout-gt-sm="row")     
-          md-input-container.md-block(flex-gt-sm)
-            label.edit-label Username
-            input(ng-model="currentUser.userName"  type="text")  
-          md-input-container.md-block(flex-gt-sm)
-            label.edit-label Password
-            input(ng-model="password"  type="password")  
-        md-input-container.md-block(flex-gt-sm)
-          md-select( ng-model="user.role" placeholder="Select a role" aria-label="currentUser.role" required="true")
-            md-option(ng-value="role" ng-repeat="role in roles") {{role.title}}
-        button.updateDoc(type="submit" ng-disabled="editUserForm.$invalid") Update
+            md-select( ng-model="user.role" placeholder="Select a role" aria-label="currentUser.role" required="true")
+              md-option(ng-value="role" ng-repeat="role in roles") {{role.title}}
+          button.updateDoc(type="submit" ng-disabled="editUserForm.$invalid") Update

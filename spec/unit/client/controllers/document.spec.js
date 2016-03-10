@@ -6,6 +6,7 @@
       DocModal,
       scope,
       state,
+      stateParams,
       mdToast,
       mdDialog,
       Users = {
@@ -28,21 +29,17 @@
         role: '45'
       },
       Documents = {
-        save: function(doc, cb, err) {
-          !doc.fail ? cb(doc) : err(null, true);
+        save: function(doc, cb, errCb) {
+          return !doc.fail ? cb(doc) : errCb(null, true);
         },
         update: function(doc, cb) {
-          doc ? cb(doc) : cb(true, null);
+          return doc ? cb(doc) : cb(true, null);
         },
         get: function(id, cb) {
           cb([1]);
         },
-        remove: function(id, cb, cbb) {
-          if (id.id) {
-            cb();
-          } else if (id === null) {
-            cbb();
-          }
+        remove: function(docId, cb, errCb) {
+          return !docId ? errCb() : cb();
         }
       };
 
@@ -99,11 +96,13 @@
       DocModal = $injector.get('DocModal');
       mdDialog = $injector.get('mdDialog');
       state = $injector.get('$state');
+      stateParams = $injector.get('$stateParams');
       controller = $controller('userDocumentCtrl', {
         $scope: scope,
         Users: Users,
         Documents: Documents,
         $mdDialog: mdDialog,
+        $stateParams: stateParams
       });
     }));
 
@@ -161,7 +160,7 @@
 
     it('should call delete function and delete document', function() {
       scope.doc = {
-        _id: 1
+        id: 1
       };
       spyOn(Documents, 'remove').and.callThrough();
       spyOn(mdDialog, 'confirm').and.returnValue(mdDialog);
@@ -174,16 +173,6 @@
       expect(Documents.remove).toHaveBeenCalled();
     });
 
-    it('should call delete function and fail', function() {
-      scope.doc = {
-        _id: null
-      };
-      spyOn(Documents, 'remove').and.callThrough();
-      spyOn(mdToast, 'show').and.callThrough();
-      scope.deleteUserDoc('ev', scope.doc);
-      expect(mdToast.show).not.toHaveBeenCalled();
-    });
-
     it('should  show mdToast dialog for update', function() {
       spyOn(mdToast, 'show').and.callThrough();
       scope.editDocument();
@@ -192,7 +181,7 @@
 
     it('should call update function', function() {
       scope.doc = {
-        _id: 1
+        id: 1
       };
       spyOn(Documents, 'update').and.callThrough();
       spyOn(mdToast, 'show').and.callThrough();

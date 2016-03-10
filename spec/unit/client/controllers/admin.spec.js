@@ -23,36 +23,24 @@
         query: function(cb) {
           cb([1, 2, 3]);
         },
-        remove: function(id, cb, cbb) {
-          if (id.id) {
-            cb();
-          } else if (id === null) {
-            cbb();
-          }
+        remove: function(userId, cb, errCb) {
+          return !userId ? errCb() : cb();
         }
       },
       Roles = {
-        save: function(doc, cb, err) {
-          !doc.fail ? cb(doc) : err(null, true);
+        save: function(role, cb, errCb) {
+           return !role.fail ? cb(role) : errCb(null, true);
         },
-        remove: function(id, cb, cbb) {
-          if(id.id) {
-            cb();
-          } else if(id === null) {
-            cbb();
-          }
+        remove: function(roleId, cb, errCb) {
+          return !roleId ? errCb() : cb();
         }
       },
       Documents = {
         query: function(cb) {
           cb([1, 2, 3]);
         },
-        remove: function(id, cb, cbb) {
-          if (id.id) {
-            cb();
-          } else if (id === null) {
-            cbb();
-          }
+        remove: function(docId, cb, errCb) {
+          return !docId ? errCb() : cb();
         }
       };
 
@@ -135,7 +123,7 @@
 
     it('should call delete function and delete user', function() {
       scope.user = {
-        _id: 1
+        id: 1
       };
       spyOn(Users, 'remove').and.callThrough();
       spyOn(mdDialog, 'confirm').and.callThrough();
@@ -152,7 +140,7 @@
 
     it('should call delete function and delete roles', function() {
       scope.role = {
-        _id: 1
+        id: 1
       };
       spyOn(Roles, 'remove').and.callThrough();
       spyOn(mdDialog, 'confirm').and.callThrough();
@@ -180,7 +168,7 @@
 
     it('should call delete function and delete document', function() {
       scope.doc = {
-        _id: 1
+        id: 1
       };
       spyOn(Documents, 'remove').and.callThrough();
       spyOn(mdDialog, 'confirm').and.callThrough();

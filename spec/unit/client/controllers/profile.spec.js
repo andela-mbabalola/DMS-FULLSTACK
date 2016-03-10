@@ -42,7 +42,7 @@
     }));
 
     Users = {
-      update: function(user, cb, err) {
+      update: function(user, cb, errCb) {
         if (user.email === 'tee@top.com') {
           cb({
             token: 'token',
@@ -51,7 +51,7 @@
             }
           });
         } else if (user.email === null) {
-          err({
+          errCb({
             user: {
               _id: 3,
               email: null

@@ -22,7 +22,6 @@
         //if role is not found
         if (!role) {
           res.status(400).json({
-            success: false,
             message: 'Role not found. Create first!'
           });
         } else {
@@ -36,7 +35,6 @@
               //if no user is found
               if (!user) {
                 res.status(400).json({
-                  success: false,
                   message: 'User not found. Create first'
                 });
               } else {
@@ -50,7 +48,6 @@
                     //if a document is found
                     if (document) {
                       res.status(409).json({
-                        success: false,
                         message: 'Document already exists!'
                       });
                     } else {
@@ -66,7 +63,6 @@
                           res.send(err);
                         } else {
                           res.status(200).json({
-                            success: true,
                             message: 'Document successfully created'
                           });
                         }
@@ -118,7 +114,6 @@
         //if no document is found
       } else if (!doc) {
         res.status(400).json({
-          success: false,
           message: 'Document not found'
         });
       } else {
@@ -150,7 +145,6 @@
           //if no document is found
         } else if (!doc) {
           res.status(404).json({
-            success: false,
             message: 'Role has no document'
           });
         } else {
@@ -179,7 +173,6 @@
           //if no document is found
         } else {
           res.status(200).json({
-            success: true,
             doc: doc
           });
         }
@@ -202,12 +195,10 @@
           //if no document is found
         } else if (!document) {
           res.status(404).json({
-            success: false,
             message: 'Document does not exist'
           });
         } else {
           res.status(200).json({
-            success: true,
             message: 'Document Successfully updated!'
           });
         }
@@ -228,12 +219,10 @@
         //if no document is found
       } else if (!document) {
         res.status(400).json({
-          success: false,
           message: 'Document not found'
         });
       } else {
         res.status(200).json({
-          success: true,
           message: 'Document successfully deleted'
         });
       }

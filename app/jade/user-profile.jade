@@ -1,4 +1,4 @@
-.profile-page(ng-if='currentUser' layout ng-init="init()")
+.profile-page(ng-if='currentUser' flex layout="row" ng-init="init()")
   .md-content(layout="row")
     md-sidenav.md-sidenav-left.md-whiteframe-z2.main.profile-sidebar(layout='column', md-component-id='left', md-is-locked-open="$mdMedia('gt-xs')")
       div.md-toolbar-tools.usr-prof
@@ -7,7 +7,8 @@
       md-toolbar.md-tall.md-hue-2.toolbar-header.user-details
         .md-toolbar-tools-bottom.inset
           span
-          img(class='profile-picture' ng-src='{{currentUser.user.img_url || currentUser.img_url}}')
+          div
+            img(class='profile-picture' ng-src='{{currentUser.user.img_url || currentUser.img_url}}')
           div.user-profile-name
             .text-center {{currentUser.user.name.firstName || currentUser.name.firstName}} {{currentUser.user.name.lastName || currentUser.name.lastName}}
             .text-center-email {{currentUser.email}}
@@ -18,29 +19,29 @@
             md-list-item(md-ink-ripple)
               md-item-content.user-profile( layout='row' layout-align='start center')
                 .inset
-                  i.fa.fa-file-text-o.fa-2x
-                span.documents Documents
+                  i.fa.fa-file-text-o
+                span Documents
         md-list
           a(class="remove-link-deco" ng-if="admin()" ui-sref="adminProfile")
             md-list-item(md-ink-ripple)
               md-item-content.user-profile(layout='row' layout-align='start center')
                 .inset
-                  i.fa.fa-lock.fa-2x
-                span.documents Admin View
+                  i.fa.fa-lock
+                span Admin View
         div.bottom-details
           md-list
             a(class="remove-link-deco" ui-sref="userProfile.edit({id: currentUser._id})")
               md-list-item(md-ink-ripple)
                 md-item-content.user-profile(layout='row' layout-align='start center')
                   .inset
-                    i.fa.fa-pencil-square-o.fa-2x.user-icons
-                  span.edit Edit your profile
+                    i.fa.fa-pencil-square-o.user-icons
+                  span Edit your profile
           md-list
             a(class="remove-link-deco" ng-controller="HeaderCtrl" ng-click="logout()")
               md-list-item(md-ink-ripple)
                 md-item-content.user-profile(layout='row' layout-align='start center')
                   .inset
-                    i.fa.fa-sign-out.fa-2x.user-icons
-                  span.edit Logout
-  .md-content(flex ui-view="inner-view")
+                    i.fa.fa-sign-out.user-icons
+                  span Logout
+  .md-content(flex ui-view="inner-view" layout="column")
     
