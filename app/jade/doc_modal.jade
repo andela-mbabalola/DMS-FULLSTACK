@@ -13,7 +13,7 @@ md-dialog(aria-label='{{modalTitle}}', ng-cloak='', ng-controller="userDocumentC
         span.highlight(ng-show="addDoc.title.$invalid && addDoc.title.$dirty") Add a title
         label Title
       .doc
-        textarea(ui-tinymce="tinymceOptions" ng-model="document.content" placeholder="Add content" name="content" type="text" required="true")
+        textarea(ui-tinymce="tinymceOptions" ng-model="document.content" aria-label="Add content" name="content" type="text" required="true")
         span.highlight
         span.bar(ng-class="{danger: addDoc.content.$invalid && addDoc.content.$dirty}")
         span.highlight(ng-show="addDoc.content.$invalid && addDoc.content.$dirty") Add a content             

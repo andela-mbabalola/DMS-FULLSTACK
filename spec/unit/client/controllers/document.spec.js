@@ -6,6 +6,7 @@
       DocModal,
       scope,
       state,
+      stateParams,
       mdToast,
       mdDialog,
       Users = {
@@ -95,11 +96,13 @@
       DocModal = $injector.get('DocModal');
       mdDialog = $injector.get('mdDialog');
       state = $injector.get('$state');
+      stateParams = $injector.get('$stateParams');
       controller = $controller('userDocumentCtrl', {
         $scope: scope,
         Users: Users,
         Documents: Documents,
         $mdDialog: mdDialog,
+        $stateParams: stateParams
       });
     }));
 
@@ -168,16 +171,6 @@
       expect(mdDialog.show).toHaveBeenCalled();
       expect(mdToast.show).toHaveBeenCalled();
       expect(Documents.remove).toHaveBeenCalled();
-    });
-
-    it('should call delete function and fail', function() {
-      scope.doc = {
-        title: 'something'
-      };
-      spyOn(Documents, 'remove').and.callThrough();
-      spyOn(mdToast, 'show').and.callThrough();
-      scope.deleteUserDoc('ev', scope.doc);
-      expect(mdToast.show).not.toHaveBeenCalled();
     });
 
     it('should  show mdToast dialog for update', function() {

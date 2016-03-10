@@ -19,17 +19,15 @@
 
         $scope.init = function() {
           console.log($stateParams.id);
-          if($stateParams.id){
-          Documents.get({
-            id: $stateParams.id
-          }, function(res) {
-            $scope.docs = res.doc;
-          });
-        }
+          if ($stateParams.id) {
+            Documents.get({
+              id: $stateParams.id
+            }, function(res) {
+              $scope.docs = res.doc;
+            });
+          }
 
           Users.userDocs($rootScope.currentUser, function(err, res) {
-            //$state.reload();
-            console.log(res, 'here');
             if (!err) {
               $scope.userDocs = res.doc.map(function(obj) {
                 obj.content = $sce.trustAsHtml(obj.content);
