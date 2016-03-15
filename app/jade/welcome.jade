@@ -38,5 +38,5 @@ div.main-doc
         md-grid-tile.welcome-docs-preview(layout='column' ng-repeat="document in documents")
           md-card.ripple-container.welcome-preview-cont(md-ink-ripple)
             .md-padding(flex)
-              h4.preview-content {{document.title | limitTo: 20}}
-              p(style='font-size: x-small' ng-bind-html="document.content | limitTo: 10")
+              h4.preview-content {{document.title | limitTo: 15}}
+              p.preview-body(style='font-size: x-small' ng-bind-html="document.content")
