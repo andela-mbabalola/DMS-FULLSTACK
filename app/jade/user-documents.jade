@@ -9,9 +9,9 @@ md-content.content(ng-if="currentUser" layout)
             i.fa.fa-plus.fa-3x.doc-preview-icon
         md-grid-tile(layout='column' md-colspan='1' md-rowspan='1' ng-repeat="doc in userDocs")
           md-card.ripple-container.tile(md-ink-ripple)
-            .md-padding(flex ui-sref="userProfile.aDocument({id: doc._id})")
-              h4.preview-content {{doc.title | limitTo: 30}}
-              p(style='font-size: x-small' ng-bind-html="doc.content | limitTo: 30")
+            .md-padding.all-docs(flex ui-sref="userProfile.aDocument({id: doc._id})")
+              h4.preview-content {{doc.title | limitTo: 15}}
+              p.preview-body(style='font-size: x-small' ng-bind-html="doc.content")
             md-card-actions(layout='row')
               md-icon.app-icons(ui-sref="userProfile.editDocument({id: doc._id})")
                   i.fa.fa-pencil
