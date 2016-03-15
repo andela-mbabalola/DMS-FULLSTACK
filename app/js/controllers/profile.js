@@ -58,7 +58,7 @@
         };
 
         $scope.editProfile = function() {
-          angular.extend($rootScope.currentUser, $scope.password);
+          angular.extend($rootScope.currentUser, {password: $scope.password});
           Users.update($rootScope.currentUser, function() {
             $mdToast.show($mdToast.simple()
               .textContent('Profile successfully updated').hideDelay(2000));
