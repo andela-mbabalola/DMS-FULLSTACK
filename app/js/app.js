@@ -171,6 +171,17 @@
             }
           }
         })
+
+        .state('userProfile.aDocument', {
+            url: '/documents/{id}/preview',
+            views: {
+              'inner-view@userProfile': {
+                controller: 'userDocumentCtrl',
+                templateUrl: 'jade/doc-preview-modal.html'
+              }
+            }
+        })
+
         .state('welcome', {
           url: '/users/welcome',
           controller: 'welcomeCtrl',

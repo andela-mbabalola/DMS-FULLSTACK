@@ -5,11 +5,11 @@
         a.logo(ui-sref="home")
           img(src="../img/doccy.png")
       md-toolbar.md-tall.md-hue-2.toolbar-header.user-details
-        .md-toolbar-tools-bottom.inset
+        .md-toolbar-tools-bottom.inset(layout="row")
           span
-          div
+          div(flex=30)
             img(class='profile-picture' ng-src='{{currentUser.user.img_url || currentUser.img_url}}')
-          div.user-profile-name
+          div.user-profile-name(flex=76)
             .text-center {{currentUser.user.name.firstName || currentUser.name.firstName}} {{currentUser.user.name.lastName || currentUser.name.lastName}}
             .text-center-email {{currentUser.email}}
       md-divider.divider
