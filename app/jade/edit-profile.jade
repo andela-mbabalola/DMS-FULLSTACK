@@ -26,6 +26,6 @@ md-content.edit-main(flex)
               label.edit-label Password
               input(ng-model="password"  type="password")  
           md-input-container.md-block(flex-gt-sm)
-            md-select( ng-model="user.role" placeholder="Select a role" aria-label="currentUser.role" required="true")
-              md-option(ng-value="role" ng-repeat="role in roles") {{role.title}}
+            md-select( ng-model="currentUser.role" placeholder="Select a role" aria-label="currentUser.role" required="true")
+              md-option(ng-value="role" ng-repeat="role in roles" ng-selected="currentUser.role") {{role.title}}
           button.updateDoc(type="submit" ng-disabled="editUserForm.$invalid") Update

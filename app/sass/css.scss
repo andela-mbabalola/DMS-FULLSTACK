@@ -19,11 +19,9 @@ md-content {
 }
 
 .home-main {
-  height: 100%;
   background: linear-gradient(to bottom, #975052 0%,#975052 50%,#000000 50%,#efefef 50%,#efefef 100%);
   margin-top: -20px;
   flex: 1;
-  padding-bottom: 100px;
   .welcome-note {
     width: 60%;
     height: 15%;
@@ -153,7 +151,7 @@ md-content {
   left: 0;
   overflow: hidden;
   width: 370px;
-  height: 525px;
+  height: 510px;
   margin: 20px auto;
   color: #666;
   border-radius: 3px;
@@ -163,7 +161,7 @@ md-content {
 
 .signUp {
   width: 370px;
-  height: 550px;
+  height: 520px;
 }
 
 #header {
@@ -271,8 +269,12 @@ md-content {
 }
 .group {
   position: relative;
-
   margin-bottom: 35px;
+  margin-left: 40px;
+}
+.groups {
+  position: relative;
+  margin-bottom: 5px;
   margin-left: 40px;
 }
 .inputMaterial {
@@ -413,19 +415,12 @@ a {
 }
 
 .user-profile-name {
-  float: left;
-
   .text-center {
-    text-align: center;
-    float: left;
     margin-top: 18px;
-    padding-left: 10px;
     font-family: 'Raleway', sans-serif;
     font-size: 16px;
   }
   .text-center-email {
-    text-align: left;
-    padding-left: 10px;
     font-family: 'Raleway', sans-serif;
     font-size: 12px
   }
@@ -868,6 +863,10 @@ table-cont {
   border-bottom: 1px solid rgb(218,218,218);
   padding-bottom: 7px;
   margin-bottom: 10px;
+}
+
+.back {
+  color: #975052
 }
 
 .create-doc {

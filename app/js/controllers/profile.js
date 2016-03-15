@@ -62,7 +62,7 @@
           Users.update($rootScope.currentUser, function() {
             $mdToast.show($mdToast.simple()
               .textContent('Profile successfully updated').hideDelay(2000));
-            $state.go('userProfile.edit', {
+            $state.go('userProfile.documents', {
               id: $rootScope.currentUser._id
             }, {
               reload: true
