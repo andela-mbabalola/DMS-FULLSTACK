@@ -20,14 +20,14 @@
 
         Users.save(user, function(res)  {
           Auth.setToken(res.token);
-          $rootScope.currentUser = res;
-          if ($rootScope.currentUser.user.email === 'owner@gmail.com') {
+          $rootScope.currentUser = res.user;
+          if ($rootScope.currentUser.email === 'owner@gmail.com') {
             $state.go('adminProfile', {
-              id: $rootScope.currentUser.user._id
+              id: $rootScope.currentUser._id
             });
           } else {
               $state.go('userProfile.edit', {
-                id: $rootScope.currentUser.user._id
+                id: $rootScope.currentUser._id
               });
             }
         }, function(err) {

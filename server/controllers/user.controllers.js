@@ -5,7 +5,9 @@
     Role = require('./../models/role.models.js'),
     config = require('./../../config/config'),
     jwt = require('jsonwebtoken'),
-    helpers = require('./../helpers/helper');
+    helpers = require('./../helpers/helper'),
+    bcrypt = require('bcrypt'),
+    SALT_WORK_FACTOR = 10;
 
   /**
    * [function to retain an authenticated user's session]
@@ -172,10 +174,9 @@
                 email: req.body.email,
                 password: req.body.password,
                 userName: req.body.userName,
-                img_url: req.body.img_url,
                 google_id: googleId,
                 facebook_id: facebookId,
-                role: role
+                role: role,
               });
               //createa new user
               newUser.save(function(err, user) {
@@ -248,6 +249,7 @@
    * @return {[json]}     [success message that user has been updated]
    */
   exports.updateUser = function(req, res) {
+    console.log(req.body);
     req.body.name = {
       firstName: req.body.name.firstName,
       lastName: req.body.name.lastName
@@ -266,23 +268,42 @@
         });
       } else {
         req.body.role = role;
-        //find user and update its details
-        User.findByIdAndUpdate(
-          req.params.id, req.body,
-          function(err, user) {
+        if(req.body.password === null) {
+          delete req.body.password;
+        } else {
+          // generate a salt
+          bcrypt.genSalt(SALT_WORK_FACTOR, function(err, salt) {
             if (err) {
-              res.send(err);
-              //if user is not found
-            } else if (!user) {
-              res.status(404).json({
-                message: 'User does not exist'
-              });
-            } else {
-              res.status(200).json({
-                message: 'User Successfully updated!'
-              });
+               res.send(err);
             }
+
+            // hash the password using our new salt
+            bcrypt.hash(req.body.password, salt, function(err, hash) {
+              if (err) {
+                res.send(err);
+              }
+              // override the cleartext password with the hashed one
+              req.body.password = hash;
+              //find user and update its details
+              User.findByIdAndUpdate(
+                req.params.id, req.body,
+                function(err, user) {
+                  if (err) {
+                    res.send(err);
+                    //if user is not found
+                  } else if (!user) {
+                    res.status(404).json({
+                      message: 'User does not exist'
+                    });
+                  } else {
+                    res.status(200).json({
+                      message: 'User Successfully updated!'
+                    });
+                  }
+                });
+            });
           });
+         }
       }
     });
   };
