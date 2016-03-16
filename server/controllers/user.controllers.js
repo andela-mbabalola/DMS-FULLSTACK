@@ -269,6 +269,23 @@
         req.body.role = role;
         if(!req.body.password) {
           delete req.body.password;
+          //find user and update its details
+          User.findByIdAndUpdate(
+            req.params.id, req.body,
+            function(err, user) {
+              if (err) {
+                res.send(err);
+                //if user is not found
+              } else if (!user) {
+                res.status(404).json({
+                  message: 'User does not exist'
+                });
+              } else {
+                res.status(200).json({
+                  message: 'User Successfully updated!'
+                });
+              }
+            });
         } else {
           console.log(req.body);
           // generate a salt
@@ -304,23 +321,6 @@
             });
           });
          }
-         //find user and update its details
-         User.findByIdAndUpdate(
-           req.params.id, req.body,
-           function(err, user) {
-             if (err) {
-               res.send(err);
-               //if user is not found
-             } else if (!user) {
-               res.status(404).json({
-                 message: 'User does not exist'
-               });
-             } else {
-               res.status(200).json({
-                 message: 'User Successfully updated!'
-               });
-             }
-           });
       }
     });
   };

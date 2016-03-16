@@ -69,7 +69,6 @@
           .set('x-access-token', superAdToken)
           .send(_roleSeeders[0])
           .end(function(err, res) {
-            console.log(res.body);
             expect(res.status).to.be(409);
             expect(res.body.message).to.eql('Role already exists!');
             done();
@@ -83,7 +82,6 @@
             title: 'superAdministrator'
           })
           .end(function(err, res) {
-            console.log(res.body);
             expect(res.status).to.be(403);
             expect(res.body.message).to.eql('Access denied');
             done();
@@ -108,7 +106,6 @@
         request.get('/api/role/superAdministrator/' + roleId)
           .set('x-access-token', superAdToken)
           .end(function(err, res) {
-            console.log(res.body);
             expect(res.status).to.be(200);
             expect(err).to.be(null);
             expect(res.body).to.not.be(undefined);
@@ -122,7 +119,6 @@
         request.get('/api/role/superAdministrator/' + id)
           .set('x-access-token', superAdToken)
           .end(function(err, res) {
-            console.log(res.body);
             expect(res.body).to.not.be(undefined);
             expect(res.body.message).to.eql('Role not found!');
             done();
