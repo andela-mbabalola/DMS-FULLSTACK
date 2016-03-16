@@ -268,7 +268,6 @@
       } else {
         req.body.role = role;
         if(!req.body.password) {
-          console.log(req.body, 'here');
           delete req.body.password;
         } else {
           console.log(req.body);
