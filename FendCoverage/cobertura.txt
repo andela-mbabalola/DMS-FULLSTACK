@@ -1,6 +1,6 @@
 <?xml version="1.0" ?>
 <!DOCTYPE coverage SYSTEM "http://cobertura.sourceforge.net/xml/coverage-04.dtd">
-<coverage lines-valid="382"  lines-covered="308"  line-rate="0.8062999999999999"  branches-valid="86"  branches-covered="28"  branch-rate="0.3256"  timestamp="1458211928063" complexity="0" version="0.1">
+<coverage lines-valid="382"  lines-covered="308"  line-rate="0.8062999999999999"  branches-valid="86"  branches-covered="28"  branch-rate="0.3256"  timestamp="1458219348494" complexity="0" version="0.1">
 <sources>
 	<source>/Users/mac/Documents/workspace/AndelaWorkspace/simulations/DMS-FULLSTACK</source>
 </sources>
@@ -27,11 +27,11 @@
 			<method name="(anonymous_6)"  hits="80"  signature="()V" >
 				<lines><line number="54"  hits="80" /></lines>
 			</method>
-			<method name="(anonymous_7)"  hits="0"  signature="()V" >
-				<lines><line number="57"  hits="0" /></lines>
+			<method name="(anonymous_7)"  hits="9"  signature="()V" >
+				<lines><line number="57"  hits="9" /></lines>
 			</method>
-			<method name="(anonymous_8)"  hits="9"  signature="()V" >
-				<lines><line number="62"  hits="9" /></lines>
+			<method name="(anonymous_8)"  hits="0"  signature="()V" >
+				<lines><line number="64"  hits="0" /></lines>
 			</method>
 			<method name="(anonymous_9)"  hits="9"  signature="()V" >
 				<lines><line number="71"  hits="9" /></lines>
@@ -592,10 +592,10 @@
 			<line number="36"  hits="1"  branch="false" />
 			<line number="52"  hits="1"  branch="false" />
 			<line number="57"  hits="80"  branch="false" />
-			<line number="58"  hits="0"  branch="false" />
-			<line number="62"  hits="80"  branch="false" />
-			<line number="63"  hits="9"  branch="true"  condition-coverage="50% (1/2)" />
-			<line number="64"  hits="9"  branch="false" />
+			<line number="58"  hits="9"  branch="true"  condition-coverage="50% (1/2)" />
+			<line number="59"  hits="9"  branch="false" />
+			<line number="64"  hits="80"  branch="false" />
+			<line number="65"  hits="0"  branch="false" />
 			<line number="68"  hits="80"  branch="false" />
 			<line number="69"  hits="80"  branch="false" />
 			<line number="71"  hits="80"  branch="false" />

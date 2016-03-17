@@ -22,6 +22,7 @@ before_script:
   - npm install -g gulp
 script:
   - npm test
+  - gulp build
   - gulp test:fend
 after_success:
   - npm run BendCoverage
