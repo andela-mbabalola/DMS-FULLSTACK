@@ -40,7 +40,7 @@
     "angular-material-data-table": "~0.9.11"
   },
   "resolutions": {
-    "lodash": "~4.0.0",
-    "angular": "1.4.9"
+    "lodash": "~3.10.0",
+    "angular": "1.5.1"
   }
 }

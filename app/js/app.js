@@ -25,8 +25,8 @@
   require('./controllers/login');
   require('./controllers/sign-up');
   require('./controllers/user-profile');
-  require('./controllers/admin-panel');
   require('./controllers/profile');
+  require('./controllers/admin-panel');
   require('./controllers/userProfile/documents');
 
   //require directives
@@ -52,17 +52,17 @@
    'google', '$mdSidenav',
     function($rootScope, $state, Users, facebook, google, $mdSidenav) {
 
-      //sidenav toggle
-      $rootScope.toggle = function() {
-        $mdSidenav('left').toggle();
-      };
-
     // Check if the user's session is still being persisted in the servers
     Users.session(function(err, res) {
       if(!err) {
         $rootScope.currentUser = res;
       }
     });
+
+    //sidenav toggle
+    $rootScope.toggle = function() {
+      $mdSidenav('left').toggle();
+    };
 
     facebook.init();
     google.init();
