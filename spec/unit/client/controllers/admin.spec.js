@@ -4,7 +4,6 @@
   describe('Admin panel ctrl', function() {
     var $http,
       controller,
-      $httpBackend,
       scope,
       state,
       mdDialog,
@@ -24,7 +23,7 @@
           cb([1, 2, 3]);
         },
         remove: function(userId, cb, errCb) {
-          return !userId ? errCb() : cb();
+          return userId ? cb() : errCb();
         }
       },
       Roles = {
@@ -32,7 +31,7 @@
            return !role.fail ? cb(role) : errCb(null, true);
         },
         remove: function(roleId, cb, errCb) {
-          return !roleId ? errCb() : cb();
+          return roleId ? cb() : errCb();
         }
       },
       Documents = {
@@ -40,7 +39,7 @@
           cb([1, 2, 3]);
         },
         remove: function(docId, cb, errCb) {
-          return !docId ? errCb() : cb();
+          return docId ? cb() : errCb();
         }
       };
 
@@ -96,7 +95,6 @@
       mdToast = $injector.get('$mdToast');
       $http = $injector.get('$http');
       state = $injector.get('$state');
-      $httpBackend = $injector.get('$httpBackend');
       controller = $controller('AdminPanelController', {
         $scope: scope,
         Users: Users,
@@ -157,7 +155,7 @@
 
     it('should define and create a role', function() {
       scope.role = {
-        _id: '345',
+        id: '345',
         title: 'user',
       };
       spyOn(Roles, 'save').and.callThrough();

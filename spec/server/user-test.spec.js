@@ -161,9 +161,7 @@
             email: _userSeeders[1].email,
             role: _roleSeeders[1]._id
           })
-          .expect(400)
           .end(function(err, res) {
-            expect(res.status).to.be(400);
             expect(res.body.message).to.eql('Role not found. Create first');
             done();
           });
@@ -178,9 +176,7 @@
             password: _userSeeders[1].password,
             email: _userSeeders[1].email,
           })
-          .expect(400)
           .end(function(err, res) {
-            expect(res.status).to.be(400);
             expect(res.body.message).to.eql('Role not found. Create first');
             done();
           });

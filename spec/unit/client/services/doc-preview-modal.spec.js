@@ -45,12 +45,6 @@
         expect(typeof mdToast.show).toBe('function');
       });
 
-      it('mdDialog should be a function', function() {
-        spyOn(mdDialog, 'show').and.callThrough();
-        DocPreviewModal.dialog();
-        expect(mdDialog.show).toHaveBeenCalled();
-      });
-
       it('dialog should be called', function() {
         expect(DocPreviewModal.dialog).toBeDefined();
         expect(typeof DocPreviewModal.dialog).toBe('function');
@@ -59,7 +53,7 @@
       it('mdDialog and its method show should both be defined', function() {
         expect(mdDialog.show).toBeDefined();
         expect(typeof mdDialog.show).toBe('function');
-        spyOn(mdDialog, 'show').and.callThrough();
+        spyOn(mdDialog, 'show');
         DocPreviewModal.modal();
         expect(mdDialog.show).toHaveBeenCalled();
       });

@@ -18,11 +18,9 @@
     })
     .controller('DialogController',
       function($scope, $mdDialog, $state, $http, Users, $rootScope, Auth) {
-        //$scope.roles = Roles.query();
         $scope.init = function() {
           $http.get('/api/role/roles')
             .then(function(resp) {
-              console.log(resp, 'feresdssd');
               $scope.roles = resp.data;
             });
         };

@@ -33,7 +33,7 @@
       });
 
       it('setToken should call Token.set', function() {
-        spyOn(Token, 'get').and.callThrough();
+        spyOn(Token, 'get');
         Auth.isLoggedIn();
         expect(Token.get).toHaveBeenCalled();
       });

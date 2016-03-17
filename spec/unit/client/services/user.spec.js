@@ -134,7 +134,7 @@
         expect(response.res).toBeDefined();
         expect(response.res).toBe('res');
       });
-      
+
       it('should test error of userDocs function', function() {
         var error, response;
         var cb = function(err, res) {
@@ -217,54 +217,10 @@
       });
     });
 
-    describe('Users.logout unit test', function() {
+    describe('Users session unit test', function() {
       it('session should be a function', function() {
         expect(Users.session).toBeDefined();
         expect(typeof Users.session).toBe('function');
-      });
-
-      it('should test success of logout function', function() {
-        var error, response,
-          cb = function(err, res) {
-            if (err) {
-              error = err;
-              response = null;
-            } else {
-              error = null;
-              response = res;
-            }
-          };
-
-        $httpBackend.when('GET', '/api/users/logout').respond(200, {
-          res: 'res'
-        });
-
-        Users.logout(cb);
-        $httpBackend.flush();
-        expect(response.res).toBeDefined();
-        expect(response.res).toBe('res');
-      });
-
-      it('should test error of logout function', function() {
-        var error, response;
-        var cb = function(err, res) {
-          if (err) {
-            error = err;
-            response = null;
-          } else {
-            error = null;
-            response = res;
-          }
-        };
-
-        $httpBackend.when('GET', '/api/users/logout').respond(500, {
-          err: 'err'
-        });
-
-        Users.logout(cb);
-        $httpBackend.flush();
-        expect(error.err).toBeDefined();
-        expect(error.err).toBe('err');
       });
     });
   });

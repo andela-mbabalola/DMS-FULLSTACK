@@ -67,8 +67,7 @@
             }, {
               reload: true
             });
-          }, function(err) {
-            console.log(err);
+          }, function() {
             $mdToast.show($mdToast.simple()
               .textContent('Unable to update profile').hideDelay(2000));
           });

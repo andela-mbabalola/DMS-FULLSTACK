@@ -59,7 +59,7 @@
       it('$mdDialog and its method show should both be defined', function() {
         expect(mdDialog.show).toBeDefined();
         expect(typeof mdDialog.show).toBe('function');
-        spyOn(mdDialog, 'show').and.callThrough();
+        spyOn(mdDialog, 'show');
         DocModal.modal();
         expect(mdDialog.show).toHaveBeenCalled();
       });

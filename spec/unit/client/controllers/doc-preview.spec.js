@@ -31,13 +31,13 @@
     }));
 
     it('should call scope.hide', function() {
-      spyOn(mdDialog, 'hide').and.callThrough();
+      spyOn(mdDialog, 'hide');
       scope.hide();
       expect(mdDialog.hide).toHaveBeenCalled();
     });
 
     it('should call scope.cancel', function() {
-      spyOn(mdDialog, 'cancel').and.callThrough();
+      spyOn(mdDialog, 'cancel');
       scope.cancel();
       expect(mdDialog.cancel).toHaveBeenCalled();
     });

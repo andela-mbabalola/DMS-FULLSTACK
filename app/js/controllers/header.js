@@ -3,21 +3,13 @@
 
   angular.module('Doccy.controllers')
     .controller('HeaderCtrl', ['$scope', '$rootScope',
-      '$state', 'Users', 'Auth',
-      function($scope, $rootScope, $state, Users, Auth) {
+      '$state', 'Auth',
+      function($scope, $rootScope, $state, Auth) {
         // logout
         $scope.logout = function() {
-          Users.logout(function(err, res) {
-            console.log(res);
-            if (!err) {
-              delete $rootScope.currentUser;
+            delete $rootScope.currentUser;
               Auth.logout();
               $state.go('login');
-            } else {
-              console.log(err, res);
-            }
-          });
-        };
-      }
-    ]);
+      };
+    }]);
 })();
