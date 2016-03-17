@@ -1,6 +1,6 @@
 <?xml version="1.0" ?>
 <!DOCTYPE coverage SYSTEM "http://cobertura.sourceforge.net/xml/coverage-04.dtd">
-<coverage lines-valid="382"  lines-covered="308"  line-rate="0.8062999999999999"  branches-valid="86"  branches-covered="28"  branch-rate="0.3256"  timestamp="1458219348494" complexity="0" version="0.1">
+<coverage lines-valid="382"  lines-covered="308"  line-rate="0.8062999999999999"  branches-valid="86"  branches-covered="28"  branch-rate="0.3256"  timestamp="1458221736237" complexity="0" version="0.1">
 <sources>
 	<source>/Users/mac/Documents/workspace/AndelaWorkspace/simulations/DMS-FULLSTACK</source>
 </sources>
