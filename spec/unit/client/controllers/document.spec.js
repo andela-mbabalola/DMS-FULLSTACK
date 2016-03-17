@@ -30,16 +30,16 @@
       },
       Documents = {
         save: function(doc, cb, errCb) {
-          return !doc.fail ? cb(doc) : errCb(null, true);
+          return !doc.fail ? cb(null, doc) : errCb(true);
         },
         update: function(doc, cb) {
-          return doc ? cb(doc) : cb(true, null);
+          return doc ? cb(doc) : cb(true);
         },
         get: function(id, cb) {
-          cb([1]);
+          cb({doc:{title: 'Abc'}});
         },
         remove: function(docId, cb, errCb) {
-          return !docId ? errCb() : cb();
+          return docId ? cb() : errCb();
         }
       };
 
@@ -94,7 +94,6 @@
       scope = $injector.get('$rootScope');
       mdToast = $injector.get('$mdToast');
       DocModal = $injector.get('DocModal');
-      mdDialog = $injector.get('mdDialog');
       state = $injector.get('$state');
       stateParams = $injector.get('$stateParams');
       controller = $controller('userDocumentCtrl', {
@@ -108,16 +107,16 @@
 
     beforeEach(function() {
       scope.currentUser = currentUser;
-      spyOn(Users, 'userDocs').and.callThrough();
-      scope.init();
     });
 
     it('should call init and return a document', function() {
+      spyOn(Users, 'userDocs').and.callThrough();
+      scope.init();
       expect(Users.userDocs).toHaveBeenCalled();
+      expect(scope.userDocs).toBeDefined();
     });
 
     it('should define and create a document', function() {
-      scope.currentUser = currentUser;
       scope.document = {
         _id: '345',
         title: 'doc test',
@@ -126,8 +125,8 @@
         role: scope.currentUser.role
       };
       spyOn(Documents, 'save').and.callThrough();
-      spyOn(state, 'go').and.callThrough();
-      spyOn(mdDialog, 'cancel').and.callThrough();
+      spyOn(state, 'go');
+      spyOn(mdDialog, 'cancel');
       scope.addDocument();
       expect(Documents.save).toHaveBeenCalled();
       expect(state.go).toHaveBeenCalled();
@@ -135,20 +134,20 @@
     });
 
     it('should show the addDocumentModal', function() {
-      spyOn(DocModal, 'modal').and.callThrough();
+      spyOn(DocModal, 'modal');
       scope.addDocumentModal();
       expect(DocModal.modal).toHaveBeenCalled();
     });
 
     it('should create a document and fail', function() {
-      scope.currentUser = currentUser;
       scope.document = {
         _id: null,
         fail: true
       };
       spyOn(Documents, 'save').and.callThrough();
-      spyOn(state, 'go').and.callThrough();
+      spyOn(state, 'go');
       scope.addDocument();
+      expect(Documents.save).toHaveBeenCalled();
       expect(state.go).not.toHaveBeenCalled();
     });
 
@@ -156,6 +155,7 @@
       spyOn(Documents, 'get').and.callThrough();
       scope.getADoc();
       expect(Documents.get).toHaveBeenCalled();
+      expect(scope.docs).toBeDefined();
     });
 
     it('should call delete function and delete document', function() {
@@ -165,7 +165,7 @@
       spyOn(Documents, 'remove').and.callThrough();
       spyOn(mdDialog, 'confirm').and.returnValue(mdDialog);
       spyOn(mdDialog, 'show').and.returnValue(mdDialog);
-      spyOn(mdToast, 'show').and.callThrough();
+      spyOn(mdToast, 'show');
       scope.deleteUserDoc('ev', scope.doc);
       expect(mdDialog.confirm).toHaveBeenCalled();
       expect(mdDialog.show).toHaveBeenCalled();
@@ -174,7 +174,7 @@
     });
 
     it('should  show mdToast dialog for update', function() {
-      spyOn(mdToast, 'show').and.callThrough();
+      spyOn(mdToast, 'show');
       scope.editDocument();
       expect(mdToast.show).toHaveBeenCalled();
     });
@@ -184,8 +184,8 @@
         id: 1
       };
       spyOn(Documents, 'update').and.callThrough();
-      spyOn(mdToast, 'show').and.callThrough();
-      spyOn(state, 'go').and.callThrough();
+      spyOn(mdToast, 'show');
+      spyOn(state, 'go');
       scope.editDocument();
       expect(Documents.update).toHaveBeenCalled();
       expect(mdToast.show).toHaveBeenCalled();
@@ -198,7 +198,7 @@
 
     it('should call update function and fail', function() {
       scope.doc = null;
-      spyOn(mdToast, 'show').and.callThrough();
+      spyOn(mdToast, 'show');
       spyOn(Documents, 'update').and.callThrough();
       scope.editDocument();
       expect(Documents.update).toHaveBeenCalled();

@@ -22,14 +22,6 @@
         });
       };
 
-      user.logout = function(cb) {
-        $http.get('/api/users/logout').success(function(res) {
-          cb(null, res);
-        }).error(function(err) {
-          cb(err);
-        });
-      };
-
       user.session = function(cb) {
         $http.get('/api/users/session').success(function(res) {
           cb(null, res);

@@ -112,7 +112,7 @@
         password: '111'
       };
       spyOn(Users, 'update').and.callThrough();
-      spyOn(mdToast, 'show').and.callThrough();
+      spyOn(mdToast, 'show');
       scope.editProfile();
       expect(Users.update).toHaveBeenCalled();
       expect(mdToast.show).toHaveBeenCalled();
@@ -124,7 +124,7 @@
         password: '111'
       };
       spyOn(Users, 'update').and.callThrough();
-      spyOn(mdToast, 'show').and.callThrough();
+      spyOn(mdToast, 'show');
       scope.editProfile();
       expect(Users.update).toHaveBeenCalled();
       expect(mdToast.show).toHaveBeenCalled();

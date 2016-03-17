@@ -23,9 +23,9 @@
   require('./controllers/header');
   require('./controllers/welcome');
   require('./controllers/login');
-  require('./controllers/signUp');
+  require('./controllers/sign-up');
   require('./controllers/user-profile');
-  require('./controllers/adminPanel');
+  require('./controllers/admin-panel');
   require('./controllers/profile');
   require('./controllers/userProfile/documents');
 
@@ -48,8 +48,14 @@
     'cloudinary'
   ]);
 
-  window.app.run(['$rootScope', '$state', 'Users', 'facebook', 'google',
-    function($rootScope, $state, Users, facebook, google) {
+  window.app.run(['$rootScope', '$state', 'Users', 'facebook',
+   'google', '$mdSidenav',
+    function($rootScope, $state, Users, facebook, google, $mdSidenav) {
+
+      //sidenav toggle
+      $rootScope.toggle = function() {
+        $mdSidenav('left').toggle();
+      };
 
     // Check if the user's session is still being persisted in the servers
     Users.session(function(err, res) {
@@ -125,9 +131,9 @@
           authenticate: false
         })
         .state('signUp', {
-          url: '/users/signUp',
+          url: '/users/sign-up',
           controller: 'SignUpCtrl',
-          templateUrl: 'jade/signUp.html',
+          templateUrl: 'jade/sign-up.html',
           authenticate: false
         })
         .state('adminProfile', {

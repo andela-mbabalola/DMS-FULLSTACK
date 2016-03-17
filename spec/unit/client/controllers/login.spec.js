@@ -151,20 +151,20 @@
         password: '1111'
       };
       spyOn(Users, 'login').and.callThrough();
-      spyOn(mdToast, 'show').and.callThrough();
+      spyOn(mdToast, 'show');
       scope.login();
       expect(Users.login).toHaveBeenCalled();
       expect(mdToast.show).toHaveBeenCalled();
     });
 
     it('scope.login should call facebook login', function() {
-      spyOn(facebook, 'login').and.callThrough();
+      spyOn(facebook, 'login');
       scope.facebookLogin();
       expect(facebook.login).toHaveBeenCalled();
     });
 
     it('scope.login should call google login', function() {
-      spyOn(google, 'login').and.callThrough();
+      spyOn(google, 'login');
       scope.googleLogin();
       expect(google.login).toHaveBeenCalled();
     });

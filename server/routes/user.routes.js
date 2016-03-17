@@ -17,9 +17,6 @@
     router.route('/users/session')
       .all(auth.authMiddleware, userController.session);
 
-    router.route('/users/logout')
-      .get(auth.authMiddleware, userController.logout);
-
     //route to get all available user(s)
     router.route('/users')
       .get(auth.authMiddleware, userController.getAllUsers);

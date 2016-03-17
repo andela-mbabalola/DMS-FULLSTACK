@@ -88,7 +88,7 @@
                   expiresInMinutes: 1440
                 });
 
-                res.status(200).json({
+                res.json({
                   message: 'Successfully logged in',
                   token: token,
                   user: user
@@ -103,7 +103,7 @@
              token = jwt.sign(user, config.secret, {
               expiresInMinutes: 1440
             });
-            res.status(200).json({
+            res.json({
               login: 'successful',
               token: token,
               user: user
@@ -130,7 +130,7 @@
       }
       //if role does not exist
       if (!role) {
-        res.status(400).json({
+        res.json({
           message: 'Role not found. Create first'
         });
       } else {
@@ -187,7 +187,7 @@
                     expiresInMinutes: 1440
                   });
 
-                  res.status(200).json({
+                  res.json({
                     message: 'User Successfully created!',
                     token: token,
                     user: user
@@ -214,7 +214,7 @@
         res.send(err);
       } else {
         //if users are found
-        res.status(200).send(users);
+        res.send(users);
       }
     });
   };
@@ -237,7 +237,7 @@
         });
       } else {
         //if a user is found
-        res.status(200).json(user);
+        res.json(user);
       }
     });
   };
@@ -281,7 +281,7 @@
                   message: 'User does not exist'
                 });
               } else {
-                res.status(200).json({
+                res.json({
                   message: 'User Successfully updated!'
                 });
               }
@@ -313,7 +313,7 @@
                       message: 'User does not exist'
                     });
                   } else {
-                    res.status(200).json({
+                    res.json({
                       message: 'User Successfully updated!'
                     });
                   }
@@ -342,7 +342,7 @@
           message: 'User does not exist!'
         });
       } else {
-        res.status(200).json({
+        res.json({
           message: 'User successfully deleted!'
         });
       }
@@ -361,20 +361,10 @@
     }, function(err, docs) {
       if (err) {
         res.send(err);
-      } else if (!docs) {
-        res.status(404).send({
-          message: 'Documents not found'
-        });
       } else {
-        res.status(200).json(docs);
+        res.json(docs);
       }
     });
   };
 
-  exports.logout = function(req, res) {
-    delete req.headers['x-access-token'];
-      return res.status(200).json({
-        message: 'User has been successfully logged out'
-      });
-  };
 })();
