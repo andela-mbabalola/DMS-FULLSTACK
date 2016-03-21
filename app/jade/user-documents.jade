@@ -14,5 +14,5 @@ md-content.content(ng-if="currentUser")
               h4.preview-content {{doc.title | limitTo: 15}}
               p.preview-body(style='font-size: x-small' ng-bind-html="doc.content")
             md-card-actions(layout='row' layout-align='end center')
-              md-button.doc-icons(ui-sref="userProfile.update({id: doc._id})") UPDATE
+              md-button.doc-icons(ui-sref='userProfile.update({id: doc._id})') UPDATE
               md-button.doc-icons(ng-click='deleteUserDoc($event, doc)') DELETE

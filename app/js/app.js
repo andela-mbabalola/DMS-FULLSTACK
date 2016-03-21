@@ -173,7 +173,7 @@
           },
           authenticate: true
         })
-        .state('userProfile.editDocument', {
+        .state('userProfile.update', {
           url: '/documents/{id}/edit',
           views: {
             'inner-view@userProfile': {
