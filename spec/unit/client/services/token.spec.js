@@ -31,12 +31,10 @@
       });
 
       it('Token.get should be a function', function() {
-        spyOn(window, 'localStorage');
         expect(Token.get).toBeDefined();
         expect(typeof Token.get).toBe('function');
         Token.set('token');
         expect(Token.get()).toBe('token');
-        expect(window.localStorage).toBe('token');
       });
 
       it('Token.remove should be a function and be defined', function() {

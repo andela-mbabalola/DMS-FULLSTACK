@@ -1,6 +1,6 @@
 <?xml version="1.0" ?>
 <!DOCTYPE coverage SYSTEM "http://cobertura.sourceforge.net/xml/coverage-04.dtd">
-<coverage lines-valid="384"  lines-covered="309"  line-rate="0.8047"  branches-valid="86"  branches-covered="28"  branch-rate="0.3256"  timestamp="1458314845875" complexity="0" version="0.1">
+<coverage lines-valid="384"  lines-covered="309"  line-rate="0.8047"  branches-valid="86"  branches-covered="28"  branch-rate="0.3256"  timestamp="1458554044950" complexity="0" version="0.1">
 <sources>
 	<source>/Users/mac/Documents/workspace/AndelaWorkspace/simulations/DMS-FULLSTACK</source>
 </sources>
@@ -507,11 +507,11 @@
 			<method name="(anonymous_166)"  hits="81"  signature="()V" >
 				<lines><line number="1082"  hits="81" /></lines>
 			</method>
-			<method name="(anonymous_167)"  hits="2"  signature="()V" >
-				<lines><line number="1084"  hits="2" /></lines>
+			<method name="(anonymous_167)"  hits="3"  signature="()V" >
+				<lines><line number="1084"  hits="3" /></lines>
 			</method>
-			<method name="(anonymous_168)"  hits="34"  signature="()V" >
-				<lines><line number="1087"  hits="34" /></lines>
+			<method name="(anonymous_168)"  hits="35"  signature="()V" >
+				<lines><line number="1087"  hits="35" /></lines>
 			</method>
 			<method name="(anonymous_169)"  hits="2"  signature="()V" >
 				<lines><line number="1090"  hits="2" /></lines>
@@ -919,8 +919,8 @@
 			<line number="1076"  hits="1"  branch="false" />
 			<line number="1080"  hits="1"  branch="false" />
 			<line number="1083"  hits="81"  branch="false" />
-			<line number="1085"  hits="2"  branch="false" />
-			<line number="1088"  hits="34"  branch="false" />
+			<line number="1085"  hits="3"  branch="false" />
+			<line number="1088"  hits="35"  branch="false" />
 			<line number="1091"  hits="2"  branch="false" />
 			<line number="1098"  hits="1"  branch="false" />
 			<line number="1101"  hits="1"  branch="false" />
