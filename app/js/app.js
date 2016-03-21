@@ -64,6 +64,11 @@
       $mdSidenav('left').toggle();
     };
 
+    //close sidenav toggle
+    $rootScope.close = function() {
+      $mdSidenav('left').close();
+    };
+
     facebook.init();
     google.init();
 
@@ -183,7 +188,7 @@
             views: {
               'inner-view@userProfile': {
                 controller: 'userDocumentCtrl',
-                templateUrl: 'jade/doc-preview-modal.html'
+                templateUrl: 'jade/doc-preview.html'
               }
             }
         })

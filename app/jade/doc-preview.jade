@@ -1,0 +1,8 @@
+md-content.content(ng-if="currentUser" layout) 
+  i.fa.fa-bars(hide-gt-xs ng-click="toggle()")   
+  .md-padding.doc-list
+    i.fa.fa-arrow-left.back(ui-sref="userProfile.documents")
+    h3.md-padding {{docs.title}}
+      .md-padding
+      md-divider
+        p(style='font-size: small' ng-bind-html="docs.content")

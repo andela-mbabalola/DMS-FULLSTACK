@@ -76,7 +76,7 @@
           });
         };
 
-        $scope.editDocument = function() {
+        $scope.update = function() {
           console.log($scope.docs, 'arsefsw');
           Documents.update($scope.docs, function() {
             $mdToast.show($mdToast.simple()

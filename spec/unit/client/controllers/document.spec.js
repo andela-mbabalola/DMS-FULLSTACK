@@ -152,6 +152,7 @@
     });
 
     it('should get document by their Id', function() {
+      expect(scope.docs).not.toBeDefined();
       spyOn(Documents, 'get').and.callThrough();
       scope.getADoc();
       expect(Documents.get).toHaveBeenCalled();
@@ -175,7 +176,7 @@
 
     it('should  show mdToast dialog for update', function() {
       spyOn(mdToast, 'show');
-      scope.editDocument();
+      scope.update();
       expect(mdToast.show).toHaveBeenCalled();
     });
 
@@ -186,7 +187,7 @@
       spyOn(Documents, 'update').and.callThrough();
       spyOn(mdToast, 'show');
       spyOn(state, 'go');
-      scope.editDocument();
+      scope.update();
       expect(Documents.update).toHaveBeenCalled();
       expect(mdToast.show).toHaveBeenCalled();
       expect(state.go).toHaveBeenCalledWith('userProfile.documents', {
@@ -200,7 +201,7 @@
       scope.doc = null;
       spyOn(mdToast, 'show');
       spyOn(Documents, 'update').and.callThrough();
-      scope.editDocument();
+      scope.update();
       expect(Documents.update).toHaveBeenCalled();
       expect(mdToast.show).toHaveBeenCalled();
     });
