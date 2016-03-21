@@ -41,6 +41,10 @@
         expect(Token.remove).toBeDefined();
         expect(typeof Token.remove).toBe('function');
       });
+      it('Token.remove should delete token', function() {
+        Token.remove();
+        expect(Token.get()).toBeNull();
+      });
     });
   });
 })();

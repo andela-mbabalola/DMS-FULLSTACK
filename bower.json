@@ -41,6 +41,6 @@
   },
   "resolutions": {
     "lodash": "~3.10.0",
-    "angular": "1.5.1"
+    "angular": "1.5.2"
   }
 }

@@ -15,12 +15,19 @@
       md-divider.divider
       md-content.profile-content
         md-list
-          a(class="remove-link-deco" ui-sref="userProfile.documents")
+          a(class="remove-link-deco" ui-sref="userProfile.documents" ng-click="close()")
             md-list-item(md-ink-ripple)
               md-item-content.user-profile( layout='row' layout-align='start center')
                 .inset
                   i.fa.fa-file-text-o
                 span Documents
+        md-list
+          a(class="remove-link-deco" ui-sref="welcome")
+            md-list-item(md-ink-ripple)
+              md-item-content.user-profile(layout='row' layout-align='start center')
+                .inset
+                  i.fa.fa-file-text-o
+                span Public Documents
         md-list
           a(class="remove-link-deco" ng-if="admin()" ui-sref="adminProfile")
             md-list-item(md-ink-ripple)
@@ -30,7 +37,7 @@
                 span Admin View
         div.bottom-details
           md-list
-            a(class="remove-link-deco" ui-sref="userProfile.edit({id: currentUser._id})")
+            a(class="remove-link-deco" ui-sref="userProfile.edit({id: currentUser._id})" ng-click="close()")
               md-list-item(md-ink-ripple)
                 md-item-content.user-profile(layout='row' layout-align='start center')
                   .inset

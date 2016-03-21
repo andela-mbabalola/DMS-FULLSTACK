@@ -34,6 +34,8 @@
       });
 
       it('request should call Token.get', function() {
+        Token.set('token');
+        expect(TokenInjector.request).toThrow();
         var config = {
           url: '/api/here',
           headers: {

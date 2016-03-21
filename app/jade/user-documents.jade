@@ -7,16 +7,12 @@ md-content.content(ng-if="currentUser")
       md-grid-list(md-cols-md='3' md-cols='2' md-cols-gt-md='5' md-row-height-gt-md='1:1.2' md-row-height='1:1.2' md-gutter='4px' md-gutter-md='6px' md-gutter-gt-md='15px')
         md-grid-tile(layout='column' md-rowspan='1' md-colspan='1' ng-click='addDocumentModal()' style='cursor: pointer')
           md-card.ripple-container.tile(md-ink-ripple)
-            i.fa.fa-plus.fa-3x.doc-preview-icon
+            i.fa.fa.fa-3x.doc-preview-icon +
         md-grid-tile(layout='column' md-colspan='1' md-rowspan='1' ng-repeat="doc in userDocs")
           md-card.ripple-container.tile(md-ink-ripple)
             .md-padding.all-docs(flex ui-sref="userProfile.aDocument({id: doc._id})")
               h4.preview-content {{doc.title | limitTo: 15}}
               p.preview-body(style='font-size: x-small' ng-bind-html="doc.content")
-            md-card-actions(layout='row')
-              md-icon.app-icons(ui-sref="userProfile.editDocument({id: doc._id})")
-                  i.fa.fa-pencil
-                  md-tooltip Update
-              md-icon(ng-click='deleteUserDoc($event, doc)').app-icons
-                  i.fa.fa-trash
-                  md-tooltip Delete              
+            md-card-actions(layout='row' layout-align='end center')
+              md-button.doc-icons(ui-sref="userProfile.update({id: doc._id})") UPDATE
+              md-button.doc-icons(ng-click='deleteUserDoc($event, doc)') DELETE
